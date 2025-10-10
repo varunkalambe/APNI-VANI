@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="Home.html" class="active">मुखपृष्ठ</a></li>
+                    <li><a href="Translation_hindi.html" class="active">मुखपृष्ठ</a></li>
                     <li><a href="Home.html">अनुवाद</a></li>
                     <li><a href="Translation_hindi.html">वीडियो</a></li>
                     <li><a href="Voice_Hindi.html">आवाज़</a></li>
@@ -70,58 +70,64 @@
                     </div>
                     <button class="upload-btn" onclick="document.getElementById('fileInput').click()">फ़ाइल चुनें</button>
                     <input type="file" id="fileInput" class="file-input" accept="video/*">
-                </div>
-                
-                <div class="progress-bar" id="progressBar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-                
-                <div class="file-info" id="fileInfo">
-                    <strong>चुनी गई फ़ाइल:</strong> <span id="fileName"></span><br>
-                    <strong>आकार:</strong> <span id="fileSize"></span>
-                </div>
-                
-                <!-- Language Selector -->
-                <div class="language-selector" id="languageSelector">
-                    <label><strong>से:</strong></label>
-                    <select id="fromLang" onchange="showSelected('fromLang','fromNote')">
-                        <option value="en">अंग्रेज़ी (ENG)</option>
-                        <option value="hi">हिन्दी (HN)</option>
-                        <option value="bn">बंगाली (BN)</option>
-                        <option value="ta">तमिल (TM)</option>
-                        <option value="te">तेलुगु (TG)</option>
-                        <option value="ml">मलयालम (ML)</option>
-                        <option value="kn">कन्नड़ (KN)</option>
-                        <option value="gu">गुजराती (GJ)</option>
-                        <option value="mr">मराठी (MR)</option>
-                        <option value="pa">पंजाबी (PN)</option>
-                    </select>
-                    <p id="fromNote" class="lang-note">कृपया स्रोत भाषा चुनें</p>
                     
-                    <label><strong>में:</strong></label>
-                    <select id="toLang" onchange="showSelected('toLang','toNote')">
-                        <option value="hi">हिन्दी (HN)</option>
-                        <option value="en">अंग्रेज़ी (ENG)</option>
-                        <option value="bn">बंगाली (BN)</option>
-                        <option value="ta">तमिल (TM)</option>
-                        <option value="te">तेलुगु (TG)</option>
-                        <option value="ml">मलयालम (ML)</option>
-                        <option value="kn">कन्नड़ (KN)</option>
-                        <option value="gu">गुजराती (GJ)</option>
-                        <option value="mr">मराठी (MR)</option>
-                        <option value="pa">पंजाबी (PN)</option>
-                        <option value="es">स्पेनिश (SP)</option>
-                        <option value="fr">फ्रेंच (FR)</option>
-                        <option value="de">जर्मन (DE)</option>
-                        <option value="ja">जापानी (JP)</option>
-                        <option value="ko">कोरियाई (KR)</option>
-                        <option value="zh">चीनी (CH)</option>
-                        <option value="ar">अरबी (AR)</option>
-                    </select>
-                    <p id="toNote" class="lang-note">कृपया लक्ष्य भाषा चुनें</p>
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    
+                    <div class="file-info" id="fileInfo">
+                        <strong>चुनी गई फ़ाइल:</strong> <span id="fileName"></span><br>
+                        <strong>आकार:</strong> <span id="fileSize"></span>
+                    </div>
                 </div>
                 
-                <button class="translate-btn" id="translateBtn">🚀 वीडियो अनुवाद करें</button>
+                <div class="upload-controls">
+                    <!-- Language Selector -->
+                    <div class="language-selector" id="languageSelector">
+                        <div class="language-row">
+                            <label><strong>से:</strong></label>
+                            <select id="fromLang" onchange="showSelected('fromLang','fromNote')">
+                                <option value="en">अंग्रेज़ी (ENG)</option>
+                                <option value="hi">हिन्दी (HN)</option>
+                                <option value="bn">बंगाली (BN)</option>
+                                <option value="ta">तमिल (TM)</option>
+                                <option value="te">तेलुगु (TG)</option>
+                                <option value="ml">मलयालम (ML)</option>
+                                <option value="kn">कन्नड़ (KN)</option>
+                                <option value="gu">गुजराती (GJ)</option>
+                                <option value="mr">मराठी (MR)</option>
+                                <option value="pa">पंजाबी (PN)</option>
+                            </select>
+                        </div>
+                        <p id="fromNote" class="lang-note">कृपया स्रोत भाषा चुनें</p>
+                        
+                        <div class="language-row">
+                            <label><strong>में:</strong></label>
+                            <select id="toLang" onchange="showSelected('toLang','toNote')">
+                                <option value="hi">हिन्दी (HN)</option>
+                                <option value="en">अंग्रेज़ी (ENG)</option>
+                                <option value="bn">बंगाली (BN)</option>
+                                <option value="ta">तमिल (TM)</option>
+                                <option value="te">तेलुगु (TG)</option>
+                                <option value="ml">मलयालम (ML)</option>
+                                <option value="kn">कन्नड़ (KN)</option>
+                                <option value="gu">गुजराती (GJ)</option>
+                                <option value="mr">मराठी (MR)</option>
+                                <option value="pa">पंजाबी (PN)</option>
+                                <option value="es">स्पेनिश (SP)</option>
+                                <option value="fr">फ्रेंच (FR)</option>
+                                <option value="de">जर्मन (DE)</option>
+                                <option value="ja">जापानी (JP)</option>
+                                <option value="ko">कोरियाई (KR)</option>
+                                <option value="zh">चीनी (CH)</option>
+                                <option value="ar">अरबी (AR)</option>
+                            </select>
+                        </div>
+                        <p id="toNote" class="lang-note">कृपया लक्ष्य भाषा चुनें</p>
+                    </div>
+                    
+                    <button class="translate-btn" id="translateBtn">🚀 वीडियो अनुवाद करें</button>
+                </div>
             </div>
         </div>
     </section>

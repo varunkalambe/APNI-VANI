@@ -28,9 +28,9 @@
                     </div>
                 </div>
                 <ul class="nav-menu">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="index.html">Language</a></li>
-    <li><a href="Translation.html" class="active">Video</a></li>
+    <li><a href="Translation.html">Home</a></li>
+    <li><a href="Home.html">Language</a></li>
+    <li><a href="Translation.html" >Video</a></li>
     <li><a href="Voice.html">Voice</a></li>
     <li><a href="Summarise.html">Summarise</a></li>
     <li><a href="#about">About</a></li>
@@ -65,58 +65,60 @@
                     </div>
                     <button class="upload-btn" onclick="document.getElementById('fileInput').click()">Choose File</button>
                     <input type="file" id="fileInput" class="file-input" accept="video/*">
-                </div>
-                
-                <div class="progress-bar" id="progressBar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-                
-                <div class="file-info" id="fileInfo">
-                    <strong>File Selected:</strong> <span id="fileName"></span><br>
-                    <strong>Size:</strong> <span id="fileSize"></span>
-                </div>
-                
-                <!-- Language Selector -->
-                <div class="language-selector" id="languageSelector">
-                    <label><strong>From:</strong></label>
-                    <select id="fromLang" onchange="showSelected('fromLang','fromNote')">
-                        <option value="en">English (ENG)</option>
-                        <option value="hi">Hindi (HN)</option>
-                        <option value="bn">Bengali (BN)</option>
-                        <option value="ta">Tamil (TM)</option>
-                        <option value="te">Telugu (TG)</option>
-                        <option value="ml">Malayalam (ML)</option>
-                        <option value="kn">Kannada (KN)</option>
-                        <option value="gu">Gujarati (GJ)</option>
-                        <option value="mr">Marathi (MR)</option>
-                        <option value="pa">Punjabi (PN)</option>
-                    </select>
-                    <p id="fromNote" class="lang-note">Please select a source language</p>
                     
-                    <label><strong>To:</strong></label>
-                    <select id="toLang" onchange="showSelected('toLang','toNote')">
-                        <option value="hi">Hindi (HN)</option>
-                        <option value="en">English (ENG)</option>
-                        <option value="bn">Bengali (BN)</option>
-                        <option value="ta">Tamil (TM)</option>
-                        <option value="te">Telugu (TG)</option>
-                        <option value="ml">Malayalam (ML)</option>
-                        <option value="kn">Kannada (KN)</option>
-                        <option value="gu">Gujarati (GJ)</option>
-                        <option value="mr">Marathi (MR)</option>
-                        <option value="pa">Punjabi (PN)</option>
-                        <option value="es">Spanish (SP)</option>
-                        <option value="fr">French (FR)</option>
-                        <option value="de">German (DE)</option>
-                        <option value="ja">Japanese (JP)</option>
-                        <option value="ko">Korean (KR)</option>
-                        <option value="zh">Chinese (CH)</option>
-                        <option value="ar">Arabic (AR)</option>
-                    </select>
-                    <p id="toNote" class="lang-note">Please select a target language</p>
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    
+                    <div class="file-info" id="fileInfo">
+                        <strong>File Selected:</strong> <span id="fileName"></span><br>
+                        <strong>Size:</strong> <span id="fileSize"></span>
+                    </div>
                 </div>
                 
-                <button class="translate-btn" id="translateBtn">🚀 Translate Video</button>
+                <div class="upload-controls">
+                    <!-- Language Selector -->
+                    <div class="language-selector" id="languageSelector">
+                        <label><strong>From:</strong></label>
+                        <select id="fromLang" onchange="showSelected('fromLang','fromNote')">
+                            <option value="en">English (ENG)</option>
+                            <option value="hi">Hindi (HN)</option>
+                            <option value="bn">Bengali (BN)</option>
+                            <option value="ta">Tamil (TM)</option>
+                            <option value="te">Telugu (TG)</option>
+                            <option value="ml">Malayalam (ML)</option>
+                            <option value="kn">Kannada (KN)</option>
+                            <option value="gu">Gujarati (GJ)</option>
+                            <option value="mr">Marathi (MR)</option>
+                            <option value="pa">Punjabi (PN)</option>
+                        </select>
+                        <p id="fromNote" class="lang-note">Please select a source language</p>
+                        
+                        <label><strong>To:</strong></label>
+                        <select id="toLang" onchange="showSelected('toLang','toNote')">
+                            <option value="hi">Hindi (HN)</option>
+                            <option value="en">English (ENG)</option>
+                            <option value="bn">Bengali (BN)</option>
+                            <option value="ta">Tamil (TM)</option>
+                            <option value="te">Telugu (TG)</option>
+                            <option value="ml">Malayalam (ML)</option>
+                            <option value="kn">Kannada (KN)</option>
+                            <option value="gu">Gujarati (GJ)</option>
+                            <option value="mr">Marathi (MR)</option>
+                            <option value="pa">Punjabi (PN)</option>
+                            <option value="es">Spanish (SP)</option>
+                            <option value="fr">French (FR)</option>
+                            <option value="de">German (DE)</option>
+                            <option value="ja">Japanese (JP)</option>
+                            <option value="ko">Korean (KR)</option>
+                            <option value="zh">Chinese (CH)</option>
+                            <option value="ar">Arabic (AR)</option>
+                        </select>
+                        <p id="toNote" class="lang-note">Please select a target language</p>
+                    </div>
+                    
+                    <button class="translate-btn" id="translateBtn">🚀 Translate Video</button>
+                </div>
             </div>
         </div>
     </section>

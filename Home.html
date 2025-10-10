@@ -1,562 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APNI VAANI - Language Selection</title>
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APNI VAANI - Language Selection</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            min-height: 100vh;
-            color: white;
-        }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff;
+      min-height: 100vh;
+      color: #222;
+    }
 
-        /* Header */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 20px 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-        }
+    .header {
+      background: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+    }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-        }
+    .nav-container {
+      max-width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 0 0 0;
+    }
 
-        /* Logo */
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+    .logo {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
 
-        .logo-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .logo-icon img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      animation: logoFloat 3s ease-in-out infinite;
+      filter: brightness(0.95) opacity(0.7)
+        drop-shadow(0 4px 15px rgba(99, 102, 241, 0.08));
+      transition: all 0.3s ease;
+    }
 
-        .logo-icon img {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
-            animation: logoFloat 3s ease-in-out infinite;
-            transition: all 0.3s ease;
-            filter: drop-shadow(0 4px 15px rgba(99, 102, 241, 0.3));
-        }
+    .logo-icon:hover img {
+      transform: scale(1.1) rotate(10deg);
+      filter: drop-shadow(0 6px 20px rgba(99, 102, 241, 0.5));
+    }
 
-        .logo-icon:hover img {
-            transform: scale(1.1) rotate(10deg);
-            filter: drop-shadow(0 6px 20px rgba(99, 102, 241, 0.5));
-        }
+    @keyframes logoFloat {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-8px) rotate(5deg);
+      }
+    }
 
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(5deg); }
-        }
+    .logo-text h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1f2937;
+    }
 
-        .logo-text h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: #1f2937;
-            animation: textSlideIn 1s ease-out;
-        }
+    .logo-text p {
+      font-size: 14px;
+      opacity: 0.7;
+      color: #6b7280;
+    }
 
-        .logo-text p {
-            font-size: 14px;
-            opacity: 0.7;
-            color: #6b7280;
-            animation: textSlideIn 1s ease-out 0.3s both;
-        }
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
 
-        @keyframes textSlideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
+    .page-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
 
-        /* Navigation Menu */
-        .nav-menu {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
+    .page-title h2 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
 
-        .nav-menu a {
-            color: #374151;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
+    .page-title p {
+      font-size: 18px;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
 
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #6366f1, #8b5cf6);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-            border-radius: 1px;
-        }
+    .language-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto 50px auto;
+    }
 
-        .nav-menu a:hover::after,
-        .nav-menu a.active::after {
-            width: 80%;
-        }
+    .language-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 2px solid rgba(99, 102, 241, 0.08);
+      border-radius: 24px;
+      padding: 60px 40px;
+      text-align: center;
+      transition: box-shadow 0.3s, transform 0.3s, color 0.3s;
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 12px 40px rgba(99, 102, 241, 0.1),
+        0 2px 12px rgba(0, 0, 0, 0.08);
+    }
 
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            background: rgba(99, 102, 241, 0.1);
-            color: #6366f1;
-        }
+    .language-card:hover {
+      box-shadow: 0 16px 48px rgba(30, 64, 175, 0.25),
+        0 2px 12px rgba(30, 64, 175, 0.18);
+      transform: translateY(-8px) scale(1.04);
+    }
 
-        /* Main Content */
-        .main-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
+    .language-card.selected {
+      background: #dbeafe !important;
+      border: 3px solid #2563eb !important;
+      transform: translateY(-8px) scale(1.02) !important;
+      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.18) !important;
+      color: #000 !important;
+    }
 
-        .page-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+    .language-name {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
 
-        .page-title h2 {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
+    .language-short {
+      font-size: 16px;
+      opacity: 0.8;
+      margin-bottom: 15px;
+    }
 
-        .page-title p {
-            font-size: 18px;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
+    .start-btn {
+      display: none;
+      margin-top: 20px;
+      padding: 12px 36px;
+      font-size: 1rem;
+      font-weight: 600;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: 0.3s;
+      position: relative;
+      z-index: 10;
+      pointer-events: auto;
+    }
 
-        /* Language Grid */
-        .language-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            max-width: 900px;
-            margin: 0 auto 50px auto;
-        }
+    .start-btn:hover {
+      background: #1e40af;
+      transform: scale(1.05);
+    }
 
-        .language-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            animation: cardSlideUp 0.6s ease forwards;
-            transform-origin: center;
-        }
+    .language-card.selected .start-btn {
+      display: inline-block;
+    }
 
-        .language-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-            opacity: 0;
-            transition: all 0.4s ease;
-            border-radius: 18px;
-        }
-
-        .language-card:nth-child(1) { animation-delay: 0.2s; }
-        .language-card:nth-child(2) { animation-delay: 0.4s; }
-        .language-card:nth-child(3) { animation-delay: 0.6s; }
-
-        @keyframes cardSlideUp {
-            from { opacity: 0; transform: translateY(50px) scale(0.9); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .language-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-
-        .language-card:hover::before {
-            opacity: 1;
-        }
-
-        /* Simple and clean selection state */
-        .language-card.selected {
-            background: rgba(16, 185, 129, 0.25) !important;
-            border: 3px solid rgba(16, 185, 129, 0.7) !important;
-            transform: translateY(-8px) scale(1.02) !important;
-            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3) !important;
-        }
-
-        .language-card.selected::before {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
-            opacity: 1;
-        }
-
-        .language-card.selected:hover {
-            transform: translateY(-10px) scale(1.02) !important;
-            background: rgba(16, 185, 129, 0.3) !important;
-        }
-
-        .language-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #10b981, #06d6a0);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 36px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .language-card:hover .language-icon {
-            transform: scale(1.15) rotate(5deg);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
-        }
-
-        .language-card.selected .language-icon {
-            transform: scale(1.1);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.5);
-            background: linear-gradient(135deg, #059669, #10b981);
-        }
-
-        .language-name { 
-            font-size: 24px; 
-            font-weight: 600; 
-            margin-bottom: 10px; 
-            transition: all 0.3s ease;
-        }
-        
-        .language-card.selected .language-name {
-            color: #f0fdf4;
-        }
-
-        .language-code { 
-            font-size: 16px; 
-            opacity: 0.8; 
-            margin-bottom: 15px; 
-            transition: all 0.3s ease;
-        }
-        
-        .language-card.selected .language-code {
-            opacity: 0.9;
-            color: #dcfce7;
-        }
-
-        .language-description { 
-            font-size: 14px; 
-            opacity: 0.7; 
-            line-height: 1.5; 
-            transition: all 0.3s ease;
-        }
-        
-        .language-card.selected .language-description {
-            opacity: 0.8;
-            color: #dcfce7;
-        }
-
-        /* Simple selection indicator */
-        .selected-indicator {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, #059669, #10b981);
-            border: 2px solid white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: bold;
-            color: white;
-            opacity: 0;
-            transform: scale(0);
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4);
-        }
-
-        .language-card.selected .selected-indicator { 
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* Confirm Section */
-        .confirm-section { 
-            text-align: center; 
-            margin-top: 50px; 
-        }
-
-        .selected-info {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(30px) scale(0.95);
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .selected-info.show { 
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .confirm-btn {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-            border: none;
-            padding: 18px 40px;
-            font-size: 18px;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
-            min-width: 200px;
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-block;
-            opacity: 0.5;
-            transform: scale(0.95);
-            pointer-events: none;
-        }
-
-        .confirm-btn.enabled {
-            opacity: 1;
-            transform: scale(1);
-            cursor: pointer;
-            pointer-events: all;
-        }
-
-        .confirm-btn.enabled:hover { 
-            transform: translateY(-3px) scale(1.05); 
-            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.5);
-        }
-
-        .confirm-btn.enabled:active { 
-            transform: translateY(-1px) scale(1.02); 
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) { 
-            .language-grid { 
-                grid-template-columns: 1fr; 
-                max-width: 400px; 
-            } 
-        }
-        
-        @media (max-width: 768px) {
-            .nav-menu { display: none; }
-            .language-grid { gap: 20px; }
-            .page-title h2 { font-size: 28px; }
-            .main-content { padding: 40px 20px; }
-        }
-
-    </style>
+    @media (max-width: 900px) {
+      .language-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-
-<header class="header">
+  <header class="header">
     <div class="nav-container">
-        <div class="logo">
-            <div class="logo-icon">
-                <img src="Logo.png" alt="APNI VANI Logo">
-            </div>
-            <div class="logo-text">
-                <h1>APNI VAANI</h1>
-                <p>Breaking Barriers, Connecting Voices</p>
-            </div>
+      <div class="logo">
+        <div class="logo-icon">
+          <img src="Logo.png" alt="APNI VAANI Logo" />
         </div>
-        <nav>
-            <ul class="nav-menu">
-                <li><a href="Home.html" class="nav-link active">Language</a></li>
-                <li><a href="Home.html" class="nav-link">Translation</a></li>
-                <li><a href="Translation.html" class="nav-link">Video</a></li>
-                <li><a href="Voice.html" class="nav-link">Voice</a></li>
-                <li><a href="#" class="nav-link">Summarise</a></li>
-                <li><a href="#" class="nav-link">About</a></li>
-            </ul>
-        </nav>
+        <div class="logo-text">
+          <h1>APNI VAANI</h1>
+          <p>Breaking Barriers, Connecting Voices</p>
+        </div>
+      </div>
     </div>
-</header>
+  </header>
 
-<main class="main-content">
-
+  <main class="main-content">
     <div class="page-title">
-        <h2>Select Your Preferred Language</h2>
-        <p>Choose from our supported languages to get the best translation experience tailored for you.</p>
+      <h2>Select Your Preferred Language</h2>
+      <p>
+        Choose from our supported languages to get the best translation
+        experience tailored for you.
+      </p>
     </div>
 
     <div class="language-grid">
-        <div class="language-card" data-lang="english">
-            <div class="selected-indicator">✓</div>
-            <div class="language-icon">ᴱᴺᴳ</div>
-            <div class="language-name">English</div>
-            <div class="language-code">ENG</div>
-            <div class="language-description">Global communication language with comprehensive translation support</div>
-        </div>
+      <div class="language-card" data-lang="bengali">
+        <div class="language-name">বাংলা</div>
+        <div class="language-short">(Bengali)</div>
+        <a class="start-btn" href="Translation_bengali.html">শুরু করুন</a>
+      </div>
 
-        <div class="language-card" data-lang="hindi">
-            <div class="selected-indicator">✓</div>
-            <div class="language-icon">ᴴᴺ</div>
-            <div class="language-name">हिंदी</div>
-            <div class="language-code">HIN</div>
-            <div class="language-description">India's widely spoken language with advanced AI translation features</div>
-        </div>
+      <div class="language-card" data-lang="marathi">
+        <div class="language-name">मराठी</div>
+        <div class="language-short">(Marathi)</div>
+        <a class="start-btn" href="Translation_marathi.html">सुरू करा</a>
+      </div>
 
-        <div class="language-card" data-lang="kannada">
-            <div class="selected-indicator">✓</div>
-            <div class="language-icon">ᴷᴺ</div>
-            <div class="language-name">ಕನ್ನಡ</div>
-            <div class="language-code">KAN</div>
-            <div class="language-description">One of the world's oldest living languages</div>
+      <div class="language-card" data-lang="gujrati">
+        <div class="language-name">ગુજરાતી</div>
+        <div class="language-short">(Gujarati)</div>
+        <a class="start-btn" href="Translation_gujrati.html">શરૂ કરો</a>
+      </div>
+
+      <div class="language-card" data-lang="punjabi">
+        <div class="language-name">ਪੰਜਾਬੀ</div>
+        <div class="language-short">(Punjabi)</div>
+        <a class="start-btn" href="Translation_punjabi.html">ਸ਼ੁਰੂ ਕਰੋ</a>
+      </div>
+
+      <div class="language-card" data-lang="english">
+        <div class="language-name">English</div>
+        <div class="language-short">(English)</div>
+        <a class="start-btn" href="Translation.html">Start</a>
+      </div>
+
+      <div class="language-card" data-lang="hindi">
+        <div class="language-name">हिंदी</div>
+        <div class="language-short">(Hindi)</div>
+        <a class="start-btn" href="Translation_hindi.html">शुरू करें</a>
+      </div>
+
+      <div class="language-card" data-lang="kannada">
+        <div class="language-name">ಕನ್ನಡ</div>
+        <div class="language-short">(Kannada)</div>
+        <a class="start-btn" href="Translation_Kannada.html">ಪ್ರಾರಂಭಿಸಿ</a>
+      </div>
+
+      <div
+        class="language-card"
+        style="min-width: 320px; max-width: 340px; cursor: default;"
+      >
+        <div class="language-name" style="font-size: 1.5rem;">
+          More regional languages coming soon ...
         </div>
+      </div>
     </div>
+  </main>
 
-    <div class="confirm-section">
-        <div class="selected-info" id="selectedInfo">
-            <h3>Selected Language: <span id="selectedLangName">None</span></h3>
-            <p>Ready to proceed with translation services</p>
-        </div>
-        <a href="#" class="confirm-btn disabled" id="confirmBtn">Continue to Translation</a>
-    </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cards = document.querySelectorAll(".language-card");
+      let activeCard = null;
 
-</main>
+      cards.forEach((card) => {
+        card.addEventListener("click", (e) => {
+          // Allow link clicks to work normally
+          if (e.target.tagName.toLowerCase() === "a" || e.target.closest("a")) {
+            return;
+          }
 
-<script>
-    class LanguageSelector {
-        constructor() {
-            this.selectedLanguage = null;
-            this.languageCards = document.querySelectorAll('.language-card');
-            this.selectedInfo = document.getElementById('selectedInfo');
-            this.selectedLangName = document.getElementById('selectedLangName');
-            this.confirmBtn = document.getElementById('confirmBtn');
-
-            this.languageLinks = {
-                'english': 'Detail.html',
-                'hindi': 'Detail_hindi.html',
-                'kannada': 'Detail_Kannada.html'
-            };
-
-            this.languageNames = {
-                'english': 'English',
-                'hindi': 'हिंदी (Hindi)',
-                'kannada': 'ಕನ್ನಡ (Kannada)'
-            };
-
-            this.init();
-        }
-
-        init() {
-            this.languageCards.forEach(card => {
-                card.addEventListener('click', (e) => {
-                    this.selectLanguage(card);
-                });
-            });
-        }
-
-        selectLanguage(selectedCard) {
-            const langCode = selectedCard.dataset.lang.toLowerCase();
-
-            // If the same card is clicked, don't do anything
-            if (this.selectedLanguage === langCode) {
-                return;
-            }
-
-            // Remove selection from all cards smoothly
-            this.languageCards.forEach(card => {
-                card.classList.remove('selected');
-            });
-
-            // Add selection to clicked card
-            selectedCard.classList.add('selected');
-
-            // Update selected language
-            this.selectedLanguage = langCode;
-            this.selectedLangName.textContent = this.languageNames[langCode];
-
-            // Show selected info with smooth animation
-            setTimeout(() => {
-                this.selectedInfo.classList.add('show');
-            }, 150);
-
-            // Enable confirm button
-            setTimeout(() => {
-                this.confirmBtn.classList.remove('disabled');
-                this.confirmBtn.classList.add('enabled');
-                this.confirmBtn.href = this.languageLinks[langCode];
-            }, 200);
-
-            // Console log for debugging
-            console.log('Language selected:', {
-                code: langCode,
-                name: this.languageNames[langCode],
-                link: this.languageLinks[langCode]
-            });
-        }
-
-        // Method to get currently selected language
-        getSelectedLanguage() {
-            return this.selectedLanguage;
-        }
-
-        // Method to programmatically select a language
-        setSelectedLanguage(langCode) {
-            const card = document.querySelector(`[data-lang="${langCode}"]`);
-            if (card) {
-                this.selectLanguage(card);
-            }
-        }
-    }
-
-    // Initialize the language selector when DOM is loaded
-    document.addEventListener('DOMContentLoaded', () => {
-        const languageSelector = new LanguageSelector();
+          // Selection logic
+          if (activeCard) activeCard.classList.remove("selected");
+          card.classList.add("selected");
+          activeCard = card;
+        });
+      });
     });
-</script>
-
+  </script>
 </body>
 </html>

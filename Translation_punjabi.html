@@ -34,12 +34,12 @@
                     </div>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="Home.html" class="active">ਮੁੱਖ ਸਫ਼ਾ</a></li>
+                    <li><a href="Translation_punjabi.html" class="active">ਮੁੱਖ ਸਫ਼ਾ</a></li>
                     <li><a href="Home.html">ਅਨੁਵਾਦ</a></li>
-                    <li><a href="Translation_hindi.html">ਵੀਡੀਓ</a></li>
-                    <li><a href="Voice_Hindi.html">ਆਵਾਜ਼</a></li>
-                    <li><a href="Summarise_hindi.Html">ਸਾਰਾਂਸ਼</a></li>
-                    <li><a href="Detail_hindi.html">ਸਾਡੇ ਬਾਰੇ</a></li>
+                    <li><a href="Translation_punjabi.html">ਵੀਡੀਓ</a></li>
+                    <li><a href="Voice_punjabi.html">ਆਵਾਜ਼</a></li>
+                    <li><a href="Summarise_punjabi.html">ਸਾਰਾਂਸ਼</a></li>
+                    <li><a href="Detail_punjabi.html">ਸਾਡੇ ਬਾਰੇ</a></li>
                 </ul>
             </nav>
         </div>
@@ -72,56 +72,65 @@
                     <input type="file" id="fileInput" class="file-input" accept="video/*">
                 </div>
                 
-                <div class="progress-bar" id="progressBar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-                
-                <div class="file-info" id="fileInfo">
-                    <strong>ਚੁਣੀ ਫਾਇਲ:</strong> <span id="fileName"></span><br>
-                    <strong>ਸਾਈਜ਼:</strong> <span id="fileSize"></span>
-                </div>
-                
-                <!-- Language Selector -->
-                <div class="language-selector" id="languageSelector">
-                    <label><strong>ਤੋਂ:</strong></label>
-                    <select id="fromLang" onchange="showSelected('fromLang','fromNote')">
-                        <option value="en">ਅੰਗਰੇਜ਼ੀ (ENG)</option>
-                        <option value="hi">ਹਿੰਦੀ (HN)</option>
-                        <option value="bn">ਬੰਗਾਲੀ (BN)</option>
-                        <option value="ta">ਤਮਿਲ (TM)</option>
-                        <option value="te">ਤੇਲਗੂ (TG)</option>
-                        <option value="ml">ਮਲਿਆਲਮ (ML)</option>
-                        <option value="kn">ਕੰਨੜ (KN)</option>
-                        <option value="gu">ਗੁਜਰਾਤੀ (GJ)</option>
-                        <option value="mr">ਮਰਾਠੀ (MR)</option>
-                        <option value="pa">ਪੰਜਾਬੀ (PN)</option>
-                    </select>
-                    <p id="fromNote" class="lang-note">ਕਿਰਪਾ ਕਰਕੇ ਸਰੋਤ ਭਾਸ਼ਾ ਚੁਣੋ</p>
                     
-                    <label><strong>ਵਿੱਚ:</strong></label>
-                    <select id="toLang" onchange="showSelected('toLang','toNote')">
-                        <option value="hi">ਹਿੰਦੀ (HN)</option>
-                        <option value="en">ਅੰਗਰੇਜ਼ੀ (ENG)</option>
-                        <option value="bn">ਬੰਗਾਲੀ (BN)</option>
-                        <option value="ta">ਤਮਿਲ (TM)</option>
-                        <option value="te">ਤੇਲਗੂ (TG)</option>
-                        <option value="ml">ਮਲਿਆਲਮ (ML)</option>
-                        <option value="kn">ਕੰਨੜ (KN)</option>
-                        <option value="gu">ਗੁਜਰਾਤੀ (GJ)</option>
-                        <option value="mr">ਮਰਾਠੀ (MR)</option>
-                        <option value="pa">ਪੰਜਾਬੀ (PN)</option>
-                        <option value="es">ਸਪੇਨੀ (SP)</option>
-                        <option value="fr">ਫ੍ਰੈਂਚ (FR)</option>
-                        <option value="de">ਜਰਮਨ (DE)</option>
-                        <option value="ja">ਜਾਪਾਨੀ (JP)</option>
-                        <option value="ko">ਕੋਰੀਆਈ (KR)</option>
-                        <option value="zh">ਚੀਨੀ (CH)</option>
-                        <option value="ar">ਅਰਬੀ (AR)</option>
-                    </select>
-                    <p id="toNote" class="lang-note">ਕਿਰਪਾ ਕਰਕੇ ਲਕੜੀ ਭਾਸ਼ਾ ਚੁਣੋ</p>
-                </div>
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    
+                    <div class="file-info" id="fileInfo">
+                        <strong>ਚੁਣੀ ਫਾਇਲ:</strong> <span id="fileName"></span><br>
+                        <strong>ਸਾਈਜ਼:</strong> <span id="fileSize"></span>
+                    </div>
                 
-                <button class="translate-btn" id="translateBtn">🚀 ਵੀਡੀਓ ਅਨੁਵਾਦ ਕਰੋ</button>
+                
+                <div class="upload-controls">
+                    <!-- Language Selector -->
+                    <div class="language-selector" id="languageSelector">
+                        <div class="language-row">
+                            <label><strong>ਤੋਂ:</strong></label>
+                            <select id="fromLang" onchange="showSelected('fromLang','fromNote')">
+                                <option value="en">ਅੰਗਰੇਜ਼ੀ (ENG)</option>
+                                <option value="hi">ਹਿੰਦੀ (HN)</option>
+                                <option value="bn">ਬੰਗਾਲੀ (BN)</option>
+                                <option value="ta">ਤਮਿਲ (TM)</option>
+                                <option value="te">ਤੇਲਗੂ (TG)</option>
+                                <option value="ml">ਮਲਿਆਲਮ (ML)</option>
+                                <option value="kn">ਕੰਨੜ (KN)</option>
+                                <option value="gu">ਗੁਜਰਾਤੀ (GJ)</option>
+                                <option value="mr">ਮਰਾਠੀ (MR)</option>
+                                <option value="pa">ਪੰਜਾਬੀ (PN)</option>
+                            </select>
+                        </div>
+                        <p id="fromNote" class="lang-note">ਕਿਰਪਾ ਕਰਕੇ ਸਰੋਤ ਭਾਸ਼ਾ ਚੁਣੋ</p>
+                        
+                        <div class="language-row">
+                            <label><strong>ਵਿੱਚ:</strong></label>
+                            <select id="toLang" onchange="showSelected('toLang','toNote')">
+                                <option value="hi">ਹਿੰਦੀ (HN)</option>
+                                <option value="en">ਅੰਗਰੇਜ਼ੀ (ENG)</option>
+                                <option value="bn">ਬੰਗਾਲੀ (BN)</option>
+                                <option value="ta">ਤਮਿਲ (TM)</option>
+                                <option value="te">ਤੇਲਗੂ (TG)</option>
+                                <option value="ml">ਮਲਿਆਲਮ (ML)</option>
+                                <option value="kn">ਕੰਨੜ (KN)</option>
+                                <option value="gu">ਗੁਜਰਾਤੀ (GJ)</option>
+                                <option value="mr">ਮਰਾਠੀ (MR)</option>
+                                <option value="pa">ਪੰਜਾਬੀ (PN)</option>
+                                <option value="es">ਸਪੇਨੀ (SP)</option>
+                                <option value="fr">ਫ੍ਰੈਂਚ (FR)</option>
+                                <option value="de">ਜਰਮਨ (DE)</option>
+                                <option value="ja">ਜਾਪਾਨੀ (JP)</option>
+                                <option value="ko">ਕੋਰੀਆਈ (KR)</option>
+                                <option value="zh">ਚੀਨੀ (CH)</option>
+                                <option value="ar">ਅਰਬੀ (AR)</option>
+                            </select>
+                        </div>
+                        <p id="toNote" class="lang-note">ਕਿਰਪਾ ਕਰਕੇ ਲਕੜੀ ਭਾਸ਼ਾ ਚੁਣੋ</p>
+                    </div>
+                    
+                    <button class="translate-btn" id="translateBtn">🚀 ਵੀਡੀਓ ਅਨੁਵਾਦ ਕਰੋ</button>
+                </div>
+            </div>
             </div>
         </div>
     </section>

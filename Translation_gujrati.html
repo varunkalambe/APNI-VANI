@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>અમારી વાણી - અવરોધ તોડવા, અવાજો જોડવા</title>
+    <title>તમારો વિડિયો અપલોડ કરો - અનુવાદ સ્ટુડિયો</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body style="font-family: 'Noto Sans Devanagari', sans-serif;">
-
-    <!-- Welcome Overlay -->
-    <div id="welcomeOverlay">
-        <h1>અમારી વાણી</h1>
-        <p>અવરોધ તોડવા, અવાજો જોડવા</p>
-    </div>
+<body style="font-family: 'Noto Sans Gujarati', sans-serif;">
 
     <!-- Notification -->
     <div class="notification" id="notification">
@@ -27,14 +21,14 @@
         <div class="container">
             <nav class="nav">
                 <div class="logo">
-                    <img src="Logo.png" alt="અમારી વાણી લોગો" class="logo-svg">
+                    <img src="Logo.png" alt="તમારો વિડિયો લોગો" class="logo-svg">
                     <div>
-                        <div class="logo-text">અમારી વાણી</div>
-                        <span class="logo-tagline">અવરોધ તોડવા, અવાજો જોડવા</span>
+                        <div class="logo-text">તમારો વિડિયો</div>
+                        <span class="logo-tagline">અનુવાદ સ્ટુડિયો</span>
                     </div>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="Home.html" class="active">હોમપેજ</a></li>
+                    <li><a href="Translation_gujrati.html" class="active">મુખપૃષ્ઠ</a></li>
                     <li><a href="Home.html">અનુવાદ</a></li>
                     <li><a href="Translation_gujrati.html">વિડિયો</a></li>
                     <li><a href="Voice_gujrati.html">અવાજ</a></li>
@@ -48,9 +42,9 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
-            <div class="made-in-PCE">PCE માં બનાવેલું</div>
-            <h1>અમારી વાણી – અવરોધ તોડવા, અવાજો જોડવા</h1>
-            <p>સહકાર અને વૈવિધ્યમાં એકતા. અમારી વાણીની શ્રેષ્ઠ AI અનુવાદ સુવિધાઓ ભાષાને અવરોધ નહીં પરંતુ વૈશ્વિક સંવાદ માટેનું દ્વાર બનાવે છે.</p>
+            <div class="made-in-PCE"> PCE માં બનાવેલ</div>
+            <h1>તમારો વિડિયો – અનુવાદ સ્ટુડિયો</h1>
+            <p>AI દ્વારા શક્તિશાળી અનુવાદ સેવાઓ. તમારો વિડિયો અપલોડ કરો અને કોઈપણ ભાષામાં અનુવાદ કરો.</p>
         </div>
     </section>
 
@@ -66,62 +60,68 @@
                     <div class="upload-text">
                         <h3>તમારો વિડિયો અપલોડ કરો</h3>
                         <p>અહીં ડ્રેગ અને ડ્રોપ કરો, અથવા બ્રાઉઝ કરવા માટે ક્લિક કરો</p>
-                        <p class="file-note">સપોર્ટેડ ફોર્મેટ્સ: MP4, AVI, MOV, WMV (સর্বাধিক: 100MB)</p>
+                        <p class="file-note">સપોર્ટેડ ફોર્મેટ્સ: MP4, AVI, MOV, WMV (સર્વાધિક: 100MB)</p>
                     </div>
                     <button class="upload-btn" onclick="document.getElementById('fileInput').click()">ફાઇલ પસંદ કરો</button>
                     <input type="file" id="fileInput" class="file-input" accept="video/*">
-                </div>
-                
-                <div class="progress-bar" id="progressBar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-                
-                <div class="file-info" id="fileInfo">
-                    <strong>પસંદ કરેલી ફાઇલ:</strong> <span id="fileName"></span><br>
-                    <strong>આકાર:</strong> <span id="fileSize"></span>
-                </div>
-                
-                <!-- Language Selector -->
-                <div class="language-selector" id="languageSelector">
-                    <label><strong>થી:</strong></label>
-                    <select id="fromLang" onchange="showSelected('fromLang','fromNote')">
-                        <option value="en">અંગ્રેજી (ENG)</option>
-                        <option value="hi">હિન્દી (HN)</option>
-                        <option value="bn">બંગાળી (BN)</option>
-                        <option value="ta">તમિલ (TM)</option>
-                        <option value="te">તેലુગુ (TG)</option>
-                        <option value="ml">મલયાલમ (ML)</option>
-                        <option value="kn">કન્નડ (KN)</option>
-                        <option value="gu">ગુજરાતી (GJ)</option>
-                        <option value="mr">મરાઠી (MR)</option>
-                        <option value="pa">પંજાબી (PN)</option>
-                    </select>
-                    <p id="fromNote" class="lang-note">કૃપા કરીને સ્ત્રોત ભાષા પસંદ કરો</p>
                     
-                    <label><strong>માં:</strong></label>
-                    <select id="toLang" onchange="showSelected('toLang','toNote')">
-                        <option value="hi">હિન્દી (HN)</option>
-                        <option value="en">અંગ્રેજી (ENG)</option>
-                        <option value="bn">બંગાળી (BN)</option>
-                        <option value="ta">તમિલ (TM)</option>
-                        <option value="te">તેલુગુ (TG)</option>
-                        <option value="ml">મલયાલમ (ML)</option>
-                        <option value="kn">કન્નડ (KN)</option>
-                        <option value="gu">ગુજરાતી (GJ)</option>
-                        <option value="mr">મરાઠી (MR)</option>
-                        <option value="pa">પંજાબી (PN)</option>
-                        <option value="es">સ્પેનિશ (SP)</option>
-                        <option value="fr">ફ્રેંચ (FR)</option>
-                        <option value="de">જર્મન (DE)</option>
-                        <option value="ja">જાપાની (JP)</option>
-                        <option value="ko">કોરિયન (KR)</option>
-                        <option value="zh">ચીની (CH)</option>
-                        <option value="ar">અરબી (AR)</option>
-                    </select>
-                    <p id="toNote" class="lang-note">કૃપા કરીને લક્ષ્ય ભાષા પસંદ કરો</p>
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    
+                    <div class="file-info" id="fileInfo">
+                        <strong>પસંદ કરેલી ફાઇલ:</strong> <span id="fileName"></span><br>
+                        <strong>આકાર:</strong> <span id="fileSize"></span>
+                    </div>
                 </div>
                 
-                <button class="translate-btn" id="translateBtn">🚀 વિડિયો અનુવાદ કરો</button>
+                <div class="upload-controls">
+                    <!-- Language Selector -->
+                    <div class="language-selector" id="languageSelector">
+                        <div class="language-row">
+                            <label><strong>થી:</strong></label>
+                            <select id="fromLang" onchange="showSelected('fromLang','fromNote')">
+                                <option value="en">અંગ્રેજી (ENG)</option>
+                                <option value="hi">હિન્દી (HN)</option>
+                                <option value="bn">બંગાળી (BN)</option>
+                                <option value="ta">તમિલ (TM)</option>
+                                <option value="te">તેલુગુ (TG)</option>
+                                <option value="ml">મલયાલમ (ML)</option>
+                                <option value="kn">કન્નડ (KN)</option>
+                                <option value="gu">ગુજરાતી (GJ)</option>
+                                <option value="mr">મરાઠી (MR)</option>
+                                <option value="pa">પંજાબી (PN)</option>
+                            </select>
+                        </div>
+                        <p id="fromNote" class="lang-note">કૃપા કરીને સ્ત્રોત ભાષા પસંદ કરો</p>
+                        
+                        <div class="language-row">
+                            <label><strong>માં:</strong></label>
+                            <select id="toLang" onchange="showSelected('toLang','toNote')">
+                                <option value="hi">હિન્દી (HN)</option>
+                                <option value="en">અંગ્રેજી (ENG)</option>
+                                <option value="bn">બંગાળી (BN)</option>
+                                <option value="ta">તમિલ (TM)</option>
+                                <option value="te">તેલુગુ (TG)</option>
+                                <option value="ml">મલયાલમ (ML)</option>
+                                <option value="kn">કન્નડ (KN)</option>
+                                <option value="gu">ગુજરાતી (GJ)</option>
+                                <option value="mr">મરાઠી (MR)</option>
+                                <option value="pa">પંજાબી (PN)</option>
+                                <option value="es">સ્પેનિશ (SP)</option>
+                                <option value="fr">ફ્રેંચ (FR)</option>
+                                <option value="de">જર્મન (DE)</option>
+                                <option value="ja">જાપાની (JP)</option>
+                                <option value="ko">કોરિયન (KR)</option>
+                                <option value="zh">ચીની (CH)</option>
+                                <option value="ar">અરબી (AR)</option>
+                            </select>
+                        </div>
+                        <p id="toNote" class="lang-note">કૃપા કરીને લક્ષ્ય ભાષા પસંદ કરો</p>
+                    </div>
+                    
+                    <button class="translate-btn" id="translateBtn">🚀 વિડિયો અનુવાદ કરો</button>
+                </div>
             </div>
         </div>
     </section>
@@ -129,12 +129,12 @@
     <!-- How to Use Section -->
     <section class="services" style="background: rgba(255,255,255,0.1);">
         <div class="container">
-            <h2 class="white-title">અમારી વાણી કેવી રીતે ઉપયોગ કરવો</h2>
+            <h2 class="white-title">તમારો વિડિયો કેવી રીતે વાપરવો</h2>
             <div class="services-grid">
-                <div class="service-card"><h3>ચરણ 1: વિડિયો અપલોડ કરો</h3><p>"ફાઇલ પસંદ કરો" ક્લિક કરો અથવા ડ્રેગ અને ડ્રોપ કરો.</p></div>
-                <div class="service-card"><h3>ચરણ 2: ભાષાઓ પસંદ કરો</h3><p>સ્ત્રોત અને લક્ષ્ય ભાષાઓ પસંદ કરો.</p></div>
-                <div class="service-card"><h3>ચરણ 3: અનુવાદ કરો</h3><p>🚀 અનુવાદ બટન દબાવો.</p></div>
-                <div class="service-card"><h3>ચરણ 4: ડાઉનલોડ કરો</h3><p>અનુવાદ પછી ડાઉનલોડ બટન દબાવો.</p></div>
+                <div class="service-card"><h3>પગલું 1: વિડિયો અપલોડ કરો</h3><p>"ફાઇલ પસંદ કરો" ક્લિક કરો અથવા ડ્રેગ અને ડ્રોપ કરો।</p></div>
+                <div class="service-card"><h3>પગલું 2: ભાષાઓ પસંદ કરો</h3><p>સ્ત્રોત અને લક્ષ્ય ભાષાઓ પસંદ કરો।</p></div>
+                <div class="service-card"><h3>પગલું 3: અનુવાદ કરો</h3><p>🚀 અનુવાદ બટન દબાવો।</p></div>
+                <div class="service-card"><h3>પગલું 4: ડાઉનલોડ કરો</h3><p>અનુવાદ પછી ડાઉનલોડ બટન દબાવો।</p></div>
             </div>
         </div>
     </section>
@@ -142,14 +142,14 @@
     <!-- Our AI-Powered Services Section -->
     <section class="services">
         <div class="container">
-            <h2 class="white-title">અમારી AI-સંચાલિત સેવાઓ</h2>
+            <h2 class="white-title">અમારી AI-ચલિત સેવાઓ</h2>
             <div class="services-grid">
-                <div class="service-card"><h3>ટેક્સ્ટ અને દસ્તાવેજ અનુવાદ</h3><p>દસ્તાવેજો અને પુસ્તકો અનુવાદ કરો.</p></div>
-                <div class="service-card"><h3>વિડિયો અનુવાદ</h3><p>સબટાઈટલ અને ડબિંગ સાથે વિડિયો બદલો.</p></div>
-                <div class="service-card"><h3>અવાજ અનુવાદ</h3><p>રીયલ-ટાઇમ નેચરલ અવાજ અનુવાદ.</p></div>
-                <div class="service-card"><h3>લાઈવ મીટિંગ અનુવાદ</h3><p>રીયલ-ટાઇમ મીટિંગમાં અવરોધ તોડો.</p></div>
-                <div class="service-card"><h3>છબી ટેક્સ્ટ અનુવાદ</h3><p>છબીઓમાંથી ટેક્સ્ટ કાઢો અને અનુવાદ કરો.</p></div>
-                <div class="service-card"><h3>સારાંશ સાધન</h3><p>લાંબી સામગ્રી માટે AI સારાંશ.</p></div>
+                <div class="service-card"><h3>પાઠ અને દસ્તાવેજ અનુવાદ</h3><p>દસ્તાવેજો અને પુસ્તકોનો અનુવાદ કરો।</p></div>
+                <div class="service-card"><h3>વિડિયો અનુવાદ</h3><p>ઉપશીર્ષક અને ડબિંગ સાથે વિડિયો બદલો।</p></div>
+                <div class="service-card"><h3>અવાજ અનુવાદ</h3><p>રિયલ-ટાઇમ કુદરતી અવાજ અનુવાદ।</p></div>
+                <div class="service-card"><h3>લાઇવ મીટિંગ અનુવાદ</h3><p>રિયલ-ટાઇમ મીટિંગ્સમાં અવરોધો તોડો।</p></div>
+                <div class="service-card"><h3>છબી પાઠ અનુવાદ</h3><p>છબીઓમાંથી પાઠ કાઢો અને અનુવાદ કરો।</p></div>
+                <div class="service-card"><h3>સારાંશ સાધનો</h3><p>લાંબી સામગ્રી માટે AI સારાંશ।</p></div>
             </div>
         </div>
     </section>
@@ -163,21 +163,13 @@
                 <a href="#">📘</a>
                 <a href="#">📸</a>
             </div>
-            <p>© 2025 સર્વાધિકાર સંરક્ષિત, અમારી વાણી, ટીમ બિલ્ડ બોટ્સ, પિલ્લાઈ કોલેજ ઓફ એન્જિનિયરિંગ</p>
-            <p>ગોપનીયતા નીતિ | વપરાશની શરતો | કૂકી નીતિ</p>
+            <p>© 2025 તમામ અધિકારો સુરક્ષિત, તમારો વિડિયો, ટીમ બિલ્ડ બોટ્સ, પિલ્લાઇ કોલેજ ઓફ એન્જિનિયરિંગ</p>
+            <p>ગોપનીયતા નીતિ | ઉપયોગની શરતો | કુકી નીતિ</p>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script>
-        // Welcome overlay fade out
-        window.addEventListener('load', () => {
-            const overlay = document.getElementById('welcomeOverlay');
-            setTimeout(() => {
-                overlay.classList.add('fadeOut');
-            }, 2000);
-        });
-
         // Language select update
         function showSelected(selectId, noteId) {
             const select = document.getElementById(selectId);

@@ -34,9 +34,9 @@
                     </div>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="Home.html" class="active">ಮುಖಪುಟ</a></li>
+                    <li><a href="Translation_Kannada.html" class="active">ಮುಖಪುಟ</a></li>
                     <li><a href="Home.html">ಅನುವಾದ</a></li>
-                    <li><a href="Translation.html">ವೀಡಿಯೋ</a></li>
+                    <li><a href="Translation_Kannada.html">ವೀಡಿಯೋ</a></li>
                     <li><a href="Voice_kannada.html">ಧ್ವನಿ</a></li>
                     <li><a href="Summarise_Kannada.Html">ಸಾರಾಂಶ</a></li>
                     <li><a href="Detail_Kannada.html">ಬಗ್ಗೆ</a></li>
@@ -70,58 +70,67 @@
                     </div>
                     <button class="upload-btn" onclick="document.getElementById('fileInput').click()">ಫೈಲ್ ಆಯ್ಕೆಮಾಡಿ</button>
                     <input type="file" id="fileInput" class="file-input" accept="video/*">
-                </div>
                 
-                <div class="progress-bar" id="progressBar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
                 
-                <div class="file-info" id="fileInfo">
-                    <strong>ಆಯ್ದ ಫೈಲ್:</strong> <span id="fileName"></span><br>
-                    <strong>ಗಾತ್ರ:</strong> <span id="fileSize"></span>
-                </div>
-                
-                <!-- Language Selector -->
-                <div class="language-selector" id="languageSelector">
-                    <label><strong>ಇಂದ:</strong></label>
-                    <select id="fromLang" onchange="showSelected('fromLang','fromNote')">
-                        <option value="en">ಇಂಗ್ಲಿಷ್ (ENG)</option>
-                        <option value="hi">ಹಿಂದಿ (HN)</option>
-                        <option value="bn">ಬಂಗಾಳಿ (BN)</option>
-                        <option value="ta">ತಮಿಳು (TM)</option>
-                        <option value="te">ತೆಲುಗು (TG)</option>
-                        <option value="ml">ಮಲಯಾಳಂ (ML)</option>
-                        <option value="kn">ಕನ್ನಡ (KN)</option>
-                        <option value="gu">ಗುಜರಾತಿ (GJ)</option>
-                        <option value="mr">ಮರಾಠಿ (MR)</option>
-                        <option value="pa">ಪಂಜಾಬಿ (PN)</option>
-                    </select>
-                    <p id="fromNote" class="lang-note">ದಯವಿಟ್ಟು ಮೂಲ ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ</p>
                     
-                    <label><strong>ಇಗೆ:</strong></label>
-                    <select id="toLang" onchange="showSelected('toLang','toNote')">
-                        <option value="hi">ಹಿಂದಿ (HN)</option>
-                        <option value="en">ಇಂಗ್ಲಿಷ್ (ENG)</option>
-                        <option value="bn">ಬಂಗಾಳಿ (BN)</option>
-                        <option value="ta">ತಮಿಳು (TM)</option>
-                        <option value="te">ತೆಲುಗು (TG)</option>
-                        <option value="ml">ಮಲಯಾಳಂ (ML)</option>
-                        <option value="kn">ಕನ್ನಡ (KN)</option>
-                        <option value="gu">ಗುಜರಾತಿ (GJ)</option>
-                        <option value="mr">ಮರಾಠಿ (MR)</option>
-                        <option value="pa">ಪಂಜಾಬಿ (PN)</option>
-                        <option value="es">ಸ್ಪ್ಯಾನಿಷ್ (SP)</option>
-                        <option value="fr">ಫ್ರೆಂಚ್ (FR)</option>
-                        <option value="de">ಜರ್ಮನ್ (DE)</option>
-                        <option value="ja">ಜಪಾನೀಸ್ (JP)</option>
-                        <option value="ko">ಕೊರಿಯನ್ (KR)</option>
-                        <option value="zh">ಚೈನೀಸ್ (CH)</option>
-                        <option value="ar">ಅರೇಬಿಕ್ (AR)</option>
-                    </select>
-                    <p id="toNote" class="lang-note">ದಯವಿಟ್ಟು ಗುರಿ ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ</p>
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    
+                    <div class="file-info" id="fileInfo">
+                        <strong>ಆಯ್ದ ಫೈಲ್:</strong> <span id="fileName"></span><br>
+                        <strong>ಗಾತ್ರ:</strong> <span id="fileSize"></span>
+                    </div>
                 </div>
                 
-                <button class="translate-btn" id="translateBtn">🚀 ವೀಡಿಯೋ ಅನುವಾದಿಸಿ</button>
+                <div class="upload-controls">
+                    <!-- Language Selector -->
+                    <div class="language-selector" id="languageSelector">
+                        <div class="language-row">
+                            <label><strong>ಇಂದ:</strong></label>
+                            <select id="fromLang" onchange="showSelected('fromLang','fromNote')">
+                                <option value="en">ಇಂಗ್ಲಿಷ್ (ENG)</option>
+                                <option value="hi">ಹಿಂದಿ (HN)</option>
+                                <option value="bn">ಬಂಗಾಳಿ (BN)</option>
+                                <option value="ta">ತಮಿಳು (TM)</option>
+                                <option value="te">ತೆಲುಗು (TG)</option>
+                                <option value="ml">ಮಲಯಾಳಂ (ML)</option>
+                                <option value="kn">ಕನ್ನಡ (KN)</option>
+                                <option value="gu">ಗುಜರಾತಿ (GJ)</option>
+                                <option value="mr">ಮರಾಠಿ (MR)</option>
+                                <option value="pa">ಪಂಜಾಬಿ (PN)</option>
+                            </select>
+                        </div>
+                        <p id="fromNote" class="lang-note">ದಯವಿಟ್ಟು ಮೂಲ ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ</p>
+                        
+                        <div class="language-row">
+                            <label><strong>ಇಗೆ:</strong></label>
+                            <select id="toLang" onchange="showSelected('toLang','toNote')">
+                                <option value="hi">ಹಿಂದಿ (HN)</option>
+                                <option value="en">ಇಂಗ್ಲಿಷ್ (ENG)</option>
+                                <option value="bn">ಬಂಗಾಳಿ (BN)</option>
+                                <option value="ta">ತಮಿಳು (TM)</option>
+                                <option value="te">ತೆಲುಗು (TG)</option>
+                                <option value="ml">ಮಲಯಾಳಂ (ML)</option>
+                                <option value="kn">ಕನ್ನಡ (KN)</option>
+                                <option value="gu">ಗುಜರಾತಿ (GJ)</option>
+                                <option value="mr">ಮರಾಠಿ (MR)</option>
+                                <option value="pa">ಪಂಜಾಬಿ (PN)</option>
+                                <option value="es">ಸ್ಪ್ಯಾನಿಷ್ (SP)</option>
+                                <option value="fr">ಫ್ರೆಂಚ್ (FR)</option>
+                                <option value="de">ಜರ್ಮನ್ (DE)</option>
+                                <option value="ja">ಜಪಾನೀಸ್ (JP)</option>
+                                <option value="ko">ಕೊರಿಯನ್ (KR)</option>
+                                <option value="zh">ಚೈನೀಸ್ (CH)</option>
+                                <option value="ar">ಅರೇಬಿಕ್ (AR)</option>
+                            </select>
+                        </div>
+                        <p id="toNote" class="lang-note">ದಯವಿಟ್ಟು ಗುರಿ ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ</p>
+                    </div>
+                    
+                    <button class="translate-btn" id="translateBtn">🚀 ವೀಡಿಯೋ ಅನುವಾದಿಸಿ</button>
+                </div>
+            </div>
             </div>
         </div>
     </section>
