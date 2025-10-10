@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apni Vani - AI सारांश उपकरण</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    animation: slideDown 0.8s ease-out;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: fadeInLeft 1s ease;
+}
+
+.logo:hover { transform: scale(1.05) rotate(2deg); }
+.logo-svg { width: 60px; height: 60px; border-radius: 8px; }
+
+.logo-text {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(45deg, #4A90E2, #357ABD);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-tagline { color: #666; font-size: 12px; }
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+.nav-menu li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.nav-menu li a:hover,
+.nav-menu li a.active {
+    color: #4A90E2;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+}
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+
+        .made-in-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff9a56, #ffad56);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 40px 0;
+        }
+
+        .input-selector {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .input-selector h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .selector-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .selector-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+        }
+
+        .selector-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .selector-btn.active {
+            background: #4CAF50;
+            border-color: #4CAF50;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            min-height: 500px;
+        }
+
+        .input-panel,
+        .output-panel {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .panel-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Audio Input Styles */
+        .audio-options {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .audio-option {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .audio-option:hover {
+            border-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .audio-option.active {
+            border-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.2);
+        }
+
+        .option-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .option-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .option-desc {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* File Upload Styles */
+        .file-upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .file-upload-area:hover {
+            border-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .file-upload-area.drag-over {
+            border-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.2);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .upload-text {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .upload-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        /* Recording Controls */
+        .recording-controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .record-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .record-btn:hover {
+            background: #d32f2f;
+            transform: scale(1.05);
+        }
+
+        .record-btn.recording {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .recording-status {
+            margin-top: 15px;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Output Panel Styles */
+        .summary-output {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 200px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .summary-placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .process-btn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .process-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .process-btn:disabled {
+            background: rgba(255, 255, 255, 0.2);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Video Styles */
+        .video-preview {
+            width: 100%;
+            max-height: 300px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Progress Styles */
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #4CAF50;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .selector-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .selector-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <div class="logo-icon">AV</div>
+                    <div>
+                        <div class="logo-text">APNI VANI</div>
+                        <span class="logo-tagline">बाधाओं को तोड़ना, आवाजों को जोड़ना</span>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="Home.html">होम</a></li>
+                    <li><a href="language">भाषा</a></li>
+                    <li><a href="Translation_hindi.html">वीडियो</a></li>
+                    <li><a href="Voice_Hindi.html">आवाज़</a></li>
+                    <li><a href="Summarise_hindi.Html" class="active">सारांश</a></li>
+                    <li><a href="Detail_hindi.html">हमारे बारे में</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="made-in-badge">PCE में बनाया गया</div>
+            <h1>🎯 AI सारांश उपकरण</h1>
+            <p>हमारी उन्नत AI तकनीक के साथ अपनी ऑडियो और वीडियो सामग्री को संक्षिप्त, बुद्धिमान सारांश में बदलें</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Input Type Selector -->
+            <div class="input-selector">
+                <h2>अपना इनपुट प्रकार चुनें</h2>
+                <div class="selector-buttons">
+                    <button class="selector-btn active" onclick="selectInputType('audio')">
+                        🎵 ऑडियो इनपुट
+                    </button>
+                    <button class="selector-btn" onclick="selectInputType('video')">
+                        🎥 वीडियो इनपुट
+                    </button>
+                </div>
+            </div>
+
+            <!-- Audio Input Section -->
+            <div class="content-section active" id="audio-section">
+                <div class="section-grid">
+                    <div class="input-panel">
+                        <h3 class="panel-title">🎧 ऑडियो इनपुट विकल्प</h3>
+                        <div class="audio-options">
+                            <div class="audio-option" onclick="selectAudioOption('upload')">
+                                <span class="option-icon">📁</span>
+                                <div class="option-title">ऑडियो फ़ाइल अपलोड करें</div>
+                                <div class="option-desc">अपने डिवाइस से ऑडियो फ़ाइल चुनें</div>
+                            </div>
+                            <div class="audio-option" onclick="selectAudioOption('record')">
+                                <span class="option-icon">🎙️</span>
+                                <div class="option-title">ऑडियो रिकॉर्ड करें</div>
+                                <div class="option-desc">सीधे अपने माइक्रोफ़ोन से ऑडियो रिकॉर्ड करें</div>
+                            </div>
+                        </div>
+
+                        <!-- File Upload Area -->
+                        <div class="file-upload-area" id="audio-upload-area" style="display: none;">
+                            <div class="upload-icon">🎵</div>
+                            <div class="upload-text">
+                                <p><strong>अपनी ऑडियो फ़ाइल अपलोड करें</strong></p>
+                                <p>अपनी ऑडियो फ़ाइल को यहाँ खींचकर छोड़ें, या ब्राउज़ करने के लिए क्लिक करें</p>
+                                <p style="font-size: 0.9rem; opacity: 0.8;">समर्थित: MP3, WAV, M4A, OGG (अधिकतम: 50MB)</p>
+                            </div>
+                            <button class="upload-btn" onclick="document.getElementById('audioFile').click()">ऑडियो फ़ाइल चुनें</button>
+                            <input type="file" id="audioFile" class="file-input" accept="audio/*">
+                        </div>
+
+                        <!-- Recording Controls -->
+                        <div class="recording-controls" id="recording-controls" style="display: none;">
+                            <button class="record-btn" id="recordBtn" onclick="toggleRecording()">🎙️ रिकॉर्डिंग शुरू करें</button>
+                            <div class="recording-status" id="recordingStatus">रिकॉर्डिंग शुरू करने के लिए क्लिक करें</div>
+                            <audio id="recordedAudio" controls style="width: 100%; margin-top: 15px; display: none;"></audio>
+                        </div>
+
+                        <div class="progress-bar" id="audioProgress" style="display: none;">
+                            <div class="progress-fill" id="audioProgressFill"></div>
+                        </div>
+
+                        <button class="process-btn" id="audioProcessBtn" onclick="processAudio()" disabled>
+                            🚀 सारांश तैयार करें
+                        </button>
+                    </div>
+
+                    <div class="output-panel">
+                        <h3 class="panel-title">📄 ऑडियो सारांश आउटपुट</h3>
+                        <div class="summary-output" id="audioSummary">
+                            <div class="summary-placeholder">
+                                आपका AI-जनरेटेड ऑडियो सारांश यहाँ दिखाई देगा...
+                                <br><br>
+                                शुरू करने के लिए ऑडियो फ़ाइल अपलोड करें या रिकॉर्ड करें!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Input Section -->
+            <div class="content-section" id="video-section">
+                <div class="section-grid">
+                    <div class="input-panel">
+                        <h3 class="panel-title">🎬 वीडियो इनपुट</h3>
+                        <div class="file-upload-area" id="video-upload-area">
+                            <div class="upload-icon">🎥</div>
+                            <div class="upload-text">
+                                <p><strong>अपनी वीडियो फ़ाइल अपलोड करें</strong></p>
+                                <p>अपनी वीडियो फ़ाइल को यहाँ खींचकर छोड़ें, या ब्राउज़ करने के लिए क्लिक करें</p>
+                                <p style="font-size: 0.9rem; opacity: 0.8;">समर्थित: MP4, AVI, MOV, WMV (अधिकतम: 200MB)</p>
+                            </div>
+                            <button class="upload-btn" onclick="document.getElementById('videoFile').click()">वीडियो फ़ाइल चुनें</button>
+                            <input type="file" id="videoFile" class="file-input" accept="video/*">
+                        </div>
+
+                        <video class="video-preview" id="videoPreview" controls style="display: none;"></video>
+
+                        <div class="progress-bar" id="videoProgress" style="display: none;">
+                            <div class="progress-fill" id="videoProgressFill"></div>
+                        </div>
+
+                        <button class="process-btn" id="videoProcessBtn" onclick="processVideo()" disabled>
+                            🚀 सारांश तैयार करें
+                        </button>
+                    </div>
+
+                    <div class="output-panel">
+                        <h3 class="panel-title">📄 वीडियो सारांश आउटपुट</h3>
+                        <div class="summary-output" id="videoSummary">
+                            <div class="summary-placeholder">
+                                आपका AI-जनरेटेड वीडियो सारांश यहाँ दिखाई देगा...
+                                <br><br>
+                                शुरू करने के लिए वीडियो फ़ाइल अपलोड करें!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let mediaRecorder;
+        let recordedChunks = [];
+        let isRecording = false;
+
+        // Input type selection
+        function selectInputType(type) {
+            document.querySelectorAll('.selector-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+            document.getElementById(type + '-section').classList.add('active');
+        }
+
+        // Audio option selection
+        function selectAudioOption(option) {
+            document.querySelectorAll('.audio-option').forEach(opt => opt.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const uploadArea = document.getElementById('audio-upload-area');
+            const recordingControls = document.getElementById('recording-controls');
+            
+            if (option === 'upload') {
+                uploadArea.style.display = 'block';
+                recordingControls.style.display = 'none';
+            } else {
+                uploadArea.style.display = 'none';
+                recordingControls.style.display = 'block';
+            }
+        }
+
+        // File upload handlers
+        document.getElementById('audioFile').addEventListener('change', function(e) {
+            handleAudioFile(e.target.files[0]);
+        });
+
+        document.getElementById('videoFile').addEventListener('change', function(e) {
+            handleVideoFile(e.target.files[0]);
+        });
+
+        function handleAudioFile(file) {
+            if (file) {
+                document.getElementById('audioProcessBtn').disabled = false;
+                showNotification(`ऑडियो फ़ाइल "${file.name}" सफलतापूर्वक लोड की गई!`);
+            }
+        }
+
+        function handleVideoFile(file) {
+            if (file) {
+                const video = document.getElementById('videoPreview');
+                video.src = URL.createObjectURL(file);
+                video.style.display = 'block';
+                document.getElementById('videoProcessBtn').disabled = false;
+                showNotification(`वीडियो फ़ाइल "${file.name}" सफलतापूर्वक लोड की गई!`);
+            }
+        }
+
+        // Recording functionality
+        async function toggleRecording() {
+            const recordBtn = document.getElementById('recordBtn');
+            const status = document.getElementById('recordingStatus');
+            
+            if (!isRecording) {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    recordedChunks = [];
+                    
+                    mediaRecorder.ondataavailable = function(e) {
+                        if (e.data.size > 0) {
+                            recordedChunks.push(e.data);
+                        }
+                    };
+                    
+                    mediaRecorder.onstop = function() {
+                        const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+                        const audioUrl = URL.createObjectURL(blob);
+                        const recordedAudio = document.getElementById('recordedAudio');
+                        recordedAudio.src = audioUrl;
+                        recordedAudio.style.display = 'block';
+                        document.getElementById('audioProcessBtn').disabled = false;
+                    };
+                    
+                    mediaRecorder.start();
+                    isRecording = true;
+                    recordBtn.textContent = '⏹️ रिकॉर्डिंग बंद करें';
+                    recordBtn.classList.add('recording');
+                    status.textContent = 'रिकॉर्डिंग चल रही है...';
+                    
+                } catch (err) {
+                    showNotification('माइक्रोफ़ोन एक्सेस में त्रुटि। कृपया अनुमतियाँ जाँचें।');
+                }
+            } else {
+                mediaRecorder.stop();
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
+                isRecording = false;
+                recordBtn.textContent = '🎙️ रिकॉर्डिंग शुरू करें';
+                recordBtn.classList.remove('recording');
+                status.textContent = 'रिकॉर्डिंग पूरी हुई!';
+            }
+        }
+
+        // Processing functions
+        async function processAudio() {
+            const progressBar = document.getElementById('audioProgress');
+            const progressFill = document.getElementById('audioProgressFill');
+            const summaryDiv = document.getElementById('audioSummary');
+            
+            progressBar.style.display = 'block';
+            summaryDiv.innerHTML = 'ऑडियो प्रोसेसिंग हो रहा है... कृपया प्रतीक्षा करें।';
+            
+            // Simulate processing
+            for (let i = 0; i <= 100; i += 10) {
+                progressFill.style.width = i + '%';
+                await new Promise(resolve => setTimeout(resolve, 200));
+            }
+            
+            // Simulate AI summary
+            const mockSummary = `ऑडियो सारांश ${new Date().toLocaleTimeString()} पर तैयार किया गया:
+
+मुख्य बिंदु:
+• मुख्य विषय: [ऑडियो सामग्री का विश्लेषण]
+• अवधि: लगभग 2 मिनट 30 सेकंड
+• स्पीकर संख्या: 1 प्राथमिक स्पीकर का पता चला
+• भाषा: हिंदी (पहचानी गई)
+
+सारांश:
+ऑडियो सामग्री में प्रौद्योगिकी और नवाचार के बारे में महत्वपूर्ण चर्चा शामिल है। स्पीकर डिजिटल परिवर्तन की आवश्यकता पर जोर देता है और कार्यान्वयन के लिए कई मुख्य रणनीतियों का उल्लेख करता है।
+
+मुख्य शब्द: प्रौद्योगिकी, नवाचार, डिजिटल परिवर्तन, रणनीति
+
+भावना विश्लेषण: सकारात्मक (85% विश्वसनीयता)
+स्पष्टता स्कोर: 92/100
+
+Apni Vani AI सारांश उपकरण द्वारा तैयार`;
+            
+            summaryDiv.textContent = mockSummary;
+            progressBar.style.display = 'none';
+            showNotification('ऑडियो सारांश सफलतापूर्वक तैयार किया गया!');
+        }
+
+        async function processVideo() {
+            const progressBar = document.getElementById('videoProgress');
+            const progressFill = document.getElementById('videoProgressFill');
+            const summaryDiv = document.getElementById('videoSummary');
+            
+            progressBar.style.display = 'block';
+            summaryDiv.innerHTML = 'वीडियो प्रोसेसिंग हो रहा है... कृपया प्रतीक्षा करें।';
+            
+            // Simulate processing
+            for (let i = 0; i <= 100; i += 8) {
+                progressFill.style.width = i + '%';
+                await new Promise(resolve => setTimeout(resolve, 300));
+            }
+            
+            // Simulate AI summary
+            const mockSummary = `वीडियो सारांश ${new Date().toLocaleTimeString()} पर तैयार किया गया:
+
+वीडियो विश्लेषण:
+• अवधि: 5 मिनट 42 सेकंड
+• रिज़ॉल्यूशन: 1920x1080 (फुल HD)
+• फ्रेम रेट: 30 fps
+• ऑडियो ट्रैक: 1 (हिंदी)
+
+सामग्री सारांश:
+वीडियो कृत्रिम बुद्धिमत्ता और मशीन लर्निंग अनुप्रयोगों का एक शैक्षणिक अवलोकन प्रस्तुत करता है। प्रस्तुतकर्ता विभिन्न AI उपकरणों का प्रदर्शन करता है और आधुनिक व्यावसायिक वातावरण में उनके व्यावहारिक कार्यान्वयन की व्याख्या करता है।
+
+मुख्य दृश्य:
+1. परिचय (0:00-0:30): AI अवधारणाओं का अवलोकन
+2. प्रदर्शन (0:30-3:20): लाइव टूल शोकेस
+3. उपयोग के मामले (3:20-4:50): वास्तविक विश्व अनुप्रयोग
+4. निष्कर्ष (4:50-5:42): सारांश और अगले चरण
+
+दृश्य तत्व:
+• चार्ट और ग्राफ़: 8 उदाहरण
+• कोड प्रदर्शन: 3 खंड
+• स्क्रीन रिकॉर्डिंग: पूरे वीडियो में कई
+
+ऑडियो गुणवत्ता: उत्कृष्ट (96/100)
+वीडियो गुणवत्ता: उच्च (94/100)
+सामग्री जुड़ाव: बहुत उच्च
+
+Apni Vani AI सारांश उपकरण द्वारा तैयार`;
+            
+            summaryDiv.textContent = mockSummary;
+            progressBar.style.display = 'none';
+            showNotification('वीडियो सारांश सफलतापूर्वक तैयार किया गया!');
+        }
+
+        // Notification function
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #4CAF50;
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                z-index: 1000;
+                font-weight: 600;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+
+        // Drag and drop functionality
+        const uploadAreas = document.querySelectorAll('.file-upload-area');
+        uploadAreas.forEach(area => {
+            area.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                area.classList.add('drag-over');
+            });
+            
+            area.addEventListener('dragleave', () => {
+                area.classList.remove('drag-over');
+            });
+            
+            area.addEventListener('drop', (e) => {
+                e.preventDefault();
+                area.classList.remove('drag-over');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    if (area.id === 'audio-upload-area') {
+                        handleAudioFile(files[0]);
+                    } else if (area.id === 'video-upload-area') {
+                        handleVideoFile(files[0]);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

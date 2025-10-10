@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="pa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ਅਪਨੀ ਵਾਣੀ - ਰੋਕਾਵਟਾਂ ਤੋੜਨਾ, ਆਵਾਜ਼ਾਂ ਜੋੜਨਾ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ================== स्वागत ओवरले ================== */
+        #welcomeOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            z-index: 9999;
+            text-align: center;
+            font-family: 'Noto Sans Devanagari', 'Inter', sans-serif;
+            transition: opacity 1s ease, visibility 1s ease;
+            overflow: hidden;
+        }
+
+        #welcomeOverlay h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: zoomIn 1.2s forwards;
+        }
+
+        #welcomeOverlay p {
+            font-size: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 1.2s forwards;
+            animation-delay: 0.5s;
+        }
+
+        #welcomeOverlay.fadeOut {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        @keyframes zoomIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ================== Floating Particles ================== */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="100" cy="100" r="3" fill="rgba(255,255,255,0.1)"><animateTransform attributeName="transform" type="translate" values="0,0; 50,-50; 0,0" dur="8s" repeatCount="indefinite"/></circle><circle cx="300" cy="200" r="2" fill="rgba(255,255,255,0.08)"><animateTransform attributeName="transform" type="translate" values="0,0; -30,40; 0,0" dur="6s" repeatCount="indefinite"/></circle><circle cx="500" cy="300" r="4" fill="rgba(255,255,255,0.12)"><animateTransform attributeName="transform" type="translate" values="0,0; 40,-30; 0,0" dur="10s" repeatCount="indefinite"/></circle><circle cx="700" cy="150" r="2.5" fill="rgba(255,255,255,0.09)"><animateTransform attributeName="transform" type="translate" values="0,0; -20,60; 0,0" dur="7s" repeatCount="indefinite"/></circle><circle cx="900" cy="400" r="3.5" fill="rgba(255,255,255,0.11)"><animateTransform attributeName="transform" type="translate" values="0,0; 35,-45; 0,0" dur="9s" repeatCount="indefinite"/></circle></svg>') repeat;
+            pointer-events: none;
+            z-index: -1;
+            animation: backgroundMove 20s linear infinite;
+        }
+
+        @keyframes backgroundMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100px); }
+        }
+
+        /* ================== Global Styles ================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans Devanagari', 'Inter', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ================== Header ================== */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInLeft 1s ease;
+        }
+
+        .logo:hover { transform: scale(1.05) rotate(2deg); }
+        .logo-svg { width: 60px; height: 60px; border-radius: 8px; }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #4A90E2, #357ABD);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-tagline { color: #666; font-size: 12px; }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: #4A90E2;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+        }
+
+        /* ================== Hero ================== */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .made-in-PCE {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff9933, #138808);
+            padding: 10px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            margin: 0 auto 35px;
+            text-align: center;
+        }
+
+        .hero h1 { font-size: 3.8rem; margin-bottom: 1.5rem; font-weight: 700; }
+        .hero p { font-size: 1.3rem; max-width: 800px; margin: 0 auto 2rem; opacity: 0.95; }
+        .white-title { color: white; text-align: center; font-size: 2.5rem; margin-bottom: 20px; font-weight: 700; }
+
+        /* ================== Voice Translation Section ================== */
+        .voice-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            margin: 40px 20px;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title { text-align: center; font-size: 2.5rem; color: #333; margin-bottom: 20px; font-weight: 700; }
+        .section-subtitle { text-align: center; color: #666; font-size: 1.2rem; margin-bottom: 50px; }
+
+        .voice-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .voice-input-section {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .voice-output-section {
+            background: linear-gradient(135deg, #f0fff0 0%, #e8ffe8 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            border: 2px solid #4ecdc4;
+        }
+
+        .voice-icon {
+            font-size: 4rem;
+            color: #4A90E2;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .output-icon {
+            font-size: 4rem;
+            color: #4ecdc4;
+            margin-bottom: 20px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .record-btn {
+            background: linear-gradient(45deg, #4A90E2, #357ABD);
+            color: white;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.3);
+        }
+
+        .record-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(74, 144, 226, 0.4);
+        }
+
+        .record-btn.recording {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .language-selector label { font-weight: 600; margin-right: 8px; color: #333; }
+        .language-selector select { 
+            padding: 10px 15px; 
+            border-radius: 8px; 
+            border: 2px solid #4A90E2; 
+            font-size: 1rem; 
+            min-width: 150px; 
+            background: white; 
+            cursor: pointer; 
+        }
+
+        .voice-status {
+            background: rgba(74, 144, 226, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+
+        .voice-waveform {
+            height: 60px;
+            background: linear-gradient(45deg, #4A90E2, #357ABD);
+            border-radius: 30px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .translated-text {
+            background: rgba(78, 205, 196, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            min-height: 100px;
+            border: 2px dashed #4ecdc4;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .play-btn {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .play-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(78, 205, 196, 0.3);
+        }
+
+        .play-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* ================== Services ================== */
+        .services { 
+            padding: 80px 0; 
+            margin: 40px 0; 
+        }
+        
+        .services-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 30px; 
+            margin-top: 50px; 
+        }
+        
+        .service-card { 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(10px); 
+            padding: 40px 30px; 
+            border-radius: 20px; 
+            text-align: center; 
+            transition: all 0.3s ease; 
+            cursor: pointer; 
+            border: 2px solid transparent; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+        }
+        
+        .service-card:hover { 
+            transform: translateY(-10px); 
+            border-color: #4A90E2; 
+            box-shadow: 0 20px 50px rgba(74,144,226,0.3); 
+        }
+        
+        .service-card h3 { 
+            color: #333; 
+            margin-bottom: 20px; 
+            font-size: 1.4rem; 
+        }
+        
+        .service-card p { 
+            color: #666; 
+            line-height: 1.7; 
+        }
+
+        /* ================== Footer ================== */
+        .footer { 
+            background: rgba(0,0,0,0.8); 
+            color: white; 
+            text-align: center; 
+            padding: 50px 0; 
+            margin-top: 80px; 
+        }
+        
+        .social-links a { 
+            color: white; 
+            font-size: 1.8rem; 
+            margin: 0 15px; 
+            transition: 0.3s; 
+        }
+        
+        .social-links a:hover { 
+            color: #4A90E2; 
+            transform: translateY(-3px); 
+        }
+
+        /* ================== Notification ================== */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 18px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: translateX(400px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .notification.show { 
+            transform: translateX(0); 
+        }
+
+        /* ================== Responsive ================== */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero p { font-size: 1.1rem; }
+            .nav-menu { gap: 20px; }
+            .voice-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .voice-input-section,
+            .voice-output-section {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav { flex-direction: column; gap: 20px; }
+            .hero h1 { font-size: 2.2rem; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ਸਵਾਗਤ ਓਵਰਲੇ -->
+    <div id="welcomeOverlay">
+        <h1>ਅਪਨੀ ਵਾਣੀ ਵਿੱਚ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ</h1>
+        <p>ਰੋਕਾਵਟਾਂ ਤੋੜਨਾ, ਆਵਾਜ਼ਾਂ ਜੋੜਨਾ</p>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span id="notificationText">ਸੂਚਨਾ ਸੁਨੇਹਾ</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <div style="width: 60px; height: 60px; background: linear-gradient(45deg, #4A90E2, #357ABD); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 24px;">AV</div>
+                    <div>
+                        <div class="logo-text">APNI VANI</div>
+                        <span class="logo-tagline">ਰੋਕਾਵਟਾਂ ਤੋੜਨਾ, ਆਵਾਜ਼ਾਂ ਜੋੜਨਾ</span>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="active">ਹੋਮ</a></li>
+                    <li><a href="#language">ਭਾਸ਼ਾ</a></li>
+                    <li><a href="#video">ਵੀਡੀਓ</a></li>
+                    <li><a href="#voice">ਵੌਇਸ</a></li>
+                    <li><a href="#summarise">ਸਾਰਾਂਸ਼</a></li>
+                    <li><a href="#about">ਸਾਡੇ ਬਾਰੇ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+    <div class="container">
+        <div class="made-in-PCE">PCE ਵਿੱਚ ਬਣਾਇਆ ਗਿਆ</div>
+        <h1>ਅਪਨੀ ਵਾਣੀ – ਰੋਕਾਵਟਾਂ ਤੋੜਨਾ, ਆਵਾਜ਼ਾਂ ਜੋੜਨਾ</h1>
+        <p>ਸਹਿਯੋਗ ਅਤੇ ਵਿਭਿੰਨਤਾ ਵਿੱਚ ਏਕਤਾ। APNI VANI ਦੇ AI ਅਨੁਵਾਦ ਫੀਚਰ ਭਾਸ਼ਾ ਨੂੰ ਰੋਕਾਵਟ ਨਹੀਂ, ਸਗੋਂ ਵਿਸ਼ਵ ਪੱਧਰੀ ਸੰਵਾਦ ਦਾ ਰਾਸ਼ਤਾ ਬਣਾਉਂਦੇ ਹਨ।</p>
+    </div>
+</section>
+
+<!-- Voice Translation Section -->
+<section class="voice-section" id="voice-translate">
+    <div class="container">
+        <h2 class="section-title">🎤 ਵੌਇਸ ਅਨੁਵਾਦ ਸਟੂਡੀਓ</h2>
+        <p class="section-subtitle">ਆਪਣੀ ਭਾਸ਼ਾ ਵਿੱਚ ਬੋਲੋ ਅਤੇ AI-ਸਹਾਇਤ ਸਹੀ ਅਨੁਵਾਦ ਪ੍ਰਾਪਤ ਕਰੋ</p>
+        
+        <div class="voice-container">
+            <!-- Input Section -->
+            <div class="voice-input-section">
+                <div class="voice-icon">🎤</div>
+                <h3>ਆਪਣੀ ਆਵਾਜ਼ ਬੋਲੋ</h3>
+                <p>ਰਿਕਾਰਡ ਬਟਨ ਦਬਾ ਕੇ ਆਪਣੀ ਭਾਸ਼ਾ ਵਿੱਚ ਬੋਲੋ</p>
+                
+                <div class="language-selector">
+                    <label><strong>ਤੋਂ (From):</strong></label>
+                    <select id="fromLang">
+                        <option value="hi">ਹਿੰਦੀ (HI)</option>
+                        <option value="en">ਅੰਗਰੇਜ਼ੀ (EN)</option>
+                        <option value="bn">ਬੰਗਾਲੀ (BN)</option>
+                        <option value="ta">ਤਮਿਲ (TA)</option>
+                        <option value="te">ਤੇਲਗੂ (TE)</option>
+                        <option value="ml">ਮਲਯਾਲਮ (ML)</option>
+                        <option value="kn">ਕੰਨੜ (KN)</option>
+                        <option value="gu">ਗੁਜਰਾਤੀ (GJ)</option>
+                        <option value="mr">ਮਰਾਠੀ (MR)</option>
+                        <option value="pa">ਪੰਜਾਬੀ (PN)</option>
+                    </select>
+                </div>
+                
+                <button class="record-btn" id="recordBtn">🎙️ ਰਿਕਾਰਡਿੰਗ ਸ਼ੁਰੂ ਕਰੋ</button>
+                
+                <div style="margin: 20px 0; text-align: center;">
+                    <p style="margin-bottom: 10px; color: #666;">ਜਾਂ ਆਡੀਓ ਫਾਈਲ ਅਪਲੋਡ ਕਰੋ:</p>
+                    <input type="file" id="audioFileInput" accept="audio/*" style="display: none;">
+                    <button class="upload-audio-btn" id="uploadAudioBtn">📁 ਆਡੀਓ ਅਪਲੋਡ ਕਰੋ</button>
+                    <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">ਸਪੋਰਟਡ: MP3, WAV, M4A, OGG, FLAC</p>
+                </div>
+                
+                <div class="voice-status" id="voiceStatus">
+                    ਰਿਕਾਰਡਿੰਗ ਜਾਂ ਆਡੀਓ ਫਾਈਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਤਿਆਰ।
+                </div>
+                
+                <div class="voice-waveform" id="waveform" style="display: none;">
+                    🔊 ਰਿਕਾਰਡਿੰਗ ਚੱਲ ਰਹੀ ਹੈ... ਹੁਣ ਬੋਲੋ!
+                </div>
+            </div>
+
+                <!-- Output Section -->
+<div class="voice-output-section">
+    <div class="output-icon">🔊</div>
+    <h3>ਅਨੁਵਾਦਿਤ ਨਤੀਜੇ</h3>
+    <p>ਤੁਹਾਡੀ ਅਨੁਵਾਦਿਤ ਵੌਇਸ ਇੱਥੇ ਦਿਖਾਈ ਦੇਵੇਗੀ</p>
+    
+    <div class="language-selector">
+        <label><strong>ਵਿੱਚ (To):</strong></label>
+        <select id="toLang">
+            <option value="en">ਅੰਗਰੇਜ਼ੀ (EN)</option>
+            <option value="hi">ਹਿੰਦੀ (HI)</option>
+            <option value="bn">ਬੰਗਾਲੀ (BN)</option>
+            <option value="ta">ਤਮਿਲ (TA)</option>
+            <option value="te">ਤੇਲਗੂ (TE)</option>
+            <option value="ml">ਮਲਯਾਲਮ (ML)</option>
+            <option value="kn">ਕੰਨੜ (KN)</option>
+            <option value="gu">ਗੁਜਰਾਤੀ (GJ)</option>
+            <option value="mr">ਮਰਾਠੀ (MR)</option>
+            <option value="pa">ਪੰਜਾਬੀ (PN)</option>
+            <option value="es">ਸਪੈਨਿਸ਼ (ES)</option>
+            <option value="fr">ਫ਼੍ਰੈਂਚ (FR)</option>
+            <option value="de">ਜਰਮਨ (DE)</option>
+            <option value="ja">ਜਪਾਨੀ (JA)</option>
+            <option value="ko">ਕੋਰੀਅਨ (KO)</option>
+            <option value="zh">ਚੀਨੀ (ZH)</option>
+            <option value="ar">ਅਰਬੀ (AR)</option>
+        </select>
+    </div>
+    
+    <div class="translated-text" id="translatedText">
+        ਤੁਹਾਡਾ ਅਨੁਵਾਦ ਇੱਥੇ ਦਿਖਾਈ ਦੇਵੇਗਾ...
+    </div>
+    
+    <button class="play-btn" id="playBtn" disabled>▶️ ਅਨੁਵਾਦ ਚਲਾਓ</button>
+    <button class="play-btn" id="downloadBtn" disabled>📥 ਆਡੀਓ ਡਾਊਨਲੋਡ ਕਰੋ</button>
+</div>
+
+<!-- How to Use Section -->
+<section class="services" style="background: rgba(255,255,255,0.1);">
+    <div class="container">
+        <h2 class="white-title">ਅਪਨੀ ਵਾਣੀ ਵੌਇਸ ਅਨੁਵਾਦ ਕਿਵੇਂ ਵਰਤੋਂ</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>ਚਰਨ 1: ਸੋਰਸ ਭਾਸ਼ਾ ਚੁਣੋ</h3>
+                <p>ਡ੍ਰੌਪਡਾਊਨ ਤੋਂ ਉਹ ਭਾਸ਼ਾ ਚੁਣੋ ਜਿਸ ਵਿੱਚ ਤੁਸੀਂ ਬੋਲਣਾ ਚਾਹੁੰਦੇ ਹੋ।</p>
+            </div>
+            <div class="service-card">
+                <h3>ਚਰਨ 2: ਰਿਕਾਰਡਿੰਗ ਸ਼ੁਰੂ ਕਰੋ</h3>
+                <p>"ਰਿਕਾਰਡ ਸ਼ੁਰੂ ਕਰੋ" ਬਟਨ 'ਤੇ ਕਲਿਕ ਕਰੋ ਅਤੇ ਮਾਈਕ੍ਰੋਫੋਨ ਵਿੱਚ ਸਪਸ਼ਟ ਤੌਰ ਤੇ ਬੋਲੋ।</p>
+            </div>
+            <div class="service-card">
+                <h3>ਚਰਨ 3: ਟਾਰਗੇਟ ਭਾਸ਼ਾ ਚੁਣੋ</h3>
+                <p>ਉਸ ਭਾਸ਼ਾ ਨੂੰ ਚੁਣੋ ਜਿਸ ਵਿੱਚ ਤੁਸੀਂ ਅਨੁਵਾਦ ਚਾਹੁੰਦੇ ਹੋ।</p>
+            </div>
+            <div class="service-card">
+                <h3>ਚਰਨ 4: ਅਨੁਵਾਦ ਪ੍ਰਾਪਤ ਕਰੋ</h3>
+                <p>ਅਨੁਵਾਦਿਤ ਟੈਕਸਟ ਵੇਖੋ ਅਤੇ ਆਡੀਓ ਤੁਰੰਤ ਚਲਾਓ / ਡਾਊਨਲੋਡ ਕਰੋ।</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="services">
+    <div class="container">
+        <h2 class="white-title">ਸਾਡੀਆਂ AI-ਸਹਾਇਤ ਸੇਵਾਵਾਂ</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>📄 ਟੈਕਸਟ ਅਤੇ ਦਸਤਾਵੇਜ਼ ਅਨੁਵਾਦ</h3>
+                <p>ਉੱਚ ਸਹੀਤਾ ਨਾਲ ਦਸਤਾਵੇਜ਼ਾਂ ਅਤੇ ਕਿਤਾਬਾਂ ਦਾ ਅਨੁਵਾਦ ਕਰੋ।</p>
+            </div>
+            <div class="service-card">
+                <h3>🎥 ਵੀਡੀਓ ਅਨੁਵਾਦ</h3>
+                <p>ਸਬਟਾਈਟਲ ਅਤੇ ਡਬਿੰਗ ਦੇ ਨਾਲ ਵੀਡੀਓ ਬਦਲੋ।</p>
+            </div>
+            <div class="service-card">
+                <h3>🎤 ਵੌਇਸ ਅਨੁਵਾਦ</h3>
+                <p>ਰੀਅਲ-ਟਾਈਮ ਕੁਦਰਤੀ ਵੌਇਸ ਅਨੁਵਾਦ ਅਤੇ ਸਪੀਚ ਸਿੰਥੇਸਿਸ।</p>
+            </div>
+            <div class="service-card">
+                <h3>💼 ਲਾਈਵ ਮੀਟਿੰਗ ਅਨੁਵਾਦ</h3>
+                <p>ਰੀਅਲ-ਟਾਈਮ ਮੀਟਿੰਗਾਂ ਅਤੇ ਕਾਨਫਰੰਸ ਵਿੱਚ ਭਾਸ਼ਾ ਦੀਆਂ ਰੋਕਾਵਟਾਂ ਹਟਾਓ।</p>
+            </div>
+            <div class="service-card">
+                <h3>🖼️ ਚਿੱਤਰ ਟੈਕਸਟ ਅਨੁਵਾਦ</h3>
+                <p>ਚਿੱਤਰਾਂ ਅਤੇ ਦਸਤਾਵੇਜ਼ਾਂ ਤੋਂ ਟੈਕਸਟ ਨਿਕਾਲੋ ਅਤੇ ਅਨੁਵਾਦ ਕਰੋ।</p>
+            </div>
+            <div class="service-card">
+                <h3>📝 ਸੰਖੇਪਣ ਸੰਦ</h3>
+                <p>ਲੰਬੀ ਸਮੱਗਰੀ ਅਤੇ ਦਸਤਾਵੇਜ਼ਾਂ ਲਈ AI-ਸਹਾਇਤ ਸੰਖੇਪਣ।</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+   <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="social-links">
+            <a href="#">💼</a>
+            <a href="#">𝕏</a>
+            <a href="#">📘</a>
+            <a href="#">📸</a>
+        </div>
+        <p>© 2025 ਸਾਰੇ ਅਧਿਕਾਰ ਸੁਰੱਖਿਅਤ, ਆਪਣੀ ਵਾਣੀ, ਟੀਮ ਬਿਲਡ ਬੋਟਸ, ਪਿਲਾਈ ਕਾਲਜ ਆਫ਼ ਇੰਜੀਨੀਅਰਿੰਗ</p>
+        <p>ਗੋਪਨੀਯਤਾ ਨੀਤੀ | ਵਰਤੋਂ ਦੀਆਂ ਸ਼ਰਤਾਂ | ਕੁਕੀ ਨੀਤੀ</p>
+    </div>
+</footer>
+
+    <script>
+        // Welcome overlay functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('welcomeOverlay').classList.add('fadeOut');
+            }, 3000);
+        });
+
+        // Voice recording and file upload functionality
+        let isRecording = false;
+        let mediaRecorder;
+        let audioChunks = [];
+
+        const recordBtn = document.getElementById('recordBtn');
+        const voiceStatus = document.getElementById('voiceStatus');
+        const waveform = document.getElementById('waveform');
+        const translatedText = document.getElementById('translatedText');
+        const playBtn = document.getElementById('playBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const uploadAudioBtn = document.getElementById('uploadAudioBtn');
+        const audioFileInput = document.getElementById('audioFileInput');
+
+        // File choose button in header (if present) - keep backward compatibility
+        // If you have multiple file inputs, keep their behavior consistent.
+        const chooseFileBtnHeader = document.querySelector('.upload-audio-btn');
+
+        // Wire header choose file (if present)
+        if (chooseFileBtnHeader) {
+            chooseFileBtnHeader.addEventListener('click', () => audioFileInput.click());
+        }
+
+        // Wire upload button inside voice section
+        uploadAudioBtn.addEventListener('click', () => audioFileInput.click());
+
+        // Handle file selection
+        audioFileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            voiceStatus.textContent = `ਫਾਈਲ ਚੁਣੀ ਗਈ: ${file.name}`;
+
+            // Create object URL and enable playback
+            const url = URL.createObjectURL(file);
+
+            // Create a temporary audio element to play the uploaded file
+            let tempAudio = document.getElementById('uploadedAudio');
+            if (!tempAudio) {
+                tempAudio = document.createElement('audio');
+                tempAudio.id = 'uploadedAudio';
+                tempAudio.controls = true;
+                tempAudio.style.marginTop = '15px';
+                tempAudio.style.width = '100%';
+                // append inside output section
+                const outputSection = document.querySelector('.voice-output-section');
+                if (outputSection) outputSection.appendChild(tempAudio);
+            }
+            tempAudio.src = url;
+
+            // Enable play/download for translated audio (demo)
+            playBtn.disabled = false;
+            downloadBtn.disabled = false;
+
+            showNotification('ਆਡੀਓ ਅਪਲੋਡ ਸਫਲ।');
+});
+
+// Recording toggle
+recordBtn.addEventListener('click', async function() {
+    if (!isRecording) {
+        // Start recording
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+            audioChunks = [];
+
+            mediaRecorder.ondataavailable = event => audioChunks.push(event.data);
+            mediaRecorder.onstop = onRecordingStop;
+
+            mediaRecorder.start();
+            isRecording = true;
+
+            recordBtn.textContent = '⏹️ ਰਿਕਾਰਡਿੰਗ ਰੋਕੋ';
+            recordBtn.classList.add('recording');
+            voiceStatus.textContent = 'ਰਿਕਾਰਡਿੰਗ ਚੱਲ ਰਹੀ ਹੈ... ਹੁਣ ਬੋਲੋ!';
+            waveform.style.display = 'flex';
+
+        } catch (err) {
+            console.error('ਮਾਈਕ੍ਰੋਫੋਨ ਐਕਸੈਸ ਵਿੱਚ ਗਲਤੀ:', err);
+            showNotification('ਮਾਈਕ੍ਰੋਫੋਨ ਦੀ ਆਗਿਆ ਰੱਦ। ਕਿਰਪਾ ਕਰਕੇ ਆਗਿਆ ਦਿਓ।');
+        }
+    } else {
+        // Stop recording
+        mediaRecorder.stop();
+        isRecording = false;
+
+        recordBtn.textContent = '🎙️ ਰਿਕਾਰਡਿੰਗ ਸ਼ੁਰੂ ਕਰੋ';
+        recordBtn.classList.remove('recording');
+        voiceStatus.textContent = 'ਤੁਹਾਡੀ ਰਿਕਾਰਡਿੰਗ ਪ੍ਰੋਸੈਸ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ...';
+        waveform.style.display = 'none';
+    }
+});
+
+
+        // Called when recording stops
+        function onRecordingStop() {
+            const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+            const audioUrl = URL.createObjectURL(audioBlob);
+
+            // Attach to output as playable audio
+            let recordedAudio = document.getElementById('recordedAudio');
+            if (!recordedAudio) {
+                recordedAudio = document.createElement('audio');
+                recordedAudio.id = 'recordedAudio';
+                recordedAudio.controls = true;
+                recordedAudio.style.marginTop = '15px';
+                recordedAudio.style.width = '100%';
+                const outputSection = document.querySelector('.voice-output-section');
+                if (outputSection) outputSection.appendChild(recordedAudio);
+            }
+            recordedAudio.src = audioUrl;
+
+            // Simulate translation
+            setTimeout(() => {
+                const fromLang = document.getElementById('fromLang').value;
+                const toLang = document.getElementById('toLang').value;
+
+                const sampleTranslations = {
+                    'en-hi': 'Hello, this is a sample translation. --> नमस्ते, यह एक नमूना अनुवाद है।',
+                    'hi-en': 'नमस्ते, यह एक नमूना अनुवाद है। --> Hello, this is a sample translation.',
+                    'default': 'ਇਹ ਅਨੁਵਾਦ ਦਾ ਨਮੂਨਾ ਆਉਟਪੁੱਟ ਹੈ।'
+                };
+
+                const key = `${fromLang}-${toLang}`;
+                const result = sampleTranslations[key] || sampleTranslations.default;
+
+                translatedText.textContent = result;
+voiceStatus.textContent = 'ਅਨੁਵਾਦ ਮੁਕੰਮਲ ਹੋ ਗਿਆ! ਅਗਲੇ ਰਿਕਾਰਡਿੰਗ ਲਈ ਤਿਆਰ।';
+
+playBtn.disabled = false;
+downloadBtn.disabled = false;
+
+showNotification('ਵੌਇਸ ਅਨੁਵਾਦ ਸਫਲਤਾਪੂਰਵਕ ਮੁਕੰਮਲ ਹੋ ਗਿਆ!');
+            }, 2000);
+        }
+
+        // Play translated text (TTS using SpeechSynthesis)
+    playBtn.addEventListener('click', function() {
+    if (!translatedText.textContent || translatedText.textContent.trim() === '' || translatedText.textContent.includes('ਇੱਥੇ')) {
+        showNotification('ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਰਿਕਾਰਡਿੰਗ ਕਰੋ ਜਾਂ ਫ਼ਾਇਲ ਅੱਪਲੋਡ ਕਰੋ।');
+        return;
+    }
+
+    showNotification('ਅਨੁਵਾਦਿਤ ਆਡੀਓ ਚਲਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...');
+
+    const utterance = new SpeechSynthesisUtterance(translatedText.textContent);
+    const toLang = document.getElementById('toLang').value;
+    utterance.lang = getLanguageCode(toLang);
+    speechSynthesis.speak(utterance);
+});
+
+    // Download translated audio (demo: download translated text as .txt)
+downloadBtn.addEventListener('click', function() {
+    if (!translatedText.textContent || translatedText.textContent.trim() === '') {
+        showNotification('ਕੋਈ ਅਨੁਵਾਦ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।');
+        return;
+    }
+
+    showNotification('ਆਡੀਓ ਡਾਊਨਲੋਡ ਸ਼ੁਰੂ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...');
+
+    // For demo, save translated text as .txt. Replace with real audio in production.
+    const text = translatedText.textContent;
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'translated_output.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+});
+
+function getLanguageCode(langCode) {
+    const languageCodes = {
+        'en': 'en-US',
+        'hi': 'hi-IN',
+        'bn': 'bn-IN',
+        'ta': 'ta-IN',
+        'te': 'te-IN',
+        'ml': 'ml-IN',
+        'kn': 'kn-IN',
+        'gu': 'gu-IN',
+        'mr': 'mr-IN',
+        'pa': 'pa-IN',
+        'es': 'es-ES',
+        'fr': 'fr-FR',
+        'de': 'de-DE',
+        'ja': 'ja-JP',
+        'ko': 'ko-KR',
+        'zh': 'zh-CN',
+        'ar': 'ar-SA'
+    };
+    return languageCodes[langCode] || 'pa-IN';
+}
+
+// Notification helper
+function showNotification(message) {
+    const notification = document.getElementById('notification');
+    const notificationText = document.getElementById('notificationText');
+    notificationText.textContent = message;
+    notification.classList.add('show');
+    setTimeout(() => notification.classList.remove('show'), 3000);
+}
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+
+// Language selection validation
+document.getElementById('fromLang').addEventListener('change', function() {
+    const fromLang = this.value;
+    const toLang = document.getElementById('toLang').value;
+    if (fromLang === toLang) showNotification('ਕਿਰਪਾ ਕਰਕੇ ਵੱਖ-ਵੱਖ ਸਰੋਤ ਅਤੇ ਲਕੜੀ ਭਾਸ਼ਾ ਚੁਣੋ।');
+});
+
+document.getElementById('toLang').addEventListener('change', function() {
+    const fromLang = document.getElementById('fromLang').value;
+    const toLang = this.value;
+    if (fromLang === toLang) showNotification('ਕਿਰਪਾ ਕਰਕੇ ਵੱਖ-ਵੱਖ ਸਰੋਤ ਅਤੇ ਲਕੜੀ ਭਾਸ਼ਾ ਚੁਣੋ।');
+});
+
+// Add simple fadeInUp animation to cards
+document.querySelectorAll('.service-card').forEach((card, index) => {
+    card.style.animationDelay = `${index * 0.15}s`;
+    card.style.animation = 'fadeInUp 0.8s ease forwards';
+});
+
+const style = document.createElement('style');
+style.textContent = `@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }`;
+document.head.appendChild(style);
+
+</script>
+</body>
+</html>

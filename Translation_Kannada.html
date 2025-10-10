@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಅಪ್ನಿ ವಾಣಿ - ಅಡೆತಡೆಗಳನ್ನು ಮುರಿದು, ಧ್ವನಿಗಳನ್ನು ಸಂಪರ್ಕಿಸುವುದು</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Noto Sans Kannada', sans-serif;">
+
+    <!-- Welcome Overlay -->
+    <div id="welcomeOverlay">
+        <h1>ಅಪ್ನಿ ವಾಣಿ</h1>
+        <p>ಅಡೆತಡೆಗಳನ್ನು ಮುರಿದು, ಧ್ವನಿಗಳನ್ನು ಸಂಪರ್ಕಿಸುವುದು</p>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span id="notificationText">ಸೂಚನೆ ಸಂದೇಶ</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <img src="Logo.png" alt="ಅಪ್ನಿ ವಾಣಿ ಲೋಗೋ" class="logo-svg">
+                    <div>
+                        <div class="logo-text">ಅಪ್ನಿ ವಾಣಿ</div>
+                        <span class="logo-tagline">ಅಡೆತಡೆಗಳನ್ನು ಮುರಿದು, ಧ್ವನಿಗಳನ್ನು ಸಂಪರ್ಕಿಸುವುದು</span>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="Home.html" class="active">ಮುಖಪುಟ</a></li>
+                    <li><a href="Home.html">ಅನುವಾದ</a></li>
+                    <li><a href="Translation.html">ವೀಡಿಯೋ</a></li>
+                    <li><a href="Voice_kannada.html">ಧ್ವನಿ</a></li>
+                    <li><a href="Summarise_Kannada.Html">ಸಾರಾಂಶ</a></li>
+                    <li><a href="Detail_Kannada.html">ಬಗ್ಗೆ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="made-in-PCE"> ಪಿಸಿಇಯಲ್ಲಿ ತಯಾರಿಸಲಾಗಿದೆ</div>
+            <h1>ಅಪ್ನಿ ವಾಣಿ – ಅಡೆತಡೆಗಳನ್ನು ಮುರಿದು, ಧ್ವನಿಗಳನ್ನು ಸಂಪರ್ಕಿಸುವುದು</h1>
+            <p>ಸಹಯೋಗ ಮತ್ತು ವೈವಿಧ್ಯತೆಯಲ್ಲಿ ಏಕತೆ. ಅಪ್ನಿ ವಾಣಿಯ ಉತ್ತಮ AI ಅನುವಾದ ಸಾಧನಗಳು ಭಾಷೆಯನ್ನು ಅಡೆತಡೆ ಆಗುವುದನ್ನು ತಡೆಯುತ್ತವೆ ಮತ್ತು ಜಾಗತಿಕ ಸಂವಹನಕ್ಕೆ ದಾರಿ ತೆರೆಯುತ್ತವೆ.</p>
+        </div>
+    </section>
+
+    <!-- Video Translation Section -->
+    <section class="video-section" id="video-translate">
+        <div class="container">
+            <h2 class="section-title">🎥 ವೀಡಿಯೋ ಅನುವಾದ ಸ್ಟುಡಿಯೋ</h2>
+            <p class="section-subtitle">ನಿಮ್ಮ ವೀಡಿಯೋ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ ಮತ್ತು AI ಸಹಾಯದಿಂದ ಯಾವುದೇ ಭಾಷೆಗೆ ಅನುವಾದಿಸಿ</p>
+            
+            <div class="upload-container">
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-icon">📹</div>
+                    <div class="upload-text">
+                        <h3>ನಿಮ್ಮ ವೀಡಿಯೋ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ</h3>
+                        <p>ಇಲ್ಲಿ ಡ್ರ್ಯಾಗ್ & ಡ್ರಾಪ್ ಮಾಡಿ ಅಥವಾ ಕ್ಲಿಕ್ ಮಾಡಿ ಆಯ್ಕೆಮಾಡಿ</p>
+                        <p class="file-note">ಬೆಂಬಲಿತ ಸ್ವರೂಪಗಳು: MP4, AVI, MOV, WMV (ಗರಿಷ್ಠ: 100MB)</p>
+                    </div>
+                    <button class="upload-btn" onclick="document.getElementById('fileInput').click()">ಫೈಲ್ ಆಯ್ಕೆಮಾಡಿ</button>
+                    <input type="file" id="fileInput" class="file-input" accept="video/*">
+                </div>
+                
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                
+                <div class="file-info" id="fileInfo">
+                    <strong>ಆಯ್ದ ಫೈಲ್:</strong> <span id="fileName"></span><br>
+                    <strong>ಗಾತ್ರ:</strong> <span id="fileSize"></span>
+                </div>
+                
+                <!-- Language Selector -->
+                <div class="language-selector" id="languageSelector">
+                    <label><strong>ಇಂದ:</strong></label>
+                    <select id="fromLang" onchange="showSelected('fromLang','fromNote')">
+                        <option value="en">ಇಂಗ್ಲಿಷ್ (ENG)</option>
+                        <option value="hi">ಹಿಂದಿ (HN)</option>
+                        <option value="bn">ಬಂಗಾಳಿ (BN)</option>
+                        <option value="ta">ತಮಿಳು (TM)</option>
+                        <option value="te">ತೆಲುಗು (TG)</option>
+                        <option value="ml">ಮಲಯಾಳಂ (ML)</option>
+                        <option value="kn">ಕನ್ನಡ (KN)</option>
+                        <option value="gu">ಗುಜರಾತಿ (GJ)</option>
+                        <option value="mr">ಮರಾಠಿ (MR)</option>
+                        <option value="pa">ಪಂಜಾಬಿ (PN)</option>
+                    </select>
+                    <p id="fromNote" class="lang-note">ದಯವಿಟ್ಟು ಮೂಲ ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ</p>
+                    
+                    <label><strong>ಇಗೆ:</strong></label>
+                    <select id="toLang" onchange="showSelected('toLang','toNote')">
+                        <option value="hi">ಹಿಂದಿ (HN)</option>
+                        <option value="en">ಇಂಗ್ಲಿಷ್ (ENG)</option>
+                        <option value="bn">ಬಂಗಾಳಿ (BN)</option>
+                        <option value="ta">ತಮಿಳು (TM)</option>
+                        <option value="te">ತೆಲುಗು (TG)</option>
+                        <option value="ml">ಮಲಯಾಳಂ (ML)</option>
+                        <option value="kn">ಕನ್ನಡ (KN)</option>
+                        <option value="gu">ಗುಜರಾತಿ (GJ)</option>
+                        <option value="mr">ಮರಾಠಿ (MR)</option>
+                        <option value="pa">ಪಂಜಾಬಿ (PN)</option>
+                        <option value="es">ಸ್ಪ್ಯಾನಿಷ್ (SP)</option>
+                        <option value="fr">ಫ್ರೆಂಚ್ (FR)</option>
+                        <option value="de">ಜರ್ಮನ್ (DE)</option>
+                        <option value="ja">ಜಪಾನೀಸ್ (JP)</option>
+                        <option value="ko">ಕೊರಿಯನ್ (KR)</option>
+                        <option value="zh">ಚೈನೀಸ್ (CH)</option>
+                        <option value="ar">ಅರೇಬಿಕ್ (AR)</option>
+                    </select>
+                    <p id="toNote" class="lang-note">ದಯವಿಟ್ಟು ಗುರಿ ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ</p>
+                </div>
+                
+                <button class="translate-btn" id="translateBtn">🚀 ವೀಡಿಯೋ ಅನುವಾದಿಸಿ</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="services" style="background: rgba(255,255,255,0.1);">
+        <div class="container">
+            <h2 class="white-title"> ಅಪ್ನಿ ವಾಣಿ ಬಳಸುವ ವಿಧಾನ</h2>
+            <div class="services-grid">
+                <div class="service-card"><h3>ಹಂತ 1: ವೀಡಿಯೋ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ</h3><p>"ಫೈಲ್ ಆಯ್ಕೆಮಾಡಿ" ಕ್ಲಿಕ್ ಮಾಡಿ ಅಥವಾ ಡ್ರ್ಯಾಗ್ & ಡ್ರಾಪ್ ಮಾಡಿ.</p></div>
+                <div class="service-card"><h3>ಹಂತ 2: ಭಾಷೆಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ</h3><p>ಮೂಲ ಮತ್ತು ಗುರಿ ಭಾಷೆಗಳನ್ನು ಆರಿಸಿ.</p></div>
+                <div class="service-card"><h3>ಹಂತ 3: ಅನುವಾದಿಸಿ</h3><p>🚀 ಅನುವಾದ ಬಟನ್ ಒತ್ತಿ.</p></div>
+                <div class="service-card"><h3>ಹಂತ 4: ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ</h3><p>ಅನುವಾದದ ನಂತರ ಡೌನ್‌ಲೋಡ್ ಬಟನ್ ಒತ್ತಿ.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="white-title">ನಮ್ಮ AI ಚಾಲಿತ ಸೇವೆಗಳು</h2>
+            <div class="services-grid">
+                <div class="service-card"><h3> ಪಠ್ಯ ಮತ್ತು ದಾಖಲೆಗಳ ಅನುವಾದ</h3><p>ಪುಸ್ತಕಗಳು ಮತ್ತು ದಾಖಲೆಗಳನ್ನು ಅನುವಾದಿಸಿ.</p></div>
+                <div class="service-card"><h3> ವೀಡಿಯೋ ಅನುವಾದ</h3><p>ಉಪಶೀರ್ಷಿಕೆ ಮತ್ತು ಡಬ್ಬಿಂಗ್‌ ಸಹಿತ ವೀಡಿಯೋಗಳನ್ನು ಪರಿವರ್ತಿಸಿ.</p></div>
+                <div class="service-card"><h3> ಧ್ವನಿ ಅನುವಾದ</h3><p>ತಕ್ಷಣದ ನೈಸರ್ಗಿಕ ಧ್ವನಿ ಅನುವಾದ.</p></div>
+                <div class="service-card"><h3> ನೇರ ಸಭಾ ಅನುವಾದ</h3><p>ತಕ್ಷಣದ ಸಭೆಗಳಲ್ಲಿ ಅಡೆತಡೆಗಳನ್ನು ಮುರಿಯಿರಿ.</p></div>
+                <div class="service-card"><h3> ಚಿತ್ರ ಪಠ್ಯ ಅನುವಾದ</h3><p>ಚಿತ್ರಗಳಿಂದ ಪಠ್ಯ ತೆಗೆದು ಅನುವಾದಿಸಿ.</p></div>
+                <div class="service-card"><h3> ಸಾರಾಂಶ ಸಾಧನಗಳು</h3><p>ದೀರ್ಘ ವಿಷಯಕ್ಕೆ AI ಸಾರಾಂಶ.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="#">💼</a>
+                <a href="#">𝕏</a>
+                <a href="#">📘</a>
+                <a href="#">📸</a>
+            </div>
+            <p>© 2025 ಎಲ್ಲಾ ಹಕ್ಕುಗಳು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ, ಅಪ್ನಿ ವಾಣಿ, ತಂಡ ಬಿಲ್ಡ್ ಬಾಟ್ಸ್, ಪಿಲ್ಲೈ ಎಂಜಿನಿಯರಿಂಗ್ ಕಾಲೇಜು</p>
+            <p>ಗೌಪ್ಯತಾ ನೀತಿ | ಬಳಕೆ ನಿಯಮಗಳು | ಕುಕೀ ನೀತಿ</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Welcome overlay fade out after 2 seconds
+        window.addEventListener('load', () => {
+            const overlay = document.getElementById('welcomeOverlay');
+            setTimeout(() => {
+                overlay.classList.add('fadeOut');
+            }, 2000); // 2 seconds
+        });
+
+        // Language select update
+        function showSelected(selectId, noteId) {
+            const select = document.getElementById(selectId);
+            const note = document.getElementById(noteId);
+            const selectedText = select.options[select.selectedIndex].text;
+            note.textContent = `ನೀವು ಆಯ್ಕೆಮಾಡಿದವು: ${selectedText}`;
+        }
+
+        // File upload & translate JS
+        document.addEventListener('DOMContentLoaded', () => {
+            const uploadZone = document.getElementById('uploadZone');
+            const fileInput = document.getElementById('fileInput');
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = document.getElementById('progressFill');
+            const fileInfo = document.getElementById('fileInfo');
+            const fileName = document.getElementById('fileName');
+            const fileSize = document.getElementById('fileSize');
+            const languageSelector = document.getElementById('languageSelector');
+            const translateBtn = document.getElementById('translateBtn');
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+
+            uploadZone.addEventListener('click', () => fileInput.click());
+            uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+            uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+            uploadZone.addEventListener('drop', e => {
+                e.preventDefault();
+                uploadZone.classList.remove('dragover');
+                if(e.dataTransfer.files.length > 0) handleFileSelect(e.dataTransfer.files[0]);
+            });
+            fileInput.addEventListener('change', e => { if(e.target.files.length > 0) handleFileSelect(e.target.files[0]); });
+
+            function handleFileSelect(file) {
+                const allowedTypes = ['video/mp4','video/avi','video/quicktime','video/x-ms-wmv'];
+                if(!allowedTypes.includes(file.type)) return showNotification('❌ ದಯವಿಟ್ಟು ಮಾನ್ಯ ವೀಡಿಯೋ ಫೈಲ್ ಆಯ್ಕೆಮಾಡಿ (MP4, AVI, MOV, WMV)');
+                const maxSize = 100*1024*1024;
+                if(file.size > maxSize) return showNotification('❌ ಫೈಲ್ ಗಾತ್ರ 100MB ಮೀರಿದೆ');
+                fileName.textContent = file.name;
+                fileSize.textContent = (file.size/1024/1024).toFixed(2) + ' MB';
+                fileInfo.style.display='block';
+                progressBar.style.display='block';
+                simulateUploadProgress();
+            }
+
+            function simulateUploadProgress() {
+                progressFill.style.width='0%';
+                let progress=0;
+                const interval = setInterval(()=>{
+                    progress += Math.random()*15;
+                    if(progress>100) progress=100;
+                    progressFill.style.width = progress+'%';
+                    if(progress>=100) { clearInterval(interval); languageSelector.style.display='flex'; translateBtn.classList.add('active'); showNotification('✅ ಫೈಲ್ ಅಪ್‌ಲೋಡ್ ಯಶಸ್ವಿ! ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ.'); }
+                },300);
+            }
+
+            translateBtn.addEventListener('click', ()=>{
+                if(!translateBtn.classList.contains('active')) return;
+                showNotification('🚀 ಅನುವಾದ ಪ್ರಾರಂಭವಾಗಿದೆ, ದಯವಿಟ್ಟು ನಿರೀಕ್ಷಿಸಿ...');
+                setTimeout(()=>{ showNotification('✅ ಅನುವಾದ ಪೂರ್ಣ! 🎉 ಡೌನ್‌ಲೋಡ್ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ.'); },2000);
+            });
+
+            function showNotification(message) {
+                notificationText.textContent = message;
+                notification.classList.add('show');
+                setTimeout(()=>{ notification.classList.remove('show'); },4000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>अपनी वाणी - बाधाओं को तोड़ना, आवाज़ों को जोड़ना</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Noto Sans Devanagari', sans-serif;">
+
+    <!-- Welcome Overlay -->
+    <div id="welcomeOverlay">
+        <h1>अपनी वाणी</h1>
+        <p>बाधाओं को तोड़ना, आवाज़ों को जोड़ना</p>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span id="notificationText">सूचना संदेश</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <img src="Logo.png" alt="अपनी वाणी लोगो" class="logo-svg">
+                    <div>
+                        <div class="logo-text">अपनी वाणी</div>
+                        <span class="logo-tagline">बाधाओं को तोड़ना, आवाज़ों को जोड़ना</span>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="Home.html" class="active">मुखपृष्ठ</a></li>
+                    <li><a href="Home.html">अनुवाद</a></li>
+                    <li><a href="Translation_hindi.html">वीडियो</a></li>
+                    <li><a href="Voice_Hindi.html">आवाज़</a></li>
+                    <li><a href="Summarise_hindi.Html">सारांश</a></li>
+                    <li><a href="Detail_hindi.html">हमारे बारे में</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="made-in-PCE"> PCE में निर्मित</div>
+            <h1>अपनी वाणी – बाधाओं को तोड़ना, आवाज़ों को जोड़ना</h1>
+            <p>सहयोग और विविधता में एकता। अपनी वाणी के बेहतरीन AI अनुवादक फीचर्स भाषा को बाधा नहीं, बल्कि वैश्विक संवाद का द्वार बनाते हैं।</p>
+        </div>
+    </section>
+
+    <!-- Video Translation Section -->
+    <section class="video-section" id="video-translate">
+        <div class="container">
+            <h2 class="section-title">🎥 वीडियो अनुवाद स्टूडियो</h2>
+            <p class="section-subtitle">अपना वीडियो अपलोड करें और AI की मदद से किसी भी भाषा में अनुवाद करें</p>
+            
+            <div class="upload-container">
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-icon">📹</div>
+                    <div class="upload-text">
+                        <h3>अपना वीडियो अपलोड करें</h3>
+                        <p>यहाँ ड्रैग और ड्रॉप करें, या ब्राउज़ करने के लिए क्लिक करें</p>
+                        <p class="file-note">सपोर्टेड फॉर्मेट्स: MP4, AVI, MOV, WMV (अधिकतम: 100MB)</p>
+                    </div>
+                    <button class="upload-btn" onclick="document.getElementById('fileInput').click()">फ़ाइल चुनें</button>
+                    <input type="file" id="fileInput" class="file-input" accept="video/*">
+                </div>
+                
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                
+                <div class="file-info" id="fileInfo">
+                    <strong>चुनी गई फ़ाइल:</strong> <span id="fileName"></span><br>
+                    <strong>आकार:</strong> <span id="fileSize"></span>
+                </div>
+                
+                <!-- Language Selector -->
+                <div class="language-selector" id="languageSelector">
+                    <label><strong>से:</strong></label>
+                    <select id="fromLang" onchange="showSelected('fromLang','fromNote')">
+                        <option value="en">अंग्रेज़ी (ENG)</option>
+                        <option value="hi">हिन्दी (HN)</option>
+                        <option value="bn">बंगाली (BN)</option>
+                        <option value="ta">तमिल (TM)</option>
+                        <option value="te">तेलुगु (TG)</option>
+                        <option value="ml">मलयालम (ML)</option>
+                        <option value="kn">कन्नड़ (KN)</option>
+                        <option value="gu">गुजराती (GJ)</option>
+                        <option value="mr">मराठी (MR)</option>
+                        <option value="pa">पंजाबी (PN)</option>
+                    </select>
+                    <p id="fromNote" class="lang-note">कृपया स्रोत भाषा चुनें</p>
+                    
+                    <label><strong>में:</strong></label>
+                    <select id="toLang" onchange="showSelected('toLang','toNote')">
+                        <option value="hi">हिन्दी (HN)</option>
+                        <option value="en">अंग्रेज़ी (ENG)</option>
+                        <option value="bn">बंगाली (BN)</option>
+                        <option value="ta">तमिल (TM)</option>
+                        <option value="te">तेलुगु (TG)</option>
+                        <option value="ml">मलयालम (ML)</option>
+                        <option value="kn">कन्नड़ (KN)</option>
+                        <option value="gu">गुजराती (GJ)</option>
+                        <option value="mr">मराठी (MR)</option>
+                        <option value="pa">पंजाबी (PN)</option>
+                        <option value="es">स्पेनिश (SP)</option>
+                        <option value="fr">फ्रेंच (FR)</option>
+                        <option value="de">जर्मन (DE)</option>
+                        <option value="ja">जापानी (JP)</option>
+                        <option value="ko">कोरियाई (KR)</option>
+                        <option value="zh">चीनी (CH)</option>
+                        <option value="ar">अरबी (AR)</option>
+                    </select>
+                    <p id="toNote" class="lang-note">कृपया लक्ष्य भाषा चुनें</p>
+                </div>
+                
+                <button class="translate-btn" id="translateBtn">🚀 वीडियो अनुवाद करें</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="services" style="background: rgba(255,255,255,0.1);">
+        <div class="container">
+            <h2 class="white-title">अपनी वाणी का उपयोग कैसे करें</h2>
+            <div class="services-grid">
+                <div class="service-card"><h3>चरण 1: वीडियो अपलोड करें</h3><p>"फ़ाइल चुनें" क्लिक करें या ड्रैग और ड्रॉप करें।</p></div>
+                <div class="service-card"><h3>चरण 2: भाषाएँ चुनें</h3><p>स्रोत और लक्ष्य भाषाओं का चयन करें।</p></div>
+                <div class="service-card"><h3>चरण 3: अनुवाद करें</h3><p>🚀 अनुवाद बटन दबाएँ।</p></div>
+                <div class="service-card"><h3>चरण 4: डाउनलोड करें</h3><p>अनुवाद के बाद डाउनलोड बटन दबाएँ।</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our AI-Powered Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="white-title">हमारी AI-संचालित सेवाएँ</h2>
+            <div class="services-grid">
+                <div class="service-card"><h3>पाठ और दस्तावेज़ अनुवाद</h3><p>दस्तावेज़ और किताबों का अनुवाद करें।</p></div>
+                <div class="service-card"><h3>वीडियो अनुवाद</h3><p>उपशीर्षक और डबिंग के साथ वीडियो बदलें।</p></div>
+                <div class="service-card"><h3>आवाज़ अनुवाद</h3><p>रीयल-टाइम प्राकृतिक आवाज़ अनुवाद।</p></div>
+                <div class="service-card"><h3>लाइव मीटिंग अनुवाद</h3><p>रीयल-टाइम मीटिंग्स में बाधाओं को तोड़ें।</p></div>
+                <div class="service-card"><h3>छवि पाठ अनुवाद</h3><p>छवियों से पाठ निकालें और अनुवाद करें।</p></div>
+                <div class="service-card"><h3>सारांश उपकरण</h3><p>लंबी सामग्री के लिए AI सारांश।</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="#">💼</a>
+                <a href="#">𝕏</a>
+                <a href="#">📘</a>
+                <a href="#">📸</a>
+            </div>
+            <p>© 2025 सर्वाधिकार सुरक्षित, अपनी वाणी, टीम बिल्ड बॉट्स, पिल्लई कॉलेज ऑफ़ इंजीनियरिंग</p>
+            <p>गोपनीयता नीति | उपयोग की शर्तें | कुकी नीति</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Welcome overlay fade out
+        window.addEventListener('load', () => {
+            const overlay = document.getElementById('welcomeOverlay');
+            setTimeout(() => {
+                overlay.classList.add('fadeOut');
+            }, 2000);
+        });
+
+        // Language select update
+        function showSelected(selectId, noteId) {
+            const select = document.getElementById(selectId);
+            const note = document.getElementById(noteId);
+            const selectedText = select.options[select.selectedIndex].text;
+            note.textContent = `आपने चयन किया: ${selectedText}`;
+        }
+    </script>
+
+</body>
+</html>

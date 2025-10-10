@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ਅਪਨੀ ਵਾਣੀ - ਰੋਕਾਵਟਾਂ ਨੂੰ ਤੋੜਨਾ, ਆਵਾਜ਼ਾਂ ਨੂੰ ਮਿਲਾਉਣਾ</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Noto Sans Devanagari', sans-serif;">
+
+    <!-- Welcome Overlay -->
+    <div id="welcomeOverlay">
+        <h1>ਅਪਨੀ ਵਾਣੀ</h1>
+        <p>ਰੋਕਾਵਟਾਂ ਨੂੰ ਤੋੜਨਾ, ਆਵਾਜ਼ਾਂ ਨੂੰ ਮਿਲਾਉਣਾ</p>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span id="notificationText">ਸੂਚਨਾ ਸੁਨੇਹਾ</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <img src="Logo.png" alt="ਅਪਨੀ ਵਾਣੀ ਲੋਗੋ" class="logo-svg">
+                    <div>
+                        <div class="logo-text">ਅਪਨੀ ਵਾਣੀ</div>
+                        <span class="logo-tagline">ਰੋਕਾਵਟਾਂ ਨੂੰ ਤੋੜਨਾ, ਆਵਾਜ਼ਾਂ ਨੂੰ ਮਿਲਾਉਣਾ</span>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="Home.html" class="active">ਮੁੱਖ ਸਫ਼ਾ</a></li>
+                    <li><a href="Home.html">ਅਨੁਵਾਦ</a></li>
+                    <li><a href="Translation_hindi.html">ਵੀਡੀਓ</a></li>
+                    <li><a href="Voice_Hindi.html">ਆਵਾਜ਼</a></li>
+                    <li><a href="Summarise_hindi.Html">ਸਾਰਾਂਸ਼</a></li>
+                    <li><a href="Detail_hindi.html">ਸਾਡੇ ਬਾਰੇ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="made-in-PCE"> PCE ਵਿੱਚ ਬਣਾਇਆ ਗਿਆ</div>
+            <h1>ਅਪਨੀ ਵਾਣੀ – ਰੋਕਾਵਟਾਂ ਨੂੰ ਤੋੜਨਾ, ਆਵਾਜ਼ਾਂ ਨੂੰ ਮਿਲਾਉਣਾ</h1>
+            <p>ਸਹਿਯੋਗ ਅਤੇ ਵਿਭਿੰਨਤਾ ਵਿੱਚ ਇਕਤਾ। ਅਪਨੀ ਵਾਣੀ ਦੇ ਉੱਤਮ AI ਅਨੁਵਾਦਕ ਫੀਚਰ ਭਾਸ਼ਾ ਨੂੰ ਰੋਕਾਵਟ ਨਹੀਂ, ਸਗੋਂ ਗਲੋਬਲ ਸੰਵਾਦ ਦਾ ਦਰਵਾਜ਼ਾ ਬਣਾਉਂਦੇ ਹਨ।</p>
+        </div>
+    </section>
+
+    <!-- Video Translation Section -->
+    <section class="video-section" id="video-translate">
+        <div class="container">
+            <h2 class="section-title">🎥 ਵੀਡੀਓ ਅਨੁਵਾਦ ਸਟੂਡੀਓ</h2>
+            <p class="section-subtitle">ਆਪਣੀ ਵੀਡੀਓ ਅਪਲੋਡ ਕਰੋ ਅਤੇ AI ਦੀ ਮਦਦ ਨਾਲ ਕਿਸੇ ਵੀ ਭਾਸ਼ਾ ਵਿੱਚ ਅਨੁਵਾਦ ਕਰੋ</p>
+            
+            <div class="upload-container">
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-icon">📹</div>
+                    <div class="upload-text">
+                        <h3>ਆਪਣੀ ਵੀਡੀਓ ਅਪਲੋਡ ਕਰੋ</h3>
+                        <p>ਇੱਥੇ ਡਰੈਗ ਅਤੇ ਡ੍ਰੌਪ ਕਰੋ ਜਾਂ ਬ੍ਰਾਊਜ਼ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ</p>
+                        <p class="file-note">ਸਪੋਰਟਿਡ ਫਾਰਮੈਟਸ: MP4, AVI, MOV, WMV (ਵੱਧ ਤੋਂ ਵੱਧ: 100MB)</p>
+                    </div>
+                    <button class="upload-btn" onclick="document.getElementById('fileInput').click()">ਫਾਇਲ ਚੁਣੋ</button>
+                    <input type="file" id="fileInput" class="file-input" accept="video/*">
+                </div>
+                
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                
+                <div class="file-info" id="fileInfo">
+                    <strong>ਚੁਣੀ ਫਾਇਲ:</strong> <span id="fileName"></span><br>
+                    <strong>ਸਾਈਜ਼:</strong> <span id="fileSize"></span>
+                </div>
+                
+                <!-- Language Selector -->
+                <div class="language-selector" id="languageSelector">
+                    <label><strong>ਤੋਂ:</strong></label>
+                    <select id="fromLang" onchange="showSelected('fromLang','fromNote')">
+                        <option value="en">ਅੰਗਰੇਜ਼ੀ (ENG)</option>
+                        <option value="hi">ਹਿੰਦੀ (HN)</option>
+                        <option value="bn">ਬੰਗਾਲੀ (BN)</option>
+                        <option value="ta">ਤਮਿਲ (TM)</option>
+                        <option value="te">ਤੇਲਗੂ (TG)</option>
+                        <option value="ml">ਮਲਿਆਲਮ (ML)</option>
+                        <option value="kn">ਕੰਨੜ (KN)</option>
+                        <option value="gu">ਗੁਜਰਾਤੀ (GJ)</option>
+                        <option value="mr">ਮਰਾਠੀ (MR)</option>
+                        <option value="pa">ਪੰਜਾਬੀ (PN)</option>
+                    </select>
+                    <p id="fromNote" class="lang-note">ਕਿਰਪਾ ਕਰਕੇ ਸਰੋਤ ਭਾਸ਼ਾ ਚੁਣੋ</p>
+                    
+                    <label><strong>ਵਿੱਚ:</strong></label>
+                    <select id="toLang" onchange="showSelected('toLang','toNote')">
+                        <option value="hi">ਹਿੰਦੀ (HN)</option>
+                        <option value="en">ਅੰਗਰੇਜ਼ੀ (ENG)</option>
+                        <option value="bn">ਬੰਗਾਲੀ (BN)</option>
+                        <option value="ta">ਤਮਿਲ (TM)</option>
+                        <option value="te">ਤੇਲਗੂ (TG)</option>
+                        <option value="ml">ਮਲਿਆਲਮ (ML)</option>
+                        <option value="kn">ਕੰਨੜ (KN)</option>
+                        <option value="gu">ਗੁਜਰਾਤੀ (GJ)</option>
+                        <option value="mr">ਮਰਾਠੀ (MR)</option>
+                        <option value="pa">ਪੰਜਾਬੀ (PN)</option>
+                        <option value="es">ਸਪੇਨੀ (SP)</option>
+                        <option value="fr">ਫ੍ਰੈਂਚ (FR)</option>
+                        <option value="de">ਜਰਮਨ (DE)</option>
+                        <option value="ja">ਜਾਪਾਨੀ (JP)</option>
+                        <option value="ko">ਕੋਰੀਆਈ (KR)</option>
+                        <option value="zh">ਚੀਨੀ (CH)</option>
+                        <option value="ar">ਅਰਬੀ (AR)</option>
+                    </select>
+                    <p id="toNote" class="lang-note">ਕਿਰਪਾ ਕਰਕੇ ਲਕੜੀ ਭਾਸ਼ਾ ਚੁਣੋ</p>
+                </div>
+                
+                <button class="translate-btn" id="translateBtn">🚀 ਵੀਡੀਓ ਅਨੁਵਾਦ ਕਰੋ</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="services" style="background: rgba(255,255,255,0.1);">
+        <div class="container">
+            <h2 class="white-title">ਅਪਨੀ ਵਾਣੀ ਦੀ ਵਰਤੋਂ ਕਿਵੇਂ ਕਰੀਏ</h2>
+            <div class="services-grid">
+                <div class="service-card"><h3>ਕਦਮ 1: ਵੀਡੀਓ ਅਪਲੋਡ ਕਰੋ</h3><p>"ਫਾਇਲ ਚੁਣੋ" ਤੇ ਕਲਿੱਕ ਕਰੋ ਜਾਂ ਡਰੈਗ ਅਤੇ ਡ੍ਰੌਪ ਕਰੋ।</p></div>
+                <div class="service-card"><h3>ਕਦਮ 2: ਭਾਸ਼ਾਵਾਂ ਚੁਣੋ</h3><p>ਸਰੋਤ ਅਤੇ ਲਕੜੀ ਭਾਸ਼ਾਵਾਂ ਚੁਣੋ।</p></div>
+                <div class="service-card"><h3>ਕਦਮ 3: ਅਨੁਵਾਦ ਕਰੋ</h3><p>🚀 ਅਨੁਵਾਦ ਬਟਨ ਦਬਾਓ।</p></div>
+                <div class="service-card"><h3>ਕਦਮ 4: ਡਾਊਨਲੋਡ ਕਰੋ</h3><p>ਅਨੁਵਾਦ ਤੋਂ ਬਾਅਦ ਡਾਊਨਲੋਡ ਬਟਨ ਦਬਾਓ।</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our AI-Powered Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="white-title">ਸਾਡੀਆਂ AI-ਚਲਿਤ ਸੇਵਾਵਾਂ</h2>
+            <div class="services-grid">
+                <div class="service-card"><h3>ਟੈਕਸਟ ਅਤੇ ਡੌਕਯੂਮੈਂਟ ਅਨੁਵਾਦ</h3><p>ਡੌਕਯੂਮੈਂਟ ਅਤੇ ਕਿਤਾਬਾਂ ਦਾ ਅਨੁਵਾਦ ਕਰੋ।</p></div>
+                <div class="service-card"><h3>ਵੀਡੀਓ ਅਨੁਵਾਦ</h3><p>ਸਬਟਾਈਟਲ ਅਤੇ ਡਬਿੰਗ ਨਾਲ ਵੀਡੀਓ ਬਦਲੋ।</p></div>
+                <div class="service-card"><h3>ਆਵਾਜ਼ ਅਨੁਵਾਦ</h3><p>ਰੀਅਲ-ਟਾਈਮ ਕੁਦਰਤੀ ਆਵਾਜ਼ ਅਨੁਵਾਦ।</p></div>
+                <div class="service-card"><h3>ਲਾਈਵ ਮੀਟਿੰਗ ਅਨੁਵਾਦ</h3><p>ਰੀਅਲ-ਟਾਈਮ ਮੀਟਿੰਗਾਂ ਵਿੱਚ ਰੋਕਾਵਟਾਂ ਤੋੜੋ।</p></div>
+                <div class="service-card"><h3>ਚਿੱਤਰ ਪਾਠ ਅਨੁਵਾਦ</h3><p>ਚਿੱਤਰਾਂ ਤੋਂ ਪਾਠ ਨਿਕਾਲੋ ਅਤੇ ਅਨੁਵਾਦ ਕਰੋ।</p></div>
+                <div class="service-card"><h3>ਸਾਰਾਂਸ਼ ਉਪਕਰਣ</h3><p>ਲੰਮੀ ਸਮੱਗਰੀ ਲਈ AI ਸਾਰਾਂਸ਼।</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="#">💼</a>
+                <a href="#">𝕏</a>
+                <a href="#">📘</a>
+                <a href="#">📸</a>
+            </div>
+            <p>© 2025 ਸਾਰੇ ਹੱਕ ਸੁਰੱਖਿਅਤ, ਅਪਨੀ ਵਾਣੀ, ਟੀਮ ਬਿਲਡ ਬੋਟਸ, ਪਿਲਾਈ ਕਾਲਜ ਆਫ਼ ਇੰਜੀਨੀਅਰਿੰਗ</p>
+            <p>ਗੋਪਨੀਯਤਾ ਨੀਤੀ | ਵਰਤੋਂ ਦੀਆਂ ਸ਼ਰਤਾਂ | ਕੁਕੀ ਨੀਤੀ</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Welcome overlay fade out
+        window.addEventListener('load', () => {
+            const overlay = document.getElementById('welcomeOverlay');
+            setTimeout(() => {
+                overlay.classList.add('fadeOut');
+            }, 2000);
+        });
+
+        // Language select update
+        function showSelected(selectId, noteId) {
+            const select = document.getElementById(selectId);
+            const note = document.getElementById(noteId);
+            const selectedText = select.options[select.selectedIndex].text;
+            note.textContent = `ਤੁਸੀਂ ਚੁਣਿਆ: ${selectedText}`;
+        }
+    </script>
+
+</body>
+</html>
