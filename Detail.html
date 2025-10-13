@@ -495,7 +495,7 @@ document.getElementById("userInfoForm").addEventListener("submit", function(even
 
         // redirect to Translation.html
         setTimeout(() => {
-            window.location.href = "Translation.html";
+            window.location.href = "index.html";
         }, 1000); // 1 second delay so user can see success message
     }
 });
@@ -619,7 +619,7 @@ document.getElementById("userInfoForm").addEventListener("submit", function(even
             // After success, redirect or enable next step
             setTimeout(() => {
                 this.proceedToNextStep(userData);
-            }, 2000);
+            }, 0);
         }
 
         proceedToNextStep(userData) {

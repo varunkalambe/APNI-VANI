@@ -29,78 +29,85 @@
 
         /* Header Styles */
         .header {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 1rem 0;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    animation: slideDown 0.8s ease-out;
-}
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.8s ease-out;
+        }
 
-@keyframes slideDown {
-    from { transform: translateY(-100%); }
-    to { transform: translateY(0); }
-}
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
 
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    animation: fadeInLeft 1s ease;
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInLeft 1s ease;
+        }
 
-.logo:hover { transform: scale(1.05) rotate(2deg); }
-.logo-svg { width: 60px; height: 60px; border-radius: 8px; }
+        .logo:hover { transform: scale(1.05) rotate(2deg); }
+        
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
 
-.logo-text {
-    font-size: 28px;
-    font-weight: 700;
-    background: linear-gradient(45deg, #4A90E2, #357ABD);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #4A90E2, #357ABD);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-.logo-tagline { color: #666; font-size: 12px; }
+        .logo-tagline { color: #666; font-size: 12px; }
 
-.nav-menu {
-    display: flex;
-    gap: 30px;
-    list-style: none;
-    flex-wrap: wrap;
-}
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
 
-.nav-menu li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 20px;
-    transition: 0.3s;
-}
+        .nav-menu li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
 
-.nav-menu li a:hover,
-.nav-menu li a.active {
-    color: #4A90E2;
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
-}
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: #4A90E2;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+        }
 
-        /* Hero Section */
+        /* Hero Section - Fixed spacing */
         .hero {
             text-align: center;
-            padding: 60px 0 40px;
+            padding: 140px 0 40px;
+            margin-top: 0;
         }
 
         .made-in-badge {
@@ -111,6 +118,7 @@
             font-size: 14px;
             font-weight: 600;
             margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(255, 154, 86, 0.3);
         }
 
         .hero h1 {
@@ -430,12 +438,28 @@
                 gap: 20px;
             }
 
+            .hero {
+                padding: 120px 0 30px;
+            }
+
             .hero h1 {
                 font-size: 2rem;
             }
 
+            .nav {
+                padding: 10px 0;
+            }
+
             .nav-menu {
-                display: none;
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+                gap: 10px;
+            }
+
+            .nav-menu li a {
+                padding: 6px 12px;
+                font-size: 0.9rem;
             }
 
             .selector-buttons {
@@ -447,6 +471,42 @@
                 width: 100%;
                 max-width: 300px;
             }
+
+            .logo-text {
+                font-size: 22px;
+            }
+
+            .logo-tagline {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 110px 0 20px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .nav-menu {
+                gap: 5px;
+            }
+
+            .nav-menu li a {
+                padding: 5px 8px;
+                font-size: 0.8rem;
+            }
+
+            .logo-img {
+                width: 50px;
+                height: 50px;
+            }
         }
     </style>
 </head>
@@ -456,19 +516,19 @@
         <div class="container">
             <nav class="nav">
                 <div class="logo">
-                    <div class="logo-icon">AV</div>
+                    <img src="Logo.png" alt="Apni Vani Logo" class="logo-img">
                     <div>
                         <div class="logo-text">APNI VANI</div>
                         <span class="logo-tagline">અવરોધો તોડવી, અવાજોને જોડવા</span>
                     </div>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="Translation_gujrati.html" class="active">મુખપૃષ્ઠ</a></li>
+                    <li><a href="index_Gujrati.html">મુખપૃષ્ઠ</a></li>
                     <li><a href="Home.html">અનુવાદ</a></li>
                     <li><a href="Translation_gujrati.html">વિડિયો</a></li>
                     <li><a href="Voice_gujrati.html">અવાજ</a></li>
-                    <li><a href="Summarise_gujrati.html">સારાંશ</a></li>
-                    <li><a href="Detail_gujrati.html">અમારા વિશે</a></li>
+                    <li><a href="Summarise_gujrati.html" class="active">સારાંશ</a></li>
+                    <li><a href="index_Gujrati.html">અમારા વિશે</a></li>
                 </ul>
             </nav>
         </div>
@@ -477,7 +537,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="made-in-badge">PCE માં બનાવેલ</div>
+            <div class="made-in-badge">🎓 PCE માં બનાવેલ</div>
             <h1>🎯 AI સારાંશ સાધન</h1>
             <p>અમારી અદ્યતન AI ટેકનોલોજી વડે તમારા ઑડિઓ અને વિડિઓ સામગ્રીને સંક્ષિપ્ત, બુદ્ધિશાળી સારાંશમાં ફેરવો</p>
         </div>
@@ -488,7 +548,7 @@
         <div class="container">
             <!-- Input Type Selector -->
             <div class="input-selector">
-                <h2>મારા ઇનપુટ પ્રકાર પસંદ કરો</h2>
+                <h2>તમારા ઇનપુટ પ્રકાર પસંદ કરો</h2>
                 <div class="selector-buttons">
                     <button class="selector-btn active" onclick="selectInputType('audio')">
                         🎵 ઑડિઓ ઇનપુટ
@@ -508,12 +568,12 @@
                             <div class="audio-option" onclick="selectAudioOption('upload')">
                                 <span class="option-icon">📁</span>
                                 <div class="option-title">ઓડિયો ફાઇલ અપલોડ કરો</div>
-                                <div class="option-desc">તમારા ઉપકરણમાંથી ઓડિયો ફાઇલ પસંદ કરો</div></div>
+                                <div class="option-desc">તમારા ઉપકરણમાંથી ઓડિયો ફાઇલ પસંદ કરો</div>
                             </div>
                             <div class="audio-option" onclick="selectAudioOption('record')">
                                 <span class="option-icon">🎙️</span>
                                 <div class="option-title">ઓડિયો રેકોર્ડ કરો</div>
-                                <div class="option-desc">તમારા ઉપકરણમાંથી સીધો ઓડિયો રેકોર્ડ કરો માઇક્રોફોન</div>
+                                <div class="option-desc">તમારા માઇક્રોફોનમાંથી સીધો ઓડિયો રેકોર્ડ કરો</div>
                             </div>
                         </div>
 
@@ -523,7 +583,7 @@
                             <div class="upload-text">
                                 <p><strong>તમારી ઑડિઓ ફાઇલ અપલોડ કરો</strong></p>
                                 <p>તમારી ઑડિઓ ફાઇલને અહીં ખેંચો અને છોડો, અથવા બ્રાઉઝ કરવા માટે ક્લિક કરો</p>
-                                <p style="font-size: 0.9rem; opacity: 0.8;">સપોર્ટેડ: MP3, WAV, M4A, OGG (મહત્તમ: 50MB)
+                                <p style="font-size: 0.9rem; opacity: 0.8;">સપોર્ટેડ: MP3, WAV, M4A, OGG (મહત્તમ: 50MB)</p>
                             </div>
                             <button class="upload-btn" onclick="document.getElementById('audioFile').click()">ઑડિઓ ફાઇલ પસંદ કરો</button>
                             <input type="file" id="audioFile" class="file-input" accept="audio/*">
@@ -569,8 +629,8 @@
                                 <p><strong>તમારી વિડિઓ ફાઇલ અપલોડ કરો</strong></p>
                                 <p>તમારી વિડિઓ ફાઇલને અહીં ખેંચો અને છોડો, અથવા બ્રાઉઝ કરવા માટે ક્લિક કરો</p>
                                 <p style="font-size: 0.9rem; opacity: 0.8;">સપોર્ટેડ: MP4, AVI, MOV, WMV (મહત્તમ: 200MB)</p>
-                            </div>                  
-                            <button class="upload-btn" onclick="document.getElementById('videoFile').click()">પસંદ કરો વિડિઓ ફાઇલ</button>
+                            </div>
+                            <button class="upload-btn" onclick="document.getElementById('videoFile').click()">વિડિઓ ફાઇલ પસંદ કરો</button>
                             <input type="file" id="videoFile" class="file-input" accept="video/*">
                         </div>
 
@@ -586,12 +646,13 @@
                     </div>
 
                     <div class="output-panel">
-                        <h3 class="panel-title">વિડિઓ સારાંશ આઉટપુટ</h3>
+                        <h3 class="panel-title">📄 વિડિઓ સારાંશ આઉટપુટ</h3>
                         <div class="summary-output" id="videoSummary">
-                        <div class="summary-placeholder">
-                            તમારો AI-જનરેટેડ વિડિઓ સારાંશ દેખાશે અહીં...
-                            <br><br>
-                            શરૂ કરવા માટે વિડિઓ ફાઇલ અપલોડ કરો!
+                            <div class="summary-placeholder">
+                                તમારો AI-જનરેટેડ વિડિઓ સારાંશ અહીં દેખાશે...
+                                <br><br>
+                                શરૂ કરવા માટે વિડિઓ ફાઇલ અપલોડ કરો!
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -616,7 +677,7 @@
         // Audio option selection
         function selectAudioOption(option) {
             document.querySelectorAll('.audio-option').forEach(opt => opt.classList.remove('active'));
-            event.target.classList.add('active');
+            event.target.closest('.audio-option').classList.add('active');
             
             const uploadArea = document.getElementById('audio-upload-area');
             const recordingControls = document.getElementById('recording-controls');
@@ -723,10 +784,9 @@
 • મુખ્ય વિષય: [ઓડિયો સામગ્રીનું વિશ્લેષણ]
 • સમયગાળો: આશરે 2 મિનિટ 30 સેકન્ડ
 • વક્તા નંબર: 1 પ્રાથમિક વક્તા ઓળખાયો
-• ભાષા: હિન્દી (ઓળખાયેલ)
+• ભાષા: ગુજરાતી (ઓળખાયેલ)
 
 સારાંશ:
-
 ઓડિયો સામગ્રીમાં ટેકનોલોજી અને નવીનતા વિશે મહત્વપૂર્ણ ચર્ચાઓ શામેલ છે. વક્તા ડિજિટલ પરિવર્તનની જરૂરિયાત પર ભાર મૂકે છે અને અમલીકરણ માટે ઘણી મુખ્ય વ્યૂહરચનાઓનો ઉલ્લેખ કરે છે.
 
 મુખ્ય શબ્દો: ટેકનોલોજી, નવીનતા, ડિજિટલ પરિવર્તન, વ્યૂહરચના
@@ -762,26 +822,24 @@
 • સમયગાળો: 5 મિનિટ 42 સેકન્ડ
 • રિઝોલ્યુશન: 1920x1080 (પૂર્ણ HD)
 • ફ્રેમ દર: 30 fps
-• ઑડિઓ ટ્રેક: 1 (હિન્દી)
+• ઑડિઓ ટ્રેક: 1 (ગુજરાતી)
 
 સામગ્રી સારાંશ:
-
 વિડિઓ કૃત્રિમ બુદ્ધિ અને મશીન લર્નિંગ એપ્લિકેશનોનું શૈક્ષણિક ઝાંખી રજૂ કરે છે. પ્રસ્તુતકર્તા વિવિધ AI સાધનોનું નિદર્શન કરે છે અને આધુનિક વ્યવસાયિક વાતાવરણમાં તેમના વ્યવહારુ અમલીકરણો સમજાવે છે.
 
 મુખ્ય દ્રશ્યો:
-
-૧. પરિચય (૦:૦૦-૦:૩૦): AI ખ્યાલોનો ઝાંખી
-૨. પ્રદર્શન (૦:૩૦-૩:૨૦): લાઇવ ટૂલ શોકેસ
-૩. ઉપયોગના કિસ્સાઓ (૩:૨૦-૪:૫૦): વાસ્તવિક દુનિયાના એપ્લિકેશનો
-૪. નિષ્કર્ષ (૪:૫૦-૫:૪૨): સારાંશ અને આગળના પગલાં
+1. પરિચય (0:00-0:30): AI ખ્યાલોનો ઝાંખી
+2. પ્રદર્શન (0:30-3:20): લાઇવ ટૂલ શોકેસ
+3. ઉપયોગના કિસ્સાઓ (3:20-4:50): વાસ્તવિક દુનિયાના એપ્લિકેશનો
+4. નિષ્કર્ષ (4:50-5:42): સારાંશ અને આગળના પગલાં
 
 દ્રશ્ય તત્વો:
-• ચાર્ટ અને ગ્રાફ: ૮ ઉદાહરણો
-• કોડ પ્રદર્શન: ૩ વિભાગો
+• ચાર્ટ અને ગ્રાફ: 8 ઉદાહરણો
+• કોડ પ્રદર્શન: 3 વિભાગો
 • સ્ક્રીન રેકોર્ડિંગ્સ: સમગ્ર વિડિઓમાં બહુવિધ
 
-ઑડિઓ ગુણવત્તા: ઉત્તમ (૯૬/૧૦૦)
-વિડિઓ ગુણવત્તા: ઉચ્ચ (૯૪/૧૦૦)
+ઑડિઓ ગુણવત્તા: ઉત્તમ (96/100)
+વિડિઓ ગુણવત્તા: ઉચ્ચ (94/100)
 સામગ્રી જોડાણ: ખૂબ જ ઉચ્ચ
 
 અપની વાણી AI સારાંશ સાધન દ્વારા જનરેટ કરેલ`;
@@ -796,15 +854,16 @@
             const notification = document.createElement('div');
             notification.style.cssText = `
                 position: fixed;
-                top: 20px;
+                top: 100px;
                 right: 20px;
                 background: #4CAF50;
                 color: white;
                 padding: 15px 25px;
                 border-radius: 10px;
                 box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-                z-index: 1000;
+                z-index: 1001;
                 font-weight: 600;
+                max-width: 300px;
             `;
             notification.textContent = message;
             document.body.appendChild(notification);

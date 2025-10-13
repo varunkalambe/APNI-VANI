@@ -1,0 +1,51 @@
+{
+  "jobId": "68e2cbbeaf8bb84d4a2e0488",
+  "created_at": "2025-10-05T19:49:18.985Z",
+  "status": "failed",
+  "step": "failed",
+  "steps_completed": [
+    {
+      "step": "audio_extraction",
+      "status": "processing",
+      "timestamp": "2025-10-05T19:49:18.986Z",
+      "source_language": "hi",
+      "target_language": "gu"
+    },
+    {
+      "step": "transcription",
+      "status": "processing",
+      "timestamp": "2025-10-05T19:49:20.878Z"
+    },
+    {
+      "step": "translation",
+      "status": "processing",
+      "timestamp": "2025-10-05T19:49:54.873Z"
+    },
+    {
+      "step": "tts_generation",
+      "status": "processing",
+      "timestamp": "2025-10-05T19:49:55.874Z"
+    },
+    {
+      "step": "aligning_translation",
+      "status": "processing",
+      "timestamp": "2025-10-05T19:50:03.339Z"
+    },
+    {
+      "step": "failed",
+      "status": "failed",
+      "timestamp": "2025-10-05T19:50:03.349Z",
+      "failed_at": "2025-10-05T19:50:03.347Z",
+      "processing_duration_ms": 44365,
+      "error_message": "Translated audio file not found for alignment: undefined",
+      "error_stack": "Error: Translated audio file not found for alignment: undefined\n    at alignTranslatedAudio (file:///C:/Users/varun/OneDrive/Desktop/SIH%20prototype/SIH-Website/backend/services/audioService.js:253:11)\n    at processVideo (file:///C:/Users/varun/OneDrive/Desktop/SIH%20prototype/SIH-Website/backend/controllers/processController.js:127:39)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  ],
+  "languages": {
+    "source": "hi",
+    "target": "gu",
+    "source_name": "Hindi",
+    "target_name": null
+  },
+  "last_updated": "2025-10-05T19:50:03.349Z"
+}

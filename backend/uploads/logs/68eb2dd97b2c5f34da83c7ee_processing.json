@@ -1,0 +1,55 @@
+{
+  "jobId": "68eb2dd97b2c5f34da83c7ee",
+  "created_at": "2025-10-12T04:26:02.134Z",
+  "status": "completed",
+  "step": "completed",
+  "steps_completed": [
+    {
+      "step": "audio_extraction",
+      "status": "processing",
+      "timestamp": "2025-10-12T04:26:02.135Z",
+      "source_language": "hi",
+      "target_language": "gu"
+    },
+    {
+      "step": "transcription",
+      "status": "processing",
+      "timestamp": "2025-10-12T04:26:05.172Z"
+    },
+    {
+      "step": "translation",
+      "status": "processing",
+      "timestamp": "2025-10-12T04:26:32.506Z"
+    },
+    {
+      "step": "tts_generation",
+      "status": "processing",
+      "timestamp": "2025-10-12T04:26:33.492Z"
+    },
+    {
+      "step": "aligning_translation",
+      "status": "processing",
+      "timestamp": "2025-10-12T04:26:43.826Z"
+    },
+    {
+      "step": "video_assembly",
+      "status": "processing",
+      "timestamp": "2025-10-12T04:27:12.115Z"
+    },
+    {
+      "step": "completed",
+      "status": "completed",
+      "timestamp": "2025-10-12T04:28:11.373Z",
+      "completed_at": "2025-10-12T04:28:11.372Z",
+      "processing_duration_ms": 129240,
+      "processed_file_path": "./uploads/processed/68eb2dd97b2c5f34da83c7ee_final.mp4"
+    }
+  ],
+  "languages": {
+    "source": "hi",
+    "target": "gu",
+    "source_name": "Hindi",
+    "target_name": null
+  },
+  "last_updated": "2025-10-12T04:28:11.373Z"
+}

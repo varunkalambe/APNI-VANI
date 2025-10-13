@@ -1,0 +1,36 @@
+{
+  "jobId": "68e2bfe2eb2eb906dfc321fe",
+  "created_at": "2025-10-05T18:58:42.335Z",
+  "status": "failed",
+  "step": "failed",
+  "steps_completed": [
+    {
+      "step": "audio_extraction",
+      "status": "processing",
+      "timestamp": "2025-10-05T18:58:42.336Z",
+      "source_language": "hi",
+      "target_language": "gu"
+    },
+    {
+      "step": "transcription",
+      "status": "processing",
+      "timestamp": "2025-10-05T18:58:44.514Z"
+    },
+    {
+      "step": "failed",
+      "status": "failed",
+      "timestamp": "2025-10-05T18:59:07.343Z",
+      "failed_at": "2025-10-05T18:59:07.342Z",
+      "processing_duration_ms": 25010,
+      "error_message": "Local Whisper transcription failed: Command failed: python \"C:\\Users\\varun\\OneDrive\\Desktop\\SIH prototype\\SIH-Website\\backend\\scripts\\run_whisper.py\" \"uploads\\audio\\68e2bfe2eb2eb906dfc321fe_audio.wav\" \"C:\\Users\\varun\\OneDrive\\Desktop\\SIH prototype\\SIH-Website\\backend\\uploads\\temp\\whisper_1759690736401\\result.json\" --language hi\nTraceback (most recent call last):\r\n  File \"C:\\Users\\varun\\OneDrive\\Desktop\\SIH prototype\\SIH-Website\\backend\\scripts\\run_whisper.py\", line 41, in <module>\r\n    transcribe_audio(args.audio_path, args.output_path, args.language)\r\n  File \"C:\\Users\\varun\\OneDrive\\Desktop\\SIH prototype\\SIH-Website\\backend\\scripts\\run_whisper.py\", line 10, in transcribe_audio\r\n    print(f\"\\u2705 Starting transcription for: {audio_path}\")\r\n  File \"C:\\Users\\varun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\encodings\\cp1252.py\", line 19, in encode\r\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nUnicodeEncodeError: 'charmap' codec can't encode character '\\u2705' in position 0: character maps to <undefined>\r\n",
+      "error_stack": "Error: Local Whisper transcription failed: Command failed: python \"C:\\Users\\varun\\OneDrive\\Desktop\\SIH prototype\\SIH-Website\\backend\\scripts\\run_whisper.py\" \"uploads\\audio\\68e2bfe2eb2eb906dfc321fe_audio.wav\" \"C:\\Users\\varun\\OneDrive\\Desktop\\SIH prototype\\SIH-Website\\backend\\uploads\\temp\\whisper_1759690736401\\result.json\" --language hi\nTraceback (most recent call last):\r\n  File \"C:\\Users\\varun\\OneDrive\\Desktop\\SIH prototype\\SIH-Website\\backend\\scripts\\run_whisper.py\", line 41, in <module>\r\n    transcribe_audio(args.audio_path, args.output_path, args.language)\r\n  File \"C:\\Users\\varun\\OneDrive\\Desktop\\SIH prototype\\SIH-Website\\backend\\scripts\\run_whisper.py\", line 10, in transcribe_audio\r\n    print(f\"\\u2705 Starting transcription for: {audio_path}\")\r\n  File \"C:\\Users\\varun\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\encodings\\cp1252.py\", line 19, in encode\r\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nUnicodeEncodeError: 'charmap' codec can't encode character '\\u2705' in position 0: character maps to <undefined>\r\n\n    at transcribeWithLocalWhisper (file:///C:/Users/varun/OneDrive/Desktop/SIH%20prototype/SIH-Website/backend/services/transcriptionService.js:65:11)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///C:/Users/varun/OneDrive/Desktop/SIH%20prototype/SIH-Website/backend/services/transcriptionService.js:122:16"
+    }
+  ],
+  "languages": {
+    "source": "hi",
+    "target": "gu",
+    "source_name": "Hindi",
+    "target_name": null
+  },
+  "last_updated": "2025-10-05T18:59:07.343Z"
+}

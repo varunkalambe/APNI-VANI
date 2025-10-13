@@ -1,0 +1,56 @@
+{
+  "jobId": "68eb72e1309e7d40e0eae01b",
+  "created_at": "2025-10-12T09:20:33.174Z",
+  "status": "failed",
+  "step": "failed",
+  "steps_completed": [
+    {
+      "step": "audio_extraction",
+      "status": "processing",
+      "timestamp": "2025-10-12T09:20:33.174Z",
+      "source_language": "hi",
+      "target_language": "gu"
+    },
+    {
+      "step": "transcription",
+      "status": "processing",
+      "timestamp": "2025-10-12T09:20:36.879Z"
+    },
+    {
+      "step": "translation",
+      "status": "processing",
+      "timestamp": "2025-10-12T09:21:11.752Z"
+    },
+    {
+      "step": "tts_generation",
+      "status": "processing",
+      "timestamp": "2025-10-12T09:21:12.443Z"
+    },
+    {
+      "step": "aligning_translation",
+      "status": "processing",
+      "timestamp": "2025-10-12T09:21:21.427Z"
+    },
+    {
+      "step": "video_assembly",
+      "status": "processing",
+      "timestamp": "2025-10-12T09:22:05.059Z"
+    },
+    {
+      "step": "failed",
+      "status": "failed",
+      "timestamp": "2025-10-12T09:22:07.071Z",
+      "failed_at": "2025-10-12T09:22:07.071Z",
+      "processing_duration_ms": 93900,
+      "error_message": "neuralCorrectedAudioPath is not defined",
+      "error_stack": "ReferenceError: neuralCorrectedAudioPath is not defined\n    at file:///C:/Users/varun/OneDrive/Desktop/SIH_demo%20final/SIH-FINAL-DEMO/backend/services/videoService.js:188:9\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  ],
+  "languages": {
+    "source": "hi",
+    "target": "gu",
+    "source_name": "Hindi",
+    "target_name": null
+  },
+  "last_updated": "2025-10-12T09:22:07.071Z"
+}

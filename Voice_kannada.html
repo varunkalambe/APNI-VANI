@@ -3,67 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ಅಪ್ನಿ ವಾಣಿ - ಅಡೆತಡೆಗಳನ್ನು ಮುರಿಯುವ, ಧ್ವನಿಗಳನ್ನು ಸಂಪರ್ಕಿಸುವ</title>
+    <title>ಅಪ್ನಿ ವಾಣಿ - ಧ್ವನಿ ಅನುವಾದ ಸ್ಟುಡಿಯೋ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Kannada:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ================== Welcome Overlay ================== */
-        /* #welcomeOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1a1a1a, #333);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            z-index: 9999;
-            text-align: center;
-            font-family: 'Noto Sans Kannada', 'Inter', sans-serif;
-            transition: opacity 1s ease, visibility 1s ease;
-            overflow: hidden;
-        }
-
-        #welcomeOverlay h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            opacity: 0;
-            transform: scale(0.8);
-            animation: zoomIn 1.2s forwards;
-        }
-
-        #welcomeOverlay p {
-            font-size: 1.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideUp 1.2s forwards;
-            animation-delay: 0.5s;
-        }
-
-        #welcomeOverlay.fadeOut {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        @keyframes zoomIn {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes slideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        } */
-
-        /* ================== Floating Particles ================== */
         body::before {
             content: '';
             position: fixed;
@@ -82,7 +26,6 @@
             100% { transform: translateY(-100px); }
         }
 
-        /* ================== Global Styles ================== */
         * {
             margin: 0;
             padding: 0;
@@ -90,7 +33,7 @@
         }
 
         body {
-            font-family: 'Noto Sans Kannada', 'Inter', 'Arial', sans-serif;
+            font-family: 'Inter', 'Arial', sans-serif;
             line-height: 1.6;
             color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -104,7 +47,6 @@
             padding: 0 20px;
         }
 
-        /* ================== Header ================== */
         .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -139,13 +81,7 @@
         }
 
         .logo:hover { transform: scale(1.05) rotate(2deg); }
-        
-        .logo-svg { 
-            width: 60px; 
-            height: 60px; 
-            border-radius: 8px; 
-            object-fit: contain;
-        }
+        .logo-svg { width: 60px; height: 60px; border-radius: 8px; }
 
         .logo-text {
             font-size: 28px;
@@ -180,10 +116,8 @@
             box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
         }
 
-        /* ================== Hero ================== */
-        .hero {
-            padding: 120px 0 80px;
-            text-align: center;
+        .voice-tech-intro {
+            padding: 120px 0 60px;
             color: white;
             margin-top: 80px;
         }
@@ -199,11 +133,72 @@
             text-align: center;
         }
 
-        .hero h1 { font-size: 3.8rem; margin-bottom: 1.5rem; font-weight: 700; }
-        .hero p { font-size: 1.3rem; max-width: 800px; margin: 0 auto 2rem; opacity: 0.95; }
-        .white-title { color: white; text-align: center; font-size: 2.5rem; margin-bottom: 20px; font-weight: 700; }
+        .intro-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
 
-        /* ================== Voice Translation Section ================== */
+        .intro-content h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(45deg, #fff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .intro-feature {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .intro-feature:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .intro-feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .intro-feature h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .intro-feature p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .intro-description {
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin: 30px 0;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
         .voice-section {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -256,7 +251,7 @@
             50% { transform: translateY(-10px); }
         }
 
-        .record-btn {
+        .record-btn, .upload-audio-btn {
             background: linear-gradient(45deg, #4A90E2, #357ABD);
             color: white;
             padding: 20px 40px;
@@ -270,7 +265,7 @@
             box-shadow: 0 10px 25px rgba(74, 144, 226, 0.3);
         }
 
-        .record-btn:hover {
+        .record-btn:hover, .upload-audio-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 15px 35px rgba(74, 144, 226, 0.4);
         }
@@ -284,25 +279,6 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
-        }
-
-        .upload-audio-btn {
-            background: linear-gradient(45deg, #6c5ce7, #5f4fcf);
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 10px 0;
-            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3);
-        }
-
-        .upload-audio-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(108, 92, 231, 0.4);
         }
 
         .language-selector {
@@ -379,7 +355,6 @@
             cursor: not-allowed;
         }
 
-        /* ================== Services ================== */
         .services { 
             padding: 80px 0; 
             margin: 40px 0; 
@@ -421,7 +396,14 @@
             line-height: 1.7; 
         }
 
-        /* ================== Footer ================== */
+        .white-title { 
+            color: white; 
+            text-align: center; 
+            font-size: 2.5rem; 
+            margin-bottom: 20px; 
+            font-weight: 700; 
+        }
+
         .footer { 
             background: rgba(0,0,0,0.8); 
             color: white; 
@@ -442,7 +424,6 @@
             transform: translateY(-3px); 
         }
 
-        /* ================== Notification ================== */
         .notification {
             position: fixed;
             top: 100px;
@@ -461,10 +442,9 @@
             transform: translateX(0); 
         }
 
-        /* ================== Responsive ================== */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; }
-            .hero p { font-size: 1.1rem; }
+            .intro-content h1 { font-size: 2.2rem; }
+            .intro-description { font-size: 1rem; }
             .nav-menu { gap: 20px; }
             .voice-container {
                 grid-template-columns: 1fr;
@@ -478,47 +458,17 @@
         
         @media (max-width: 480px) {
             .nav { flex-direction: column; gap: 20px; }
-            .hero h1 { font-size: 2.2rem; }
+            .intro-content h1 { font-size: 1.8rem; }
             .section-title { font-size: 2rem; }
-        }
-
-        /* ================== Animation Classes ================== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Welcome Overlay -->
-    <!-- <div id="welcomeOverlay">
-        <h1>ಅಪ್ನಿ ವಾಣಿಗೆ ಸ್ವಾಗತ</h1>
-        <p>ಅಡೆತಡೆಗಳನ್ನು ಮುರಿಯುವ, ಧ್ವನಿಗಳನ್ನು ಸಂಪರ್ಕಿಸುವ</p>
-    </div> -->
 
-    <!-- Notification -->
     <div class="notification" id="notification">
-        <span id="notificationText">ಸೂಚನೆ ಸಂದೇಶ</span>
+        <span id="notificationText">ಅಧಿಸೂಚನೆ ಸಂದೇಶ</span>
     </div>
 
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <nav class="nav">
@@ -526,70 +476,114 @@
                     <img src="Logo.png" alt="ಅಪ್ನಿ ವಾಣಿ ಲೋಗೋ" class="logo-svg" />
                     <div>
                         <div class="logo-text">ಅಪ್ನಿ ವಾಣಿ</div>
-                        <span class="logo-tagline">ಅಡೆತಡೆಗಳನ್ನು ಮುರಿಯುವ, ಧ್ವನಿಗಳನ್ನು ಸಂಪರ್ಕಿಸುವ</span>
+                        <span class="logo-tagline">ಅಡೆತಡೆಗಳನ್ನು ಮುರಿಯುವುದು, ಧ್ವನಿಗಳನ್ನು ಸಂಪರ್ಕಿಸುವುದು</span>
                     </div>
                 </div>
+
                 <ul class="nav-menu">
-                    <li><a href="Translation_Kannada.html" class="active">ಮುಖಪುಟ</a></li>
-                    <li><a href="Home.html">ಅನುವಾದ</a></li>
+                    <li><a href="index_Kannada.Html">ಹೋಮ್</a></li>
+                    <li><a href="Home.html">ಭಾಷೆ</a></li>
                     <li><a href="Translation_Kannada.html">ವೀಡಿಯೋ</a></li>
                     <li><a href="Voice_kannada.html">ಧ್ವನಿ</a></li>
                     <li><a href="Summarise_Kannada.Html">ಸಾರಾಂಶ</a></li>
-                    <li><a href="Detail_Kannada.html">ಬಗ್ಗೆ</a></li>
+                    <li><a href="index_Kannada.Html">ನಮ್ಮ ಬಗ್ಗೆ</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="voice-tech-intro">
         <div class="container">
-            <div class="made-in-PCE">PCE ನಲ್ಲಿ ತಯಾರಿಸಲಾಗಿದೆ</div>
-            <h1>ಅಪ್ನಿ ವಾಣಿ - ಅಡೆತಡೆಗಳನ್ನು ಮುರಿಯುವ, ಧ್ವನಿಗಳನ್ನು ಸಂಪರ್ಕಿಸುವ</h1>
-            <p>ಸಹಕಾರ ಮತ್ತು ವೈವಿಧ್ಯತೆಯಲ್ಲಿ ಏಕತೆ. ಅಪ್ನಿ ವಾಣಿಯ ಅತ್ಯುತ್ತಮ AI ಅನುವಾದಕ ವೈಶಿಷ್ಟ್ಯಗಳು ಭಾಷೆಯು ಇನ್ನು ಮುಂದೆ ಅಡೆತಡೆಯಾಗದೆ ಜಾಗತಿಕ ಸಂವಹನಕ್ಕೆ ಪ್ರವೇಶದ್ವಾರವಾಗಿದೆ ಎಂದು ಖಚಿತಪಡಿಸುತ್ತದೆ.</p>
+            <div style="text-align: center;">
+                <div class="made-in-PCE">🎙️ ಪಿಸಿಇನಲ್ಲಿ ಮಾಡಲಾಗಿದೆ</div>
+            </div>
+            
+            <div class="intro-content">
+                <h1>🌍 ಧ್ವನಿ-ಟು-ವಾಯ್ಸ್ ಅನುವಾದ ತಂತ್ರಜ್ಞಾನ</h1>
+                
+                <p class="intro-description">
+                    ರಿಯಲ್-ಟೈಮ್ ಧ್ವನಿ ಅನುವಾದದೊಂದಿಗೆ ಸಂವಹನದ ಭವಿಷ್ಯವನ್ನು ಅನುಭವಿಸಿ, ಅದು ತಕ್ಷಣವೇ ಭಾಷಾ ಅಡೆತಡೆಗಳನ್ನು ಮುರಿಯುತ್ತದೆ. ನಮ್ಮ AI-ಚಾಲಿತ ವ್ಯವಸ್ಥೆಯು ಒಂದು ಭಾಷೆಯಿಂದ ಇನ್ನೊಂದಕ್ಕೆ ಮಾತನಾಡುವ ಪದಗಳನ್ನು ಪರಿವರ್ತಿಸುತ್ತದೆ ಮತ್ತು ಸ್ವರ, ಭಾವನೆ ಮತ್ತು ನೈಸರ್ಗಿಕ ಭಾಷಣ ಮಾದರಿಗಳನ್ನು ಸಂರಕ್ಷಿಸುತ್ತದೆ, ಪ್ರಪಂಚದಾದ್ಯಂತ ತಡೆರಹಿತ ಸಂವಾದವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ.
+                </p>
+
+                <div class="intro-grid">
+                    <div class="intro-feature">
+                        <div class="intro-feature-icon">🎯</div>
+                        <h3>ಭಾಷಣ ಗುರುತಿಸುವಿಕೆ</h3>
+                        <p>ಸುಧಾರಿತ AI ನಿಮ್ಮ ಧ್ವನಿಯನ್ನು ಸೆರೆಹಿಡಿಯುತ್ತದೆ ಮತ್ತು ಮಾತನಾಡುವ ಪದಗಳನ್ನು ಅಸಾಧಾರಣ ನಿಖರತೆಯೊಂದಿಗೆ ಪಠ್ಯವಾಗಿ ಪರಿವರ್ತಿಸುತ್ತದೆ, ಗದ್ದಲದ ಪರಿಸರದಲ್ಲಿಯೂ ಸಹ.</p>
+                    </div>
+
+                    <div class="intro-feature">
+                        <div class="intro-feature-icon">🔄</div>
+                        <h3>ತತ್ಕ್ಷಣ ಅನುವಾದ</h3>
+                        <p>ಅತ್ಯಾಧುನಿಕ ಯಂತ್ರ ಕಲಿಕೆ ಅಲ್ಗಾರಿದಮ್‌ಗಳು ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಗುರಿ ಭಾಷೆಗೆ ಅನುವಾದಿಸುತ್ತವೆ ಮತ್ತು ಸಂದರ್ಭ ಮತ್ತು ಅರ್ಥವನ್ನು ನಿರ್ವಹಿಸುತ್ತವೆ.</p>
+                    </div>
+
+                    <div class="intro-feature">
+                        <div class="intro-feature-icon">🔊</div>
+                        <h3>ನೈಸರ್ಗಿಕ ಧ್ವನಿ ಔಟ್‌ಪುಟ್</h3>
+                        <p>ಟೆಕ್ಸ್ಟ್-ಟು-ಸ್ಪೀಚ್ ಸಂಶ್ಲೇಷಣೆಯು ನೈಸರ್ಗಿಕ-ಧ್ವನಿಯ ಧ್ವನಿಯಲ್ಲಿ ಅನುವಾದವನ್ನು ತಲುಪಿಸುತ್ತದೆ ಮತ್ತು ನಿಮ್ಮ ಮೂಲ ಸ್ವರ ಮತ್ತು ಭಾವನೆಯನ್ನು ಸಂರಕ್ಷಿಸುತ್ತದೆ.</p>
+                    </div>
+
+                    <div class="intro-feature">
+                        <div class="intro-feature-icon">⚡</div>
+                        <h3>ರಿಯಲ್-ಟೈಮ್ ಸಂಸ್ಕರಣೆ</h3>
+                        <p>ಮಿಂಚಿನ-ವೇಗದ ಅನುವಾದಗಳನ್ನು ಅನುಭವಿಸಿ, ಅದು ನೈಸರ್ಗಿಕ ಸಂವಾದದಂತೆ ಭಾಸವಾಗುತ್ತದೆ, ವಿಚಿತ್ರ ವಿಳಂಬಗಳು ಮತ್ತು ಅಡಚಣೆಗಳನ್ನು ತೆಗೆದುಹಾಕುತ್ತದೆ.</p>
+                    </div>
+
+                    <div class="intro-feature">
+                        <div class="intro-feature-icon">🌐</div>
+                        <h3>ಬಹುಭಾಷಾ ಬೆಂಬಲ</h3>
+                        <p>ಎಲ್ಲಾ ಪ್ರಮುಖ ಭಾರತೀಯ ಭಾಷೆಗಳು ಮತ್ತು ಅಂತರರಾಷ್ಟ್ರೀಯ ಆಯ್ಕೆಗಳನ್ನು ಒಳಗೊಂಡಂತೆ 15+ ಭಾಷೆಗಳ ಬೆಂಬಲದೊಂದಿಗೆ ಸಂಸ್ಕೃತಿಗಳಲ್ಲಿ ಸಂಪರ್ಕಿಸಿ.</p>
+                    </div>
+
+                    <div class="intro-feature">
+                        <div class="intro-feature-icon">🎨</div>
+                        <h3>ಸಂದರ್ಭ-ಜಾಗೃತ AI</h3>
+                        <p>ನಮ್ಮ ವ್ಯವಸ್ಥೆಯು ಭಾಷಾಂತರಗಳು, ಸಾಂಸ್ಕೃತಿಕ ಸೂಕ್ಷ್ಮತೆಗಳು ಮತ್ತು ಸಾಂದರ್ಭಿಕ ಅರ್ಥಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುತ್ತದೆ ಮತ್ತು ಹೆಚ್ಚು ನಿಖರ ಮತ್ತು ನೈಸರ್ಗಿಕ ಅನುವಾದಗಳಿಗೆ ಇದೆ.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Voice Translation Section -->
     <section class="voice-section" id="voice-translate">
         <div class="container">
             <h2 class="section-title">🎤 ಧ್ವನಿ ಅನುವಾದ ಸ್ಟುಡಿಯೋ</h2>
-            <p class="section-subtitle">ನಿಮ್ಮ ಭಾಷೆಯಲ್ಲಿ ಮಾತನಾಡಿ ಮತ್ತು AI-ಶಕ್ತಿಯ ನಿಖರತೆಯೊಂದಿಗೆ ತ್ವರಿತ ಅನುವಾದವನ್ನು ಪಡೆಯಿರಿ</p>
+            <p class="section-subtitle">ನಿಮ್ಮ ಭಾಷೆಯಲ್ಲಿ ಮಾತನಾಡಿ ಮತ್ತು AI-ಚಾಲಿತ ನಿಖರತೆಯೊಂದಿಗೆ ತತ್ಕ್ಷಣ ಅನುವಾದವನ್ನು ಪಡೆಯಿರಿ</p>
             
             <div class="voice-container">
-                <!-- Input Section -->
                 <div class="voice-input-section">
                     <div class="voice-icon">🎤</div>
-                    <h3>ನಿಮ್ಮ ಧ್ವನಿಯನ್ನು ಹೇಳಿ</h3>
-                    <p>ರೆಕಾರ್ಡ್ ಬಟನ್ ಒತ್ತಿ ಮತ್ತು ನಿಮ್ಮ ಭಾಷೆಯಲ್ಲಿ ಮಾತನಾಡಿ</p>
+                    <h3>ನಿಮ್ಮ ಧ್ವನಿ ಮಾತನಾಡಿ</h3>
+                    <p>ರೆಕಾರ್ಡ್ ಬಟನ್ ಕ್ಲಿಕ್ ಮಾಡಿ ಮತ್ತು ನಿಮ್ಮ ಭಾಷೆಯಲ್ಲಿ ಮಾತನಾಡಿ</p>
                     
                     <div class="language-selector">
-                        <label><strong>ಇಂದ:</strong></label>
+                        <label><strong>ನಿಂದ:</strong></label>
                         <select id="fromLang">
-                            <option value="en">ಇಂಗ್ಲಿಷ್ (ಇಂ)</option>
-                            <option value="hi">ಹಿಂದಿ (ಹಿ)</option>
-                            <option value="bn">ಬಂಗಾಳಿ (ಬಂ)</option>
-                            <option value="ta">ತಮಿಳು (ತ)</option>
-                            <option value="te">ತೆಲುಗು (ತೆ)</option>
-                            <option value="ml">ಮಲಯಾಳಂ (ಮಲ)</option>
-                            <option value="kn" selected>ಕನ್ನಡ (ಕ)</option>
-                            <option value="gu">ಗುಜರಾತಿ (ಗು)</option>
-                            <option value="mr">ಮರಾಠಿ (ಮ)</option>
-                            <option value="pa">ಪಂಜಾಬಿ (ಪಂ)</option>
+                            <option value="en">ಇಂಗ್ಲಿಷ್ (ENG)</option>
+                            <option value="hi">ಹಿಂದಿ (HN)</option>
+                            <option value="bn">ಬೆಂಗಾಲಿ (BN)</option>
+                            <option value="ta">ತಮಿಳು (TM)</option>
+                            <option value="te">ತೆಲುಗು (TG)</option>
+                            <option value="ml">ಮಲಯಾಳಂ (ML)</option>
+                            <option value="kn">ಕನ್ನಡ (KN)</option>
+                            <option value="gu">ಗುಜರಾತಿ (GJ)</option>
+                            <option value="mr">ಮರಾಠಿ (MR)</option>
+                            <option value="pa">ಪಂಜಾಬಿ (PN)</option>
                         </select>
                     </div>
                     
-                    <button class="record-btn" id="recordBtn">🎙️ ರೆಕಾರ್ಡಿಂಗ್ ಆರಂಭಿಸಿ</button>
+                    <button class="record-btn" id="recordBtn">🎙️ ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಾರಂಭಿಸಿ</button>
                     
                     <div style="margin: 20px 0; text-align: center;">
-                        <p style="margin-bottom: 10px; color: #666;">ಅಥವಾ ಆಡಿಯೋ ಫೈಲ್ ಅಪ್ಲೋಡ್ ಮಾಡಿ:</p>
+                        <p style="margin-bottom: 10px; color: #666;">ಅಥವಾ ಆಡಿಯೊ ಫೈಲ್ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ:</p>
                         <input type="file" id="audioFileInput" accept="audio/*" style="display: none;">
-                        <button class="upload-audio-btn" id="uploadAudioBtn">📁 ಆಡಿಯೋ ಫೈಲ್ ಅಪ್ಲೋಡ್ ಮಾಡಿ</button>
+                        <button class="upload-audio-btn" id="uploadAudioBtn">📁 ಆಡಿಯೊ ಫೈಲ್ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ</button>
                         <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">ಬೆಂಬಲಿತ: MP3, WAV, M4A, OGG, FLAC</p>
                     </div>
                     
                     <div class="voice-status" id="voiceStatus">
-                        ರೆಕಾರ್ಡ್ ಮಾಡಲು ಅಥವಾ ಆಡಿಯೋ ಫೈಲ್ ಅಪ್ಲೋಡ್ ಮಾಡಲು ಸಿದ್ಧ.
+                        ರೆಕಾರ್ಡ್ ಮಾಡಲು ಅಥವಾ ಆಡಿಯೊ ಫೈಲ್ ಅಪ್‌ಲೋಡ್ ಮಾಡಲು ಸಿದ್ಧ.
                     </div>
                     
                     <div class="voice-waveform" id="waveform" style="display: none;">
@@ -597,32 +591,31 @@
                     </div>
                 </div>
 
-                <!-- Output Section -->
                 <div class="voice-output-section">
                     <div class="output-icon">🔊</div>
-                    <h3>ಅನುವಾದಿತ ಔಟ್ಪುಟ್</h3>
+                    <h3>ಅನುವಾದಿತ ಔಟ್‌ಪುಟ್</h3>
                     <p>ನಿಮ್ಮ ಅನುವಾದಿತ ಧ್ವನಿ ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತದೆ</p>
                     
                     <div class="language-selector">
                         <label><strong>ಗೆ:</strong></label>
                         <select id="toLang">
-                            <option value="hi">ಹಿಂದಿ (ಹಿ)</option>
-                            <option value="en" selected>ಇಂಗ್ಲಿಷ್ (ಇಂ)</option>
-                            <option value="bn">ಬಂಗಾಳಿ (ಬಂ)</option>
-                            <option value="ta">ತಮಿಳು (ತ)</option>
-                            <option value="te">ತೆಲುಗು (ತೆ)</option>
-                            <option value="ml">ಮಲಯಾಳಂ (ಮಲ)</option>
-                            <option value="kn">ಕನ್ನಡ (ಕ)</option>
-                            <option value="gu">ಗುಜರಾತಿ (ಗು)</option>
-                            <option value="mr">ಮರಾಠಿ (ಮ)</option>
-                            <option value="pa">ಪಂಜಾಬಿ (ಪಂ)</option>
-                            <option value="es">ಸ್ಪ್ಯಾನಿಷ್ (ಸ್ಪ್ಯಾ)</option>
-                            <option value="fr">ಫ್ರೆಂಚ್ (ಫ್ರೆ)</option>
-                            <option value="de">ಜರ್ಮನ್ (ಜರ್)</option>
-                            <option value="ja">ಜಪಾನೀಸ್ (ಜಪಾ)</option>
-                            <option value="ko">ಕೊರಿಯನ್ (ಕೊ)</option>
-                            <option value="zh">ಚೈನೀಸ್ (ಚೈ)</option>
-                            <option value="ar">ಅರೇಬಿಕ್ (ಅರೇ)</option>
+                            <option value="kn">ಕನ್ನಡ (KN)</option>
+                            <option value="en">ಇಂಗ್ಲಿಷ್ (ENG)</option>
+                            <option value="hi">ಹಿಂದಿ (HN)</option>
+                            <option value="bn">ಬೆಂಗಾಲಿ (BN)</option>
+                            <option value="ta">ತಮಿಳು (TM)</option>
+                            <option value="te">ತೆಲುಗು (TG)</option>
+                            <option value="ml">ಮಲಯಾಳಂ (ML)</option>
+                            <option value="gu">ಗುಜರಾತಿ (GJ)</option>
+                            <option value="mr">ಮರಾಠಿ (MR)</option>
+                            <option value="pa">ಪಂಜಾಬಿ (PN)</option>
+                            <option value="es">ಸ್ಪ್ಯಾನಿಷ್ (SP)</option>
+                            <option value="fr">ಫ್ರೆಂಚ್ (FR)</option>
+                            <option value="de">ಜರ್ಮನ್ (DE)</option>
+                            <option value="ja">ಜಪಾನೀಸ್ (JP)</option>
+                            <option value="ko">ಕೊರಿಯನ್ (KR)</option>
+                            <option value="zh">ಚೈನೀಸ್ (CH)</option>
+                            <option value="ar">ಅರೇಬಿಕ್ (AR)</option>
                         </select>
                     </div>
                     
@@ -630,72 +623,69 @@
                         ನಿಮ್ಮ ಅನುವಾದಿತ ಪಠ್ಯ ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತದೆ...
                     </div>
                     
-                    <button class="play-btn" id="playBtn" disabled>▶️ ಅನುವಾದ ಪ್ಲೇ ಮಾಡಿ</button>
-                    <button class="play-btn" id="downloadBtn" disabled>📥 ಆಡಿಯೋ ಡೌನ್ಲೋಡ್ ಮಾಡಿ</button>
+                    <button class="play-btn" id="playBtn" disabled>▶️ ಅನುವಾದವನ್ನು ಪ್ಲೇ ಮಾಡಿ</button>
+                    <button class="play-btn" id="downloadBtn" disabled>📥 ಆಡಿಯೊ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How to Use Section -->
     <section class="services" style="background: rgba(255,255,255,0.1);">
         <div class="container">
-            <h2 class="white-title">ಅಪ್ನಿ ವಾಣಿ ಧ್ವನಿ ಅನುವಾದವನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು</h2>
+            <h2 class="white-title">ಅಪ್ನಿ ವಾಣಿ ಧ್ವನಿ ಅನುವಾದವನ್ನು ಹೇಗೆ ಬಳಸುವುದು</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <h3>ಹಂತ 1: ಮೂಲ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ</h3>
+                    <h3>ಹಂತ 1: ಮೂಲ ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ</h3>
                     <p>ಡ್ರಾಪ್‌ಡೌನ್ ಮೆನುವಿನಿಂದ ನೀವು ಮಾತನಾಡಲು ಬಯಸುವ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ.</p>
                 </div>
                 <div class="service-card">
-                    <h3>ಹಂತ 2: ರೆಕಾರ್ಡಿಂಗ್ ಆರಂಭಿಸಿ</h3>
-                    <p>"ರೆಕಾರ್ಡಿಂಗ್ ಆರಂಭಿಸಿ" ಬಟನ್ ಒತ್ತಿ ಮತ್ತು ನಿಮ್ಮ ಮೈಕ್ರೋಫೋನ್‌ನಲ್ಲಿ ಸ್ಪಷ್ಟವಾಗಿ ಮಾತನಾಡಿ.</p>
+                    <h3>ಹಂತ 2: ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಾರಂಭಿಸಿ</h3>
+                    <p>"ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಾರಂಭಿಸಿ" ಬಟನ್ ಕ್ಲಿಕ್ ಮಾಡಿ ಮತ್ತು ನಿಮ್ಮ ಮೈಕ್ರೋಫೋನ್‌ನಲ್ಲಿ ಸ್ಪಷ್ಟವಾಗಿ ಮಾತನಾಡಿ.</p>
                 </div>
                 <div class="service-card">
-                    <h3>ಹಂತ 3: ಗುರಿ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ</h3>
-                    <p>ನಿಮ್ಮ ಭಾಷಣವನ್ನು ಯಾವ ಭಾಷೆಗೆ ಅನುವಾದಿಸಬೇಕೆಂದು ಆಯ್ಕೆಮಾಡಿ.</p>
+                    <h3>ಹಂತ 3: ಗುರಿ ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ</h3>
+                    <p>ನಿಮ್ಮ ಭಾಷಣವನ್ನು ಅನುವಾದಿಸಲು ನೀವು ಬಯಸುವ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ.</p>
                 </div>
                 <div class="service-card">
                     <h3>ಹಂತ 4: ಅನುವಾದ ಪಡೆಯಿರಿ</h3>
-                    <p>ಅನುವಾದಿತ ಪಠ್ಯವನ್ನು ವೀಕ್ಷಿಸಿ ಮತ್ತು ಆಡಿಯೋ ಔಟ್‌ಪುಟ್ ಅನ್ನು ತಕ್ಷಣವೇ ಪ್ಲೇ ಮಾಡಿ.</p>
+                    <p>ಅನುವಾದಿತ ಪಠ್ಯವನ್ನು ವೀಕ್ಷಿಸಿ ಮತ್ತು ತಕ್ಷಣವೇ ಆಡಿಯೊ ಔಟ್‌ಪುಟ್ ಪ್ಲೇ ಮಾಡಿ.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
     <section class="services">
         <div class="container">
-            <h2 class="white-title">ನಮ್ಮ AI-ಶಕ್ತಿಯುತ ಸೇವೆಗಳು</h2>
+            <h2 class="white-title">ನಮ್ಮ AI-ಚಾಲಿತ ಸೇವೆಗಳು</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <h3>📄 ಪಠ್ಯ ಮತ್ತು ಡಾಕ್ಯುಮೆಂಟ್ ಅನುವಾದ</h3>
-                    <p>ಹೆಚ್ಚಿನ ನಿಖರತೆಯೊಂದಿಗೆ ಡಾಕ್ಯುಮೆಂಟ್‌ಗಳು ಮತ್ತು ಪುಸ್ತಕಗಳನ್ನು ಅನುವಾದಿಸಿ.</p>
+                    <h3>📄 ಪಠ್ಯ ಮತ್ತು ದಾಖಲೆ ಅನುವಾದ</h3>
+                    <p>ಹೆಚ್ಚಿನ ನಿಖರತೆಯೊಂದಿಗೆ ದಾಖಲೆಗಳು ಮತ್ತು ಪುಸ್ತಕಗಳನ್ನು ಅನುವಾದಿಸಿ.</p>
                 </div>
                 <div class="service-card">
-                    <h3>🎥 ವಿಡಿಯೋ ಅನುವಾದ</h3>
-                    <p>ಉಪಶೀರ್ಷಿಕೆಗಳು ಮತ್ತು ಡಬ್ಬಿಂಗ್ ಸಾಮರ್ಥ್ಯಗಳೊಂದಿಗೆ ವಿಡಿಯೋಗಳನ್ನು ಪರಿವರ್ತಿಸಿ.</p>
+                    <h3>🎥 ವೀಡಿಯೊ ಅನುವಾದ</h3>
+                    <p>ಉಪಶೀರ್ಷಿಕೆಗಳು ಮತ್ತು ಡಬ್ಬಿಂಗ್ ಸಾಮರ್ಥ್ಯಗಳೊಂದಿಗೆ ವೀಡಿಯೊಗಳನ್ನು ಪರಿವರ್ತಿಸಿ.</p>
                 </div>
                 <div class="service-card">
                     <h3>🎤 ಧ್ವನಿ ಅನುವಾದ</h3>
-                    <p>ಭಾಷಣ ಸಂಶ್ಲೇಷಣೆಯೊಂದಿಗೆ ನೈಜ-ಸಮಯದ ನೈಸರ್ಗಿಕ ಧ್ವನಿ ಅನುವಾದ.</p>
+                    <p>ಭಾಷಣ ಸಂಶ್ಲೇಷಣೆಯೊಂದಿಗೆ ರಿಯಲ್-ಟೈಮ್ ನೈಸರ್ಗಿಕ ಧ್ವನಿ ಅನುವಾದ.</p>
                 </div>
                 <div class="service-card">
-                    <h3>💼 ನೇರ ಸಭೆ ಅನುವಾದ</h3>
-                    <p>ನೈಜ-ಸಮಯದ ಸಭೆಗಳು ಮತ್ತು ಸಮ್ಮೇಳನಗಳಲ್ಲಿ ಭಾಷಾ ಅಡೆತಡೆಗಳನ್ನು ಮುರಿಯಿರಿ.</p>
+                    <h3>💼 ಲೈವ್ ಮೀಟಿಂಗ್ ಅನುವಾದ</h3>
+                    <p>ರಿಯಲ್-ಟೈಮ್ ಮೀಟಿಂಗ್‌ಗಳು ಮತ್ತು ಸಮ್ಮೇಳನಗಳಲ್ಲಿ ಭಾಷಾ ಅಡೆತಡೆಗಳನ್ನು ಮುರಿಯಿರಿ.</p>
                 </div>
                 <div class="service-card">
                     <h3>🖼️ ಚಿತ್ರ ಪಠ್ಯ ಅನುವಾದ</h3>
-                    <p>ಚಿತ್ರಗಳು ಮತ್ತು ಡಾಕ್ಯುಮೆಂಟ್‌ಗಳಿಂದ ಪಠ್ಯವನ್ನು ಹೊರತೆಗೆದು ಅನುವಾದಿಸಿ.</p>
+                    <p>ಚಿತ್ರಗಳು ಮತ್ತು ದಾಖಲೆಗಳಿಂದ ಪಠ್ಯವನ್ನು ಹೊರತೆಗೆಯಿರಿ ಮತ್ತು ಅನುವಾದಿಸಿ.</p>
                 </div>
                 <div class="service-card">
                     <h3>📝 ಸಾರಾಂಶ ಸಾಧನಗಳು</h3>
-                    <p>ದೀರ್ಘ ವಿಷಯ ಮತ್ತು ಡಾಕ್ಯುಮೆಂಟ್‌ಗಳಿಗಾಗಿ AI-ಶಕ್ತಿಯುತ ಸಂಕ್ಷೇಪಣ.</p>
+                    <p>ದೀರ್ಘ ವಿಷಯ ಮತ್ತು ದಾಖಲೆಗಳಿಗಾಗಿ AI-ಚಾಲಿತ ಸಾರಾಂಶ.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="social-links">
@@ -704,38 +694,30 @@
                 <a href="#">📘</a>
                 <a href="#">📸</a>
             </div>
-            <p>© 2025 ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ, ಅಪ್ನಿ ವಾಣಿ, ಟೀಮ್ ಬಿಲ್ಡ್ ಬಾಟ್ಸ್, ಪಿಳ್ಳೈ ಕಾಲೇಜ್ ಆಫ್ ಇಂಜಿನಿಯರಿಂಗ್</p>
-            <p>ಗೌಪ್ಯತೆ ನೀತಿ | ಬಳಕೆಯ ನಿಯಮಗಳು | ಕುಕೀ ನೀತಿ</p>
+            <p>© 2025 ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ, ಅಪ್ನಿ ವಾಣಿ, ಟೀಮ್ ಬಿಲ್ಡ್ ಬಾಟ್ಸ್, ಪಿಲ್ಲೈ ಕಾಲೇಜ್ ಆಫ್ ಇಂಜಿನಿಯರಿಂಗ್</p>
+            <p>ಗೌಪ್ಯತಾ ನೀತಿ | ಬಳಕೆಯ ನಿಯಮಗಳು | ಕುಕೀ ನೀತಿ</p>
         </div>
     </footer>
 
     <script>
-        // Welcome overlay functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                document.getElementById('welcomeOverlay').classList.add('fadeOut');
-            }, 3000);
-        });
-
-        // Voice recording functionality
         let isRecording = false;
         let mediaRecorder;
         let audioChunks = [];
 
         const recordBtn = document.getElementById('recordBtn');
-        const uploadAudioBtn = document.getElementById('uploadAudioBtn');
-        const audioFileInput = document.getElementById('audioFileInput');
         const voiceStatus = document.getElementById('voiceStatus');
         const waveform = document.getElementById('waveform');
         const translatedText = document.getElementById('translatedText');
         const playBtn = document.getElementById('playBtn');
         const downloadBtn = document.getElementById('downloadBtn');
+        const uploadAudioBtn = document.getElementById('uploadAudioBtn');
+        const audioFileInput = document.getElementById('audioFileInput');
 
         recordBtn.addEventListener('click', toggleRecording);
-        uploadAudioBtn.addEventListener('click', () => audioFileInput.click());
-        audioFileInput.addEventListener('change', handleAudioUpload);
         playBtn.addEventListener('click', playTranslation);
         downloadBtn.addEventListener('click', downloadAudio);
+        uploadAudioBtn.addEventListener('click', () => audioFileInput.click());
+        audioFileInput.addEventListener('change', handleAudioUpload);
 
         async function toggleRecording() {
             if (!isRecording) {
@@ -755,7 +737,7 @@
                     
                     recordBtn.textContent = '⏹️ ರೆಕಾರ್ಡಿಂಗ್ ನಿಲ್ಲಿಸಿ';
                     recordBtn.classList.add('recording');
-                    voiceStatus.textContent = 'ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಗತಿಯಲ್ಲಿ... ಈಗ ಮಾತನಾಡಿ!';
+                    voiceStatus.textContent = 'ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಗತಿಯಲ್ಲಿದೆ... ಈಗ ಮಾತನಾಡಿ!';
                     waveform.style.display = 'flex';
 
                 } catch (error) {
@@ -766,9 +748,9 @@
                 mediaRecorder.stop();
                 isRecording = false;
                 
-                recordBtn.textContent = '🎙️ ರೆಕಾರ್ಡಿಂಗ್ ಆರಂಭಿಸಿ';
+                recordBtn.textContent = '🎙️ ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಾರಂಭಿಸಿ';
                 recordBtn.classList.remove('recording');
-                voiceStatus.textContent = 'ನಿಮ್ಮ ರೆಕಾರ್ಡಿಂಗ್ ಅನ್ನು ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗುತ್ತಿದೆ...';
+                voiceStatus.textContent = 'ನಿಮ್ಮ ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿದೆ...';
                 waveform.style.display = 'none';
             }
         }
@@ -776,35 +758,13 @@
         function handleAudioUpload(event) {
             const file = event.target.files[0];
             if (file) {
-                voiceStatus.textContent = `ಅಪ್ಲೋಡ್ ಮಾಡಿದ ಫೈಲ್ ಅನ್ನು ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗುತ್ತಿದೆ: ${file.name}`;
-                // Simulate processing
+                voiceStatus.textContent = `${file.name} ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿದೆ...`;
+                showNotification('ಆಡಿಯೊ ಫೈಲ್ ಅಪ್‌ಲೋಡ್ ಆಗಿದೆ. ಅನುವಾದ ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿದೆ...');
+                
                 setTimeout(() => {
-                    processUploadedAudio(file);
+                    processRecording();
                 }, 1500);
             }
-        }
-
-        function processUploadedAudio(file) {
-            const fromLang = document.getElementById('fromLang').value;
-            const toLang = document.getElementById('toLang').value;
-            
-            const sampleTranslations = {
-                'kn-en': 'This is a sample translation of the uploaded audio file.',
-                'en-kn': 'ಇದು ಅಪ್ಲೋಡ್ ಮಾಡಿದ ಆಡಿಯೋ ಫೈಲ್‌ನ ಮಾದರಿ ಅನುವಾದವಾಗಿದೆ.',
-                'kn-hi': 'यह अपलोड की गई ऑडियो फ़ाइल का एक नमूना अनुवाद है।',
-                'default': 'ಇದು ಅಪ್ಲೋಡ್ ಮಾಡಿದ ಆಡಿಯೋ ಫೈಲ್‌ನ ಮಾದರಿ ಅನುವಾದವಾಗಿದೆ.'
-            };
-            
-            const translationKey = `${fromLang}-${toLang}`;
-            const translatedContent = sampleTranslations[translationKey] || sampleTranslations.default;
-            
-            translatedText.textContent = translatedContent;
-            voiceStatus.textContent = 'ಆಡಿಯೋ ಫೈಲ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗಿದೆ! ಅನುವಾದ ಪೂರ್ಣಗೊಂಡಿದೆ.';
-            
-            playBtn.disabled = false;
-            downloadBtn.disabled = false;
-            
-            showNotification('ಆಡಿಯೋ ಫೈಲ್ ಅನುವಾದ ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ!');
         }
 
         function processRecording() {
@@ -815,10 +775,10 @@
                 const toLang = document.getElementById('toLang').value;
                 
                 const sampleTranslations = {
-                    'kn-en': 'Hello, this is a sample translation.',
-                    'en-kn': 'ನಮಸ್ಕಾರ, ಇದು ಮಾದರಿ ಅನುವಾದವಾಗಿದೆ.',
-                    'kn-hi': 'नमस्ते, यह एक नमूना अनुवाद है।',
-                    'default': 'ಇದು ಮಾದರಿ ಅನುವಾದ ಔಟ್‌ಪುಟ್ ಆಗಿದೆ.'
+                    'en-kn': 'ನಮಸ್ಕಾರ, ಇದು ಮಾದರಿ ಅನುವಾದವಾಗಿದೆ. ಧ್ವನಿ-ಟು-ವಾಯ್ಸ್ ಅನುವಾದ ತಂತ್ರಜ್ಞಾನವು ರಿಯಲ್-ಟೈಮ್‌ನಲ್ಲಿ ಭಾಷಾ ಅಡೆತಡೆಗಳನ್ನು ಮುರಿಯುತ್ತದೆ.',
+                    'kn-en': 'Hello, this is a sample translation. Voice-to-voice translation technology breaks language barriers in real-time.',
+                    'en-hi': 'नमस्ते, यह एक नमूना अनुवाद है।',
+                    'default': 'ಇದು ಮಾದರಿ ಅನುವಾದ ಔಟ್‌ಪುಟ್. ಧ್ವನಿ-ಟು-ವಾಯ್ಸ್ ಅನುವಾದವು ಭಾಷೆಗಳಲ್ಲಿ ತಡೆರಹಿತ ಸಂವಹನವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ.'
                 };
                 
                 const translationKey = `${fromLang}-${toLang}`;
@@ -830,12 +790,12 @@
                 playBtn.disabled = false;
                 downloadBtn.disabled = false;
                 
-                showNotification('ಧ್ವನಿ ಅನುವಾದ ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ!');
+                showNotification('✅ ಧ್ವನಿ ಅನುವಾದ ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ!');
             }, 2000);
         }
 
         function playTranslation() {
-            showNotification('ಅನುವಾದಿತ ಆಡಿಯೋ ಪ್ಲೇ ಮಾಡಲಾಗುತ್ತಿದೆ...');
+            showNotification('▶️ ಅನುವಾದಿತ ಆಡಿಯೊ ಪ್ಲೇ ಆಗುತ್ತಿದೆ...');
             
             const utterance = new SpeechSynthesisUtterance(translatedText.textContent);
             const toLang = document.getElementById('toLang').value;
@@ -845,15 +805,15 @@
         }
 
         function downloadAudio() {
-            showNotification('ಆಡಿಯೋ ಡೌನ್ಲೋಡ್ ಆರಂಭವಾಗಿದೆ...');
+            showNotification('📥 ಆಡಿಯೊ ಡೌನ್‌ಲೋಡ್ ಪ್ರಾರಂಭವಾಗಿದೆ...');
             
             const text = translatedText.textContent;
-            const blob = new Blob([text], { type: 'text/plain; charset=utf-8' });
+            const blob = new Blob([text], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'translated_audio_kannada.txt';
+            a.download = 'translated_audio.txt';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -880,7 +840,7 @@
                 'zh': 'zh-CN',
                 'ar': 'ar-SA'
             };
-            return languageCodes[langCode] || 'kn-IN';
+            return languageCodes[langCode] || 'en-US';
         }
 
         function showNotification(message) {
@@ -895,7 +855,6 @@
             }, 3000);
         }
 
-        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -909,13 +868,12 @@
             });
         });
 
-        // Language selection validation
         document.getElementById('fromLang').addEventListener('change', function() {
             const fromLang = this.value;
             const toLang = document.getElementById('toLang').value;
             
             if (fromLang === toLang) {
-                showNotification('ದಯವಿಟ್ಟು ವಿಭಿನ್ನ ಮೂಲ ಮತ್ತು ಗುರಿ ಭಾಷೆಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ.');
+                showNotification('⚠️ ದಯವಿಟ್ಟು ವಿಭಿನ್ನ ಮೂಲ ಮತ್ತು ಗುರಿ ಭಾಷೆಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ.');
             }
         });
 
@@ -924,15 +882,29 @@
             const toLang = this.value;
             
             if (fromLang === toLang) {
-                showNotification('ದಯವಿಟ್ಟು ವಿಭಿನ್ನ ಮೂಲ ಮತ್ತು ಗುರಿ ಭಾಷೆಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ.');
+                showNotification('⚠️ ದಯವಿಟ್ಟು ವಿಭಿನ್ನ ಮೂಲ ಮತ್ತು ಗುರಿ ಭಾಷೆಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ.');
             }
         });
 
-        // Add floating animation to service cards
         document.querySelectorAll('.service-card').forEach((card, index) => {
             card.style.animationDelay = `${index * 0.2}s`;
             card.style.animation = 'fadeInUp 0.8s ease forwards';
         });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
-</html>6
+</html>

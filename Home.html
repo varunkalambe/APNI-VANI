@@ -112,31 +112,23 @@
     }
 
     .language-card {
-      background: rgba(255, 255, 255, 0.85);
-      border: 2px solid rgba(99, 102, 241, 0.08);
-      border-radius: 24px;
-      padding: 60px 40px;
-      text-align: center;
-      transition: box-shadow 0.3s, transform 0.3s, color 0.3s;
-      cursor: pointer;
-      position: relative;
-      box-shadow: 0 12px 40px rgba(99, 102, 241, 0.1),
-        0 2px 12px rgba(0, 0, 0, 0.08);
-    }
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid rgba(99, 102, 241, 0.08);
+  border-radius: 24px;
+  padding: 60px 40px;
+  text-align: center;
+  cursor: pointer;
+  position: relative; /* needed for absolute button */
+  box-shadow: 0 12px 40px rgba(99, 102, 241, 0.1),
+              0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s;
+  overflow: hidden; /* prevent button from enlarging card */
+}
 
-    .language-card:hover {
-      box-shadow: 0 16px 48px rgba(30, 64, 175, 0.25),
-        0 2px 12px rgba(30, 64, 175, 0.18);
-      transform: translateY(-8px) scale(1.04);
-    }
-
-    .language-card.selected {
-      background: #dbeafe !important;
-      border: 3px solid #2563eb !important;
-      transform: translateY(-8px) scale(1.02) !important;
-      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.18) !important;
-      color: #000 !important;
-    }
+.language-card:hover {
+  box-shadow: 0 14px 36px rgba(30, 64, 175, 0.15),
+              0 2px 12px rgba(30, 64, 175, 0.1);
+}
 
     .language-name {
       font-size: 24px;
@@ -151,30 +143,30 @@
     }
 
     .start-btn {
-      display: none;
-      margin-top: 20px;
-      padding: 12px 36px;
-      font-size: 1rem;
-      font-weight: 600;
-      background: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 30px;
-      text-decoration: none;
-      transition: 0.3s;
-      position: relative;
-      z-index: 10;
-      pointer-events: auto;
-    }
+  display: none;
+  position: absolute; /* overlay button inside card */
+  bottom: 20px;      /* distance from bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 36px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: 0.3s;
+}
 
-    .start-btn:hover {
-      background: #1e40af;
-      transform: scale(1.05);
-    }
+.language-card:hover .start-btn {
+  display: inline-block;
+}
 
-    .language-card.selected .start-btn {
-      display: inline-block;
-    }
+.start-btn:hover {
+  background: #1e40af;
+  transform: translateX(-50%) scale(1.05);
+}
 
     @media (max-width: 900px) {
       .language-grid {
@@ -213,43 +205,43 @@
       <div class="language-card" data-lang="bengali">
         <div class="language-name">বাংলা</div>
         <div class="language-short">(Bengali)</div>
-        <a class="start-btn" href="Translation_bengali.html">শুরু করুন</a>
+        <a class="start-btn" href="Detail_bengali.html">শুরু করুন</a>
       </div>
 
       <div class="language-card" data-lang="marathi">
         <div class="language-name">मराठी</div>
         <div class="language-short">(Marathi)</div>
-        <a class="start-btn" href="Translation_marathi.html">सुरू करा</a>
+        <a class="start-btn" href="Detail_marathi.html">सुरू करा</a>
       </div>
 
       <div class="language-card" data-lang="gujrati">
         <div class="language-name">ગુજરાતી</div>
         <div class="language-short">(Gujarati)</div>
-        <a class="start-btn" href="Translation_gujrati.html">શરૂ કરો</a>
+        <a class="start-btn" href="Detail_gujrati.html">શરૂ કરો</a>
       </div>
 
       <div class="language-card" data-lang="punjabi">
         <div class="language-name">ਪੰਜਾਬੀ</div>
         <div class="language-short">(Punjabi)</div>
-        <a class="start-btn" href="Translation_punjabi.html">ਸ਼ੁਰੂ ਕਰੋ</a>
+        <a class="start-btn" href="Detail_punjabi.html">ਸ਼ੁਰੂ ਕਰੋ</a>
       </div>
 
       <div class="language-card" data-lang="english">
         <div class="language-name">English</div>
         <div class="language-short">(English)</div>
-        <a class="start-btn" href="Translation.html">Start</a>
+        <a class="start-btn" href="Detail.html">Start</a>
       </div>
 
       <div class="language-card" data-lang="hindi">
         <div class="language-name">हिंदी</div>
         <div class="language-short">(Hindi)</div>
-        <a class="start-btn" href="Translation_hindi.html">शुरू करें</a>
+        <a class="start-btn" href="Detail_hindi.html">शुरू करें</a>
       </div>
 
       <div class="language-card" data-lang="kannada">
         <div class="language-name">ಕನ್ನಡ</div>
         <div class="language-short">(Kannada)</div>
-        <a class="start-btn" href="Translation_Kannada.html">ಪ್ರಾರಂಭಿಸಿ</a>
+        <a class="start-btn" href="Detail_Kannada.html">ಪ್ರಾರಂಭಿಸಿ</a>
       </div>
 
       <div
@@ -285,3 +277,17 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

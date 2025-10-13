@@ -1,0 +1,51 @@
+{
+  "jobId": "68e2b466d1e26987ea958f60",
+  "created_at": "2025-10-05T18:09:42.080Z",
+  "status": "failed",
+  "step": "failed",
+  "steps_completed": [
+    {
+      "step": "audio_extraction",
+      "status": "processing",
+      "timestamp": "2025-10-05T18:09:42.081Z",
+      "source_language": "hi",
+      "target_language": "gu"
+    },
+    {
+      "step": "transcription",
+      "status": "processing",
+      "timestamp": "2025-10-05T18:09:46.159Z"
+    },
+    {
+      "step": "translation",
+      "status": "processing",
+      "timestamp": "2025-10-05T18:09:57.613Z"
+    },
+    {
+      "step": "tts_generation",
+      "status": "processing",
+      "timestamp": "2025-10-05T18:09:58.733Z"
+    },
+    {
+      "step": "aligning_translation",
+      "status": "processing",
+      "timestamp": "2025-10-05T18:10:03.992Z"
+    },
+    {
+      "step": "failed",
+      "status": "failed",
+      "timestamp": "2025-10-05T18:10:04.000Z",
+      "failed_at": "2025-10-05T18:10:03.999Z",
+      "processing_duration_ms": 21922,
+      "error_message": "alignTranslatedAudio is not defined",
+      "error_stack": "ReferenceError: alignTranslatedAudio is not defined\n    at processVideo (file:///C:/Users/varun/OneDrive/Desktop/SIH%20prototype/SIH-Website/backend/controllers/processController.js:125:33)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  ],
+  "languages": {
+    "source": "hi",
+    "target": "gu",
+    "source_name": "Hindi",
+    "target_name": null
+  },
+  "last_updated": "2025-10-05T18:10:04.000Z"
+}

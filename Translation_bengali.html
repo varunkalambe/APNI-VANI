@@ -11,12 +11,6 @@
 </head>
 <body style="font-family: 'Noto Sans Bengali', sans-serif;">
 
-    <!-- Welcome Overlay -->
-    <div id="welcomeOverlay">
-        <h1>আপনি বাণী</h1>
-        <p>বাধা ভেঙে, কণ্ঠস্বরকে যুক্ত করুন</p>
-    </div>
-
     <!-- Notification -->
     <div class="notification" id="notification">
         <span id="notificationText">বিজ্ঞপ্তি বার্তা</span>
@@ -34,12 +28,12 @@
                     </div>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="Translation_bengali.html" class="active">মূল পৃষ্ঠা</a></li>
+                    <li><a href="index_Bengali.Html" class="active">মূল পৃষ্ঠা</a></li>
                     <li><a href="Home.html">অনুবাদ</a></li>
                     <li><a href="Translation_bengali.html">ভিডিও</a></li>
                     <li><a href="Voice_Bengali.html">ভয়েস</a></li>
                     <li><a href="Summarise_bengali.html">সারাংশ</a></li>
-                    <li><a href="Detail_bengali.html">আমাদের সম্পর্কে</a></li>
+                    <li><a href="index_Bengali.Html">আমাদের সম্পর্কে</a></li>
                 </ul>
             </nav>
         </div>
@@ -176,14 +170,6 @@
 
     <!-- Scripts -->
     <script>
-        // Welcome overlay fade out
-        window.addEventListener('load', () => {
-            const overlay = document.getElementById('welcomeOverlay');
-            setTimeout(() => {
-                overlay.classList.add('fadeOut');
-            }, 2000);
-        });
-
         // Language select update
         function showSelected(selectId, noteId) {
             const select = document.getElementById(selectId);

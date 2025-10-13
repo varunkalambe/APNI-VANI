@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apni Vani - Breaking Barriers, Connecting Voices</title>
+    <title>Apni Vani - Voice Translation Studio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        
-
         /* ================== Floating Particles ================== */
         body::before {
             content: '';
@@ -121,10 +119,9 @@
             box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
         }
 
-        /* ================== Hero ================== */
-        .hero {
-            padding: 120px 0 80px;
-            text-align: center;
+        /* ================== Voice Technology Introduction ================== */
+        .voice-tech-intro {
+            padding: 120px 0 60px;
             color: white;
             margin-top: 80px;
         }
@@ -140,9 +137,71 @@
             text-align: center;
         }
 
-        .hero h1 { font-size: 3.8rem; margin-bottom: 1.5rem; font-weight: 700; }
-        .hero p { font-size: 1.3rem; max-width: 800px; margin: 0 auto 2rem; opacity: 0.95; }
-        .white-title { color: white; text-align: center; font-size: 2.5rem; margin-bottom: 20px; font-weight: 700; }
+        .intro-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .intro-content h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(45deg, #fff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .intro-feature {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .intro-feature:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .intro-feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .intro-feature h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .intro-feature p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .intro-description {
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin: 30px 0;
+            color: rgba(255, 255, 255, 0.95);
+        }
 
         /* ================== Voice Translation Section ================== */
         .voice-section {
@@ -197,7 +256,7 @@
             50% { transform: translateY(-10px); }
         }
 
-        .record-btn {
+        .record-btn, .upload-audio-btn {
             background: linear-gradient(45deg, #4A90E2, #357ABD);
             color: white;
             padding: 20px 40px;
@@ -211,7 +270,7 @@
             box-shadow: 0 10px 25px rgba(74, 144, 226, 0.3);
         }
 
-        .record-btn:hover {
+        .record-btn:hover, .upload-audio-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 15px 35px rgba(74, 144, 226, 0.4);
         }
@@ -343,6 +402,14 @@
             line-height: 1.7; 
         }
 
+        .white-title { 
+            color: white; 
+            text-align: center; 
+            font-size: 2.5rem; 
+            margin-bottom: 20px; 
+            font-weight: 700; 
+        }
+
         /* ================== Footer ================== */
         .footer { 
             background: rgba(0,0,0,0.8); 
@@ -385,8 +452,8 @@
 
         /* ================== Responsive ================== */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; }
-            .hero p { font-size: 1.1rem; }
+            .intro-content h1 { font-size: 2.2rem; }
+            .intro-description { font-size: 1rem; }
             .nav-menu { gap: 20px; }
             .voice-container {
                 grid-template-columns: 1fr;
@@ -400,13 +467,12 @@
         
         @media (max-width: 480px) {
             .nav { flex-direction: column; gap: 20px; }
-            .hero h1 { font-size: 2.2rem; }
+            .intro-content h1 { font-size: 1.8rem; }
             .section-title { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
-
 
     <!-- Notification -->
     <div class="notification" id="notification">
@@ -419,35 +485,27 @@
             <nav class="nav">
                 <div class="logo">
                     <img src="Logo.png" alt="Apni Vani Logo" class="logo-svg" />
-                <div>
-            <div class="logo-text">APNI VANI</div>
-        <span class="logo-tagline">Breaking Barriers, Connecting Voices</span>
-    </div>
-</div>
+                    <div>
+                        <div class="logo-text">APNI VANI</div>
+                        <span class="logo-tagline">Breaking Barriers, Connecting Voices</span>
+                    </div>
+                </div>
 
                 <ul class="nav-menu">
-    <li><a href="Translation.html">Home</a></li>
-    <li><a href="Home.html">Language</a></li>
-    <li><a href="Translation.html" >Video</a></li>
-    <li><a href="Voice.html">Voice</a></li>
-    <li><a href="Summarise.html">Summarise</a></li>
-    <li><a href="#about">About</a></li>
-</ul>
-
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Home.html">Language</a></li>
+                    <li><a href="Translation.html">Video</a></li>
+                    <li><a href="Voice.html">Voice</a></li>
+                    <li><a href="Summarise.html">Summarise</a></li>
+                    <li><a href="index.html">About</a></li>
+                </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="made-in-PCE"> MADE IN PCE</div>
-            <h1>Apni Vani – Breaking Barriers, Connecting Voices</h1>
-            <p>Collaboration, and unity in diversity. APNI VANI's Best AI translator features ensure that language is no longer a hurdle but a gateway to global interaction.</p>
-        </div>
-    </section>
 
-    <!-- Voice Translation Section -->
+
+        <!-- Voice Translation Section -->
     <section class="voice-section" id="voice-translate">
         <div class="container">
             <h2 class="section-title">🎤 Voice Translation Studio</h2>
@@ -534,6 +592,63 @@
         </div>
     </section>
 
+    <!-- Voice Technology Introduction Section -->
+    <section class="voice-tech-intro">
+        <div class="container">
+            <div style="text-align: center;">
+                <div class="made-in-PCE">🎙️ MADE BY BUILD-BOTS_5</div>
+            </div>
+            
+            <div class="intro-content">
+                <h1>🌍 Voice-to-Voice Translation Technology</h1>
+                
+                <p class="intro-description">
+                    Experience the future of communication with real-time voice translation that breaks language barriers instantly. Our AI-powered system converts spoken words from one language to another while preserving tone, emotion, and natural speech patterns, enabling seamless conversations across the globe.
+                </p>
+
+                <div class="intro-grid">
+                    <div class="intro-feature">
+                        <div class="intro-feature-icon">🎯</div>
+                        <h3>Speech Recognition</h3>
+                        <p>Advanced AI captures your voice and converts spoken words into text with exceptional accuracy, even in noisy environments.</p>
+                    </div>
+
+                    <div class="intro-feature">
+                        <div class="intro-feature-icon">🔄</div>
+                        <h3>Instant Translation</h3>
+                        <p>Sophisticated machine learning algorithms translate your message into the target language while maintaining context and meaning.</p>
+                    </div>
+
+                    <div class="intro-feature">
+                        <div class="intro-feature-icon">🔊</div>
+                        <h3>Natural Voice Output</h3>
+                        <p>Text-to-speech synthesis delivers the translation in a natural-sounding voice that preserves your original tone and emotion.</p>
+                    </div>
+
+                    <div class="intro-feature">
+                        <div class="intro-feature-icon">⚡</div>
+                        <h3>Real-Time Processing</h3>
+                        <p>Experience lightning-fast translations that feel like natural conversations, eliminating awkward delays and interruptions.</p>
+                    </div>
+
+                    <div class="intro-feature">
+                        <div class="intro-feature-icon">🌐</div>
+                        <h3>Multilingual Support</h3>
+                        <p>Connect across cultures with support for 15+ languages including all major Indian languages and international options.</p>
+                    </div>
+
+                    <div class="intro-feature">
+                        <div class="intro-feature-icon">🎨</div>
+                        <h3>Context-Aware AI</h3>
+                        <p>Our system understands idioms, cultural nuances, and contextual meanings for more accurate and natural translations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
     <!-- How to Use Section -->
     <section class="services" style="background: rgba(255,255,255,0.1);">
         <div class="container">
@@ -607,7 +722,6 @@
     </footer>
 
     <script>
-
         // Voice recording functionality
         let isRecording = false;
         let mediaRecorder;
@@ -619,10 +733,14 @@
         const translatedText = document.getElementById('translatedText');
         const playBtn = document.getElementById('playBtn');
         const downloadBtn = document.getElementById('downloadBtn');
+        const uploadAudioBtn = document.getElementById('uploadAudioBtn');
+        const audioFileInput = document.getElementById('audioFileInput');
 
         recordBtn.addEventListener('click', toggleRecording);
         playBtn.addEventListener('click', playTranslation);
         downloadBtn.addEventListener('click', downloadAudio);
+        uploadAudioBtn.addEventListener('click', () => audioFileInput.click());
+        audioFileInput.addEventListener('change', handleAudioUpload);
 
         async function toggleRecording() {
             if (!isRecording) {
@@ -660,6 +778,19 @@
             }
         }
 
+        function handleAudioUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                voiceStatus.textContent = `Processing ${file.name}...`;
+                showNotification('Audio file uploaded. Processing translation...');
+                
+                // Simulate processing
+                setTimeout(() => {
+                    processRecording();
+                }, 1500);
+            }
+        }
+
         function processRecording() {
             const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
             
@@ -670,10 +801,12 @@
                 
                 // Simulate translated text (in real implementation, this would come from your translation API)
                 const sampleTranslations = {
-                    'en-hi': 'नमस्ते, यह एक नमूना अनुवाद है।',
-                    'hi-en': 'Hello, this is a sample translation.',
-                    'en-bn': 'হ্যালো, এটি একটি নমুনা অনুবাদ।',
-                    'default': 'This is a sample translation output.'
+                    'en-hi': 'नमस्ते, यह एक नमूना अनुवाद है। आवाज से आवाज अनुवाद प्रौद्योगिकी वास्तविक समय में भाषा बाधाओं को तोड़ती है।',
+                    'hi-en': 'Hello, this is a sample translation. Voice-to-voice translation technology breaks language barriers in real-time.',
+                    'en-bn': 'হ্যালো, এটি একটি নমুনা অনুবাদ। ভয়েস-টু-ভয়েস অনুবাদ প্রযুক্তি রিয়েল-টাইমে ভাষার বাধা ভেঙে দেয়।',
+                    'en-ta': 'வணக்கம், இது ஒரு மாதிரி மொழிபெயர்ப்பு. குரல் முதல் குரல் மொழிபெயர்ப்பு தொழில்நுட்பம் நிகழ்நேரத்தில் மொழித் தடைகளை உடைக்கிறது.',
+                    'en-kn': 'ನಮಸ್ಕಾರ, ಇದು ಮಾದರಿ ಅನುವಾದವಾಗಿದೆ. ಧ್ವನಿ-ಟು-ವಾಯ್ಸ್ ಅನುವಾದ ತಂತ್ರಜ್ಞಾನವು ನೈಜ ಸಮಯದಲ್ಲಿ ಭಾಷಾ ಅಡೆತಡೆಗಳನ್ನು ಮುರಿಯುತ್ತದೆ.',
+                    'default': 'This is a sample translation output. Voice-to-voice translation enables seamless communication across languages.'
                 };
                 
                 const translationKey = `${fromLang}-${toLang}`;
@@ -685,13 +818,12 @@
                 playBtn.disabled = false;
                 downloadBtn.disabled = false;
                 
-                showNotification('Voice translation completed successfully!');
+                showNotification('✅ Voice translation completed successfully!');
             }, 2000);
         }
 
         function playTranslation() {
-            // Simulate playing translated audio
-            showNotification('Playing translated audio...');
+            showNotification('▶️ Playing translated audio...');
             
             // In real implementation, you would use Web Speech API or play generated audio
             const utterance = new SpeechSynthesisUtterance(translatedText.textContent);
@@ -703,7 +835,7 @@
         }
 
         function downloadAudio() {
-            showNotification('Audio download started...');
+            showNotification('📥 Audio download started...');
             
             // In real implementation, you would provide the translated audio file
             // For demo purposes, we'll create a simple blob
@@ -775,7 +907,7 @@
             const toLang = document.getElementById('toLang').value;
             
             if (fromLang === toLang) {
-                showNotification('Please select different source and target languages.');
+                showNotification('⚠️ Please select different source and target languages.');
             }
         });
 
@@ -784,7 +916,7 @@
             const toLang = this.value;
             
             if (fromLang === toLang) {
-                showNotification('Please select different source and target languages.');
+                showNotification('⚠️ Please select different source and target languages.');
             }
         });
 

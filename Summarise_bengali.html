@@ -29,78 +29,91 @@
 
         /* Header Styles */
         .header {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 1rem 0;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    animation: slideDown 0.8s ease-out;
-}
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.8s ease-out;
+        }
 
-@keyframes slideDown {
-    from { transform: translateY(-100%); }
-    to { transform: translateY(0); }
-}
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
 
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    animation: fadeInLeft 1s ease;
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInLeft 1s ease;
+        }
 
-.logo:hover { transform: scale(1.05) rotate(2deg); }
-.logo-svg { width: 60px; height: 60px; border-radius: 8px; }
+        .logo:hover { transform: scale(1.05) rotate(2deg); }
+        
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #4A90E2, #357ABD);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 24px;
+        }
 
-.logo-text {
-    font-size: 28px;
-    font-weight: 700;
-    background: linear-gradient(45deg, #4A90E2, #357ABD);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #4A90E2, #357ABD);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-.logo-tagline { color: #666; font-size: 12px; }
+        .logo-tagline { color: #666; font-size: 12px; }
 
-.nav-menu {
-    display: flex;
-    gap: 30px;
-    list-style: none;
-    flex-wrap: wrap;
-}
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
 
-.nav-menu li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 20px;
-    transition: 0.3s;
-}
+        .nav-menu li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
 
-.nav-menu li a:hover,
-.nav-menu li a.active {
-    color: #4A90E2;
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
-}
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: #4A90E2;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+        }
 
-        /* Hero Section */
+        /* Hero Section - Fixed spacing to account for fixed navbar */
         .hero {
             text-align: center;
-            padding: 60px 0 40px;
+            padding: 140px 0 40px; /* Increased top padding from 60px to 140px */
+            margin-top: 0; /* Removed margin-top */
         }
 
         .made-in-badge {
@@ -111,6 +124,7 @@
             font-size: 14px;
             font-weight: 600;
             margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(255, 154, 86, 0.3);
         }
 
         .hero h1 {
@@ -430,12 +444,28 @@
                 gap: 20px;
             }
 
+            .hero {
+                padding: 120px 0 30px; /* Adjusted for mobile */
+            }
+
             .hero h1 {
                 font-size: 2rem;
             }
 
+            .nav {
+                padding: 10px 0;
+            }
+
             .nav-menu {
-                display: none;
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+                gap: 10px;
+            }
+
+            .nav-menu li a {
+                padding: 6px 12px;
+                font-size: 0.9rem;
             }
 
             .selector-buttons {
@@ -447,157 +477,195 @@
                 width: 100%;
                 max-width: 300px;
             }
+
+            .logo-text {
+                font-size: 22px;
+            }
+
+            .logo-tagline {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 110px 0 20px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .nav-menu {
+                gap: 5px;
+            }
+
+            .nav-menu li a {
+                padding: 5px 8px;
+                font-size: 0.8rem;
+            }
+
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-<header class="header">
-    <div class="container">
-        <nav class="nav">
-            <div class="logo">
-                <div class="logo-icon">AV</div>
-                <div>
-                    <div class="logo-text">APNI VANI</div>
-                    <span class="logo-tagline">বাধা ভাঙা, কণ্ঠ মিলানো</span>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <div class="logo-icon">AV</div>
+                    <div>
+                        <div class="logo-text">APNI VANI</div>
+                        <span class="logo-tagline">বাধা ভাঙা, কণ্ঠ মিলানো</span>
+                    </div>
                 </div>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="Translation_bengali.html" class="active">মূল পৃষ্ঠা</a></li>
+                <ul class="nav-menu">
+                    <li><a href="index_Bengali.Html">মূল পৃষ্ঠা</a></li>
                     <li><a href="Home.html">অনুবাদ</a></li>
                     <li><a href="Translation_bengali.html">ভিডিও</a></li>
                     <li><a href="Voice_Bengali.html">ভয়েস</a></li>
-                    <li><a href="Summarise_bengali.html">সারাংশ</a></li>
-                    <li><a href="#about">আমাদের সম্পর্কে</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+                    <li><a href="Summarise_bengali.html" class="active">সারাংশ</a></li>
+                    <li><a href="index_Bengali.Html">আমাদের সম্পর্কে</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
     <!-- Hero Section -->
-<section class="hero">
-    <div class="container">
-        <div class="made-in-badge">PCE-এ তৈরি</div>
-        <h1>🎯 এআই সংক্ষিপ্তকরণ সরঞ্জাম</h1>
-        <p>আমাদের উন্নত এআই প্রযুক্তির মাধ্যমে আপনার অডিও এবং ভিডিও কনটেন্টকে সংক্ষিপ্ত, বুদ্ধিমত্তার সাথে সংক্ষেপে রূপান্তর করুন</p>
-    </div>
-</section>
-
-<!-- Main Content -->
-<main class="main-content">
-    <div class="container">
-        <!-- Input Type Selector -->
-        <div class="input-selector">
-            <h2>আপনার ইনপুট টাইপ নির্বাচন করুন</h2>
-            <div class="selector-buttons">
-                <button class="selector-btn active" onclick="selectInputType('audio')">
-                    🎵 অডিও ইনপুট
-                </button>
-                <button class="selector-btn" onclick="selectInputType('video')">
-                    🎥 ভিডিও ইনপুট
-                </button>
-            </div>
+    <section class="hero">
+        <div class="container">
+            <div class="made-in-badge">🎓 PCE-এ তৈরি</div>
+            <h1>🎯 এআই সংক্ষিপ্তকরণ সরঞ্জাম</h1>
+            <p>আমাদের উন্নত এআই প্রযুক্তির মাধ্যমে আপনার অডিও এবং ভিডিও কনটেন্টকে সংক্ষিপ্ত, বুদ্ধিমত্তার সাথে সংক্ষেপে রূপান্তর করুন</p>
         </div>
+    </section>
 
-        <!-- Audio Input Section -->
-        <div class="content-section active" id="audio-section">
-            <div class="section-grid">
-                <div class="input-panel">
-                    <h3 class="panel-title">🎧 অডিও ইনপুট অপশন</h3>
-                    <div class="audio-options">
-                        <div class="audio-option" onclick="selectAudioOption('upload')">
-                            <span class="option-icon">📁</span>
-                            <div class="option-title">অডিও ফাইল আপলোড করুন</div>
-                            <div class="option-desc">আপনার ডিভাইস থেকে অডিও ফাইল নির্বাচন করুন</div>
-                        </div>
-                        <div class="audio-option" onclick="selectAudioOption('record')">
-                            <span class="option-icon">🎙️</span>
-                            <div class="option-title">অডিও রেকর্ড করুন</div>
-                            <div class="option-desc">সরাসরি আপনার মাইক্রোফোন থেকে অডিও রেকর্ড করুন</div>
-                        </div>
-                    </div>
-
-                    <!-- File Upload Area -->
-                    <div class="file-upload-area" id="audio-upload-area" style="display: none;">
-                        <div class="upload-icon">🎵</div>
-                        <div class="upload-text">
-                            <p><strong>আপনার অডিও ফাইল আপলোড করুন</strong></p>
-                            <p>আপনার অডিও ফাইল এখানে টেনে আনুন বা ব্রাউজ করতে ক্লিক করুন</p>
-                            <p style="font-size: 0.9rem; opacity: 0.8;">সমর্থিত: MP3, WAV, M4A, OGG (সর্বাধিক: 50MB)</p>
-                        </div>
-                        <button class="upload-btn" onclick="document.getElementById('audioFile').click()">অডিও ফাইল নির্বাচন করুন</button>
-                        <input type="file" id="audioFile" class="file-input" accept="audio/*">
-                    </div>
-
-                    <!-- Recording Controls -->
-                    <div class="recording-controls" id="recording-controls" style="display: none;">
-                        <button class="record-btn" id="recordBtn" onclick="toggleRecording()">🎙️ রেকর্ডিং শুরু করুন</button>
-                        <div class="recording-status" id="recordingStatus">রেকর্ডিং শুরু করতে ক্লিক করুন</div>
-                        <audio id="recordedAudio" controls style="width: 100%; margin-top: 15px; display: none;"></audio>
-                    </div>
-
-                    <div class="progress-bar" id="audioProgress" style="display: none;">
-                        <div class="progress-fill" id="audioProgressFill"></div>
-                    </div>
-
-                    <button class="process-btn" id="audioProcessBtn" onclick="processAudio()" disabled>
-                        🚀 সংক্ষিপ্তকরণ প্রস্তুত করুন
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Input Type Selector -->
+            <div class="input-selector">
+                <h2>আপনার ইনপুট টাইপ নির্বাচন করুন</h2>
+                <div class="selector-buttons">
+                    <button class="selector-btn active" onclick="selectInputType('audio')">
+                        🎵 অডিও ইনপুট
+                    </button>
+                    <button class="selector-btn" onclick="selectInputType('video')">
+                        🎥 ভিডিও ইনপুট
                     </button>
                 </div>
+            </div>
 
-                <div class="output-panel">
-                    <h3 class="panel-title">📄 অডিও সংক্ষিপ্তকরণ আউটপুট</h3>
-                    <div class="summary-output" id="audioSummary">
-                        <div class="summary-placeholder">
-                            আপনার এআই-উৎপন্ন অডিও সংক্ষিপ্তকরণ এখানে প্রদর্শিত হবে...
-                            <br><br>
-                            শুরু করতে অডিও ফাইল আপলোড করুন বা রেকর্ড করুন!
+            <!-- Audio Input Section -->
+            <div class="content-section active" id="audio-section">
+                <div class="section-grid">
+                    <div class="input-panel">
+                        <h3 class="panel-title">🎧 অডিও ইনপুট অপশন</h3>
+                        <div class="audio-options">
+                            <div class="audio-option" onclick="selectAudioOption('upload')">
+                                <span class="option-icon">📁</span>
+                                <div class="option-title">অডিও ফাইল আপলোড করুন</div>
+                                <div class="option-desc">আপনার ডিভাইস থেকে অডিও ফাইল নির্বাচন করুন</div>
+                            </div>
+                            <div class="audio-option" onclick="selectAudioOption('record')">
+                                <span class="option-icon">🎙️</span>
+                                <div class="option-title">অডিও রেকর্ড করুন</div>
+                                <div class="option-desc">সরাসরি আপনার মাইক্রোফোন থেকে অডিও রেকর্ড করুন</div>
+                            </div>
+                        </div>
+
+                        <!-- File Upload Area -->
+                        <div class="file-upload-area" id="audio-upload-area" style="display: none;">
+                            <div class="upload-icon">🎵</div>
+                            <div class="upload-text">
+                                <p><strong>আপনার অডিও ফাইল আপলোড করুন</strong></p>
+                                <p>আপনার অডিও ফাইল এখানে টেনে আনুন বা ব্রাউজ করতে ক্লিক করুন</p>
+                                <p style="font-size: 0.9rem; opacity: 0.8;">সমর্থিত: MP3, WAV, M4A, OGG (সর্বাধিক: 50MB)</p>
+                            </div>
+                            <button class="upload-btn" onclick="document.getElementById('audioFile').click()">অডিও ফাইল নির্বাচন করুন</button>
+                            <input type="file" id="audioFile" class="file-input" accept="audio/*">
+                        </div>
+
+                        <!-- Recording Controls -->
+                        <div class="recording-controls" id="recording-controls" style="display: none;">
+                            <button class="record-btn" id="recordBtn" onclick="toggleRecording()">🎙️ রেকর্ডিং শুরু করুন</button>
+                            <div class="recording-status" id="recordingStatus">রেকর্ডিং শুরু করতে ক্লিক করুন</div>
+                            <audio id="recordedAudio" controls style="width: 100%; margin-top: 15px; display: none;"></audio>
+                        </div>
+
+                        <div class="progress-bar" id="audioProgress" style="display: none;">
+                            <div class="progress-fill" id="audioProgressFill"></div>
+                        </div>
+
+                        <button class="process-btn" id="audioProcessBtn" onclick="processAudio()" disabled>
+                            🚀 সংক্ষিপ্তকরণ প্রস্তুত করুন
+                        </button>
+                    </div>
+
+                    <div class="output-panel">
+                        <h3 class="panel-title">📄 অডিও সংক্ষিপ্তকরণ আউটপুট</h3>
+                        <div class="summary-output" id="audioSummary">
+                            <div class="summary-placeholder">
+                                আপনার এআই-উৎপন্ন অডিও সংক্ষিপ্তকরণ এখানে প্রদর্শিত হবে...
+                                <br><br>
+                                শুরু করতে অডিও ফাইল আপলোড করুন বা রেকর্ড করুন!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Input Section -->
+            <div class="content-section" id="video-section">
+                <div class="section-grid">
+                    <div class="input-panel">
+                        <h3 class="panel-title">🎬 ভিডিও ইনপুট</h3>
+                        <div class="file-upload-area" id="video-upload-area">
+                            <div class="upload-icon">🎥</div>
+                            <div class="upload-text">
+                                <p><strong>আপনার ভিডিও ফাইল আপলোড করুন</strong></p>
+                                <p>আপনার ভিডিও ফাইল এখানে টেনে আনুন বা ব্রাউজ করতে ক্লিক করুন</p>
+                                <p style="font-size: 0.9rem; opacity: 0.8;">সমর্থিত: MP4, AVI, MOV, WMV (সর্বাধিক: 200MB)</p>
+                            </div>
+                            <button class="upload-btn" onclick="document.getElementById('videoFile').click()">ভিডিও ফাইল নির্বাচন করুন</button>
+                            <input type="file" id="videoFile" class="file-input" accept="video/*">
+                        </div>
+
+                        <video class="video-preview" id="videoPreview" controls style="display: none;"></video>
+
+                        <div class="progress-bar" id="videoProgress" style="display: none;">
+                            <div class="progress-fill" id="videoProgressFill"></div>
+                        </div>
+
+                        <button class="process-btn" id="videoProcessBtn" onclick="processVideo()" disabled>
+                            🚀 সংক্ষিপ্তকরণ প্রস্তুত করুন
+                        </button>
+                    </div>
+
+                    <div class="output-panel">
+                        <h3 class="panel-title">📄 ভিডিও সংক্ষিপ্তকরণ আউটপুট</h3>
+                        <div class="summary-output" id="videoSummary">
+                            <div class="summary-placeholder">
+                                আপনার এআই-উৎপন্ন ভিডিও সংক্ষিপ্তকরণ এখানে প্রদর্শিত হবে...
+                                <br><br>
+                                শুরু করতে ভিডিও ফাইল আপলোড করুন!
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-<!-- Video Input Section -->
-<div class="content-section" id="video-section">
-    <div class="section-grid">
-        <div class="input-panel">
-            <h3 class="panel-title">🎬 ভিডিও ইনপুট</h3>
-            <div class="file-upload-area" id="video-upload-area">
-                <div class="upload-icon">🎥</div>
-                <div class="upload-text">
-                    <p><strong>আপনার ভিডিও ফাইল আপলোড করুন</strong></p>
-                    <p>আপনার ভিডিও ফাইল এখানে টেনে আনুন বা ব্রাউজ করতে ক্লিক করুন</p>
-                    <p style="font-size: 0.9rem; opacity: 0.8;">সমর্থিত: MP4, AVI, MOV, WMV (সর্বাধিক: 200MB)</p>
-                </div>
-                <button class="upload-btn" onclick="document.getElementById('videoFile').click()">ভিডিও ফাইল নির্বাচন করুন</button>
-                <input type="file" id="videoFile" class="file-input" accept="video/*">
-            </div>
-
-            <video class="video-preview" id="videoPreview" controls style="display: none;"></video>
-
-            <div class="progress-bar" id="videoProgress" style="display: none;">
-                <div class="progress-fill" id="videoProgressFill"></div>
-            </div>
-
-            <button class="process-btn" id="videoProcessBtn" onclick="processVideo()" disabled>
-                🚀 সংক্ষিপ্তকরণ প্রস্তুত করুন
-            </button>
-        </div>
-
-        <div class="output-panel">
-            <h3 class="panel-title">📄 ভিডিও সংক্ষিপ্তকরণ আউটপুট</h3>
-            <div class="summary-output" id="videoSummary">
-                <div class="summary-placeholder">
-                    আপনার এআই-উৎপন্ন ভিডিও সংক্ষিপ্তকরণ এখানে প্রদর্শিত হবে...
-                    <br><br>
-                    শুরু করতে ভিডিও ফাইল আপলোড করুন!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</main>
+    </main>
 
     <script>
         let mediaRecorder;
@@ -616,7 +684,7 @@
         // Audio option selection
         function selectAudioOption(option) {
             document.querySelectorAll('.audio-option').forEach(opt => opt.classList.remove('active'));
-            event.target.classList.add('active');
+            event.target.closest('.audio-option').classList.add('active');
             
             const uploadArea = document.getElementById('audio-upload-area');
             const recordingControls = document.getElementById('recording-controls');
@@ -631,31 +699,30 @@
         }
 
         // File upload handlers
-document.getElementById('audioFile').addEventListener('change', function(e) {
-    handleAudioFile(e.target.files[0]);
-});
+        document.getElementById('audioFile').addEventListener('change', function(e) {
+            handleAudioFile(e.target.files[0]);
+        });
 
-document.getElementById('videoFile').addEventListener('change', function(e) {
-    handleVideoFile(e.target.files[0]);
-});
+        document.getElementById('videoFile').addEventListener('change', function(e) {
+            handleVideoFile(e.target.files[0]);
+        });
 
-function handleAudioFile(file) {
-    if (file) {
-        document.getElementById('audioProcessBtn').disabled = false;
-        showNotification(`অডিও ফাইল "${file.name}" সফলভাবে লোড হয়েছে!`);
-    }
-}
+        function handleAudioFile(file) {
+            if (file) {
+                document.getElementById('audioProcessBtn').disabled = false;
+                showNotification(`অডিও ফাইল "${file.name}" সফলভাবে লোড হয়েছে!`);
+            }
+        }
 
-function handleVideoFile(file) {
-    if (file) {
-        const video = document.getElementById('videoPreview');
-        video.src = URL.createObjectURL(file);
-        video.style.display = 'block';
-        document.getElementById('videoProcessBtn').disabled = false;
-        showNotification(`ভিডিও ফাইল "${file.name}" সফলভাবে লোড হয়েছে!`);
-    }
-}
-
+        function handleVideoFile(file) {
+            if (file) {
+                const video = document.getElementById('videoPreview');
+                video.src = URL.createObjectURL(file);
+                video.style.display = 'block';
+                document.getElementById('videoProcessBtn').disabled = false;
+                showNotification(`ভিডিও ফাইল "${file.name}" সফলভাবে লোড হয়েছে!`);
+            }
+        }
 
         // Recording functionality
         async function toggleRecording() {
@@ -698,7 +765,7 @@ function handleVideoFile(file) {
                 isRecording = false;
                 recordBtn.textContent = '🎙️ রেকর্ডিং শুরু করুন';
                 recordBtn.classList.remove('recording');
-                status.textContent = 'রেকর্ডিং শুরু করুন';
+                status.textContent = 'রেকর্ডিং সম্পূর্ণ!';
             }
         }
 
@@ -784,9 +851,9 @@ Apni Vani AI সারাংশ টুল দ্বারা প্রস্ত�
 
 Apni Vani AI সারাংশ টুল দ্বারা প্রস্তুত`;
 
-summaryDiv.textContent = mockSummary;
-progressBar.style.display = 'none';
-showNotification('ভিডিও সারাংশ সফলভাবে প্রস্তুত করা হয়েছে!');
+            summaryDiv.textContent = mockSummary;
+            progressBar.style.display = 'none';
+            showNotification('ভিডিও সারাংশ সফলভাবে প্রস্তুত করা হয়েছে!');
         }
 
         // Notification function
@@ -794,15 +861,16 @@ showNotification('ভিডিও সারাংশ সফলভাবে প�
             const notification = document.createElement('div');
             notification.style.cssText = `
                 position: fixed;
-                top: 20px;
+                top: 100px;
                 right: 20px;
                 background: #4CAF50;
                 color: white;
                 padding: 15px 25px;
                 border-radius: 10px;
                 box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-                z-index: 1000;
+                z-index: 1001;
                 font-weight: 600;
+                max-width: 300px;
             `;
             notification.textContent = message;
             document.body.appendChild(notification);
