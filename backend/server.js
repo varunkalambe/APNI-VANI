@@ -49,29 +49,31 @@ app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 // ============================================
 // 📁 DIRECTORY SETUP
 // ============================================
-// Ensure all upload directories exist
+// Ensure all upload directories exist (using absolute paths for Docker)
 const uploadDirs = [
-    'uploads',
-    'uploads/originals',
-    'uploads/audio',
-    'uploads/transcription',
-    'uploads/translations',
-    'uploads/translated_audio',
-    'uploads/captions',
-    'uploads/transcripts',
-    'uploads/processed',
-    'uploads/final',
-    'uploads/temp',
-    'fonts'
+    '/app/uploads',
+    '/app/uploads/originals',
+    '/app/uploads/audio',
+    '/app/uploads/transcription',
+    '/app/uploads/translations',
+    '/app/uploads/translated_audio',
+    '/app/uploads/captions',
+    '/app/uploads/transcripts',
+    '/app/uploads/processed',
+    '/app/uploads/final',
+    '/app/uploads/temp'
 ];
 
 uploadDirs.forEach(dir => {
-    const dirPath = path.join(__dirname, '..', dir);
-    if (!fs.existsSync(dirPath)) {
-        fs.mkdirSync(dirPath, { recursive: true });
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
         console.log(`📁 Created directory: ${dir}`);
     }
 });
+
+// Fonts directory already created by Dockerfile at /app/backend/fonts
+console.log(`✅ Fonts directory: /app/backend/fonts`);
+
 
 // ============================================
 // 🎨 STATIC FILE SERVING (HF Spaces Compatible)
