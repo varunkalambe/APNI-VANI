@@ -104,3 +104,8 @@ data/
 *.log
 logs/
 *.log.*
+
+
+
+backend/processing/
+backend/.env
