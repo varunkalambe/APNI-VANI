@@ -47,11 +47,12 @@ RUN pip3 install --no-cache-dir \
     torchaudio==2.2.0+cpu \
     --index-url https://download.pytorch.org/whl/cpu
 
-# Install other Python packages AFTER PyTorch
+# Install other Python packages with compatible NumPy version (CRITICAL FIX!)
 RUN pip3 install --no-cache-dir \
+    "numpy<2.0" \
     openai-whisper \
-    edge-tts \
-    numpy
+    edge-tts
+
 
 # Pre-download Whisper model to reduce runtime startup time
 RUN echo "=== Downloading Whisper Model ===" && \
