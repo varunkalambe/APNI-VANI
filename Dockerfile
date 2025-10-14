@@ -48,7 +48,9 @@ ENV PATH="/opt/venv/bin:$PATH"
 RUN pip3 install --no-cache-dir \
     openai-whisper \
     edge-tts \
-    numpy \
+    numpy
+
+RUN pip3 install --no-cache-dir \
     torch --index-url https://download.pytorch.org/whl/cpu \
     torchaudio --index-url https://download.pytorch.org/whl/cpu
 
