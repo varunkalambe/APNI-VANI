@@ -166,6 +166,22 @@ app.use("/api/upload", uploadRoutes);
 app.use("/uploads", streamRoutes);
 app.use("/api/process", processRoutes);
 
+
+// ============================================
+// 🌐 SERVE ALL HTML FILES EXPLICITLY
+// ============================================
+app.get('/*.html', (req, res, next) => {
+    const filePath = path.join(__dirname, '..', req.path);
+    
+    if (fs.existsSync(filePath)) {
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.sendFile(filePath);
+    } else {
+        next(); // Pass to 404 handler
+    }
+});
+
+
 // ============================================
 // 🏠 ROOT ENDPOINTS (HF Spaces Compatible)
 // ============================================
