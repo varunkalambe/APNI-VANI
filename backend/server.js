@@ -80,17 +80,21 @@ console.log(`✅ Fonts directory: /app/backend/fonts`);
 // ============================================
 
 // ✅ NEW: Serve static frontend files from parent directory
-app.use(express.static(path.join(__dirname, '../'), {
+// ✅ Serve HTML files from project root
+app.use(express.static(path.join(__dirname, '..'), {
+    extensions: ['html'],  // Auto-add .html extension
+    index: 'index.html',
     setHeaders: (res, filePath) => {
-        // Set cache headers for static assets
         if (filePath.endsWith('.css') || filePath.endsWith('.js')) {
             res.setHeader('Cache-Control', 'public, max-age=3600');
         }
         if (filePath.endsWith('.html')) {
             res.setHeader('Cache-Control', 'no-cache');
+            res.setHeader('Content-Type', 'text/html; charset=utf-8');
         }
     }
 }));
+
 
 // ✅ Serve uploaded videos and processed files
 app.use("/uploads", express.static(path.join(__dirname, "..", "uploads"), {
