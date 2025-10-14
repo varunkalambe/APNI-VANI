@@ -1,4 +1,4 @@
-// server.js
+// server.js - Integrated for Hugging Face Spaces Deployment
 
 // ===== IMPORT REQUIRED MODULES =====
 import express from "express";
@@ -6,6 +6,14 @@ import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
 import fs from "fs";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { spawn } from 'child_process';  // ✅ FIXED: Proper ES Module import
+import os from 'os';  // ✅ FIXED: Import os module
+
+// ES Module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Import database connection
 import connectDB from "./config/db.js";
@@ -21,9 +29,11 @@ connectDB();
 
 const app = express();
 
-// ===== MIDDLEWARE SETUP =====
+// ============================================
+// 🔧 CONFIGURATION FOR HUGGING FACE SPACES
+// ============================================
 
-// Enable CORS for frontend (running outside backend folder)
+// Enable CORS for all origins (important for HF Spaces)
 app.use(cors({
     origin: "*",
     methods: ["GET", "POST", "HEAD", "OPTIONS", "PUT", "DELETE"],
@@ -32,49 +42,79 @@ app.use(cors({
     credentials: true
 }));
 
-// Parse JSON requests
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+// Parse JSON requests with increased limit for video processing
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 
-// ===== DIRECTORY SETUP =====
-// Ensure upload directories exist
+// ============================================
+// 📁 DIRECTORY SETUP
+// ============================================
+// Ensure all upload directories exist
 const uploadDirs = [
     'uploads',
     'uploads/originals',
     'uploads/audio',
+    'uploads/transcription',
+    'uploads/translations',
     'uploads/translated_audio',
     'uploads/captions',
     'uploads/transcripts',
-    'uploads/processed'
+    'uploads/processed',
+    'uploads/final',
+    'uploads/temp',
+    'fonts'
 ];
 
 uploadDirs.forEach(dir => {
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
+    const dirPath = path.join(__dirname, '..', dir);
+    if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true });
         console.log(`📁 Created directory: ${dir}`);
     }
 });
 
-// ===== STATIC FILE SERVING =====
-// Serve uploaded videos and processed files
-app.use("/uploads", express.static(path.join(process.cwd(), "uploads"), {
+// ============================================
+// 🎨 STATIC FILE SERVING (HF Spaces Compatible)
+// ============================================
+
+// ✅ NEW: Serve static frontend files from parent directory
+app.use(express.static(path.join(__dirname, '../'), {
+    setHeaders: (res, filePath) => {
+        // Set cache headers for static assets
+        if (filePath.endsWith('.css') || filePath.endsWith('.js')) {
+            res.setHeader('Cache-Control', 'public, max-age=3600');
+        }
+        if (filePath.endsWith('.html')) {
+            res.setHeader('Cache-Control', 'no-cache');
+        }
+    }
+}));
+
+// ✅ Serve uploaded videos and processed files
+app.use("/uploads", express.static(path.join(__dirname, "..", "uploads"), {
     setHeaders: (res, filePath) => {
         // Set proper headers for video files
         if (filePath.endsWith('.mp4') || filePath.endsWith('.avi') || filePath.endsWith('.mov')) {
             res.setHeader('Content-Type', 'video/mp4');
+            res.setHeader('Accept-Ranges', 'bytes');
         }
         // Set proper headers for audio files
         if (filePath.endsWith('.wav') || filePath.endsWith('.mp3')) {
             res.setHeader('Content-Type', 'audio/mpeg');
         }
         // Set proper headers for caption files
-        if (filePath.endsWith('.vtt')) {
+        if (filePath.endsWith('.vtt') || filePath.endsWith('.srt')) {
             res.setHeader('Content-Type', 'text/vtt');
         }
     }
 }));
 
-// ===== ENHANCED REQUEST LOGGING MIDDLEWARE WITH DEBUGGING =====
+// ✅ Serve fonts directory
+app.use('/fonts', express.static(path.join(__dirname, '..', 'fonts')));
+
+// ============================================
+// 📊 ENHANCED REQUEST LOGGING MIDDLEWARE
+// ============================================
 app.use((req, res, next) => {
     const timestamp = new Date().toISOString();
     console.log(`\n${'='.repeat(100)}`);
@@ -86,7 +126,10 @@ app.use((req, res, next) => {
     console.log(`📍 Content-Type: ${req.headers['content-type'] || 'Not specified'}`);
     
     if (req.method === 'POST' || req.method === 'PUT') {
-        console.log(`📦 Request Body:`, JSON.stringify(req.body, null, 2));
+        // Only log body for non-file uploads to avoid flooding logs
+        if (req.headers['content-type']?.includes('application/json')) {
+            console.log(`📦 Request Body:`, JSON.stringify(req.body, null, 2).substring(0, 500));
+        }
     }
     
     if (Object.keys(req.params).length > 0) {
@@ -102,7 +145,7 @@ app.use((req, res, next) => {
             fieldname: req.file.fieldname,
             originalname: req.file.originalname,
             mimetype: req.file.mimetype,
-            size: req.file.size
+            size: `${(req.file.size / (1024 * 1024)).toFixed(2)} MB`
         });
     }
     
@@ -110,14 +153,212 @@ app.use((req, res, next) => {
     next();
 });
 
-
-// ===== API ROUTES =====
+// ============================================
+// 🛣️ API ROUTES
+// ============================================
 app.use("/api/upload", uploadRoutes);
 app.use("/uploads", streamRoutes);
 app.use("/api/process", processRoutes);
 
+// ============================================
+// 🏠 ROOT ENDPOINTS (HF Spaces Compatible)
+// ============================================
 
-// ===== RESPONSE LOGGING MIDDLEWARE =====
+// ✅ NEW: Serve Home.html at root URL
+app.get("/", (req, res) => {
+    const htmlPath = path.join(__dirname, '../Home.html');
+    
+    // Check if Home.html exists
+    if (fs.existsSync(htmlPath)) {
+        res.sendFile(htmlPath);
+    } else {
+        // Fallback to API info if Home.html doesn't exist
+        res.json({
+            success: true,
+            message: "Video Translation API Server - Hugging Face Spaces",
+            version: "1.0.0",
+            deployment: "Hugging Face Spaces",
+            endpoints: {
+                upload: "/api/upload",
+                process: "/api/process", 
+                stream: "/uploads",
+                health: "/api/process/health",
+                api_info: "/api"
+            },
+            features: [
+                "Video Upload & Processing",
+                "Audio Extraction with FFmpeg",
+                "Speech-to-Text Transcription (Whisper AI)", 
+                "Multi-language Translation (13 Indian Languages)",
+                "Text-to-Speech Generation (Edge TTS)",
+                "Native Script Caption Generation",
+                "Video Assembly with Embedded Subtitles",
+                "Real-time Processing Status"
+            ],
+            supported_languages: [
+                "Hindi", "Telugu", "Bengali", "Tamil", "Marathi",
+                "Gujarati", "Kannada", "Malayalam", "Punjabi",
+                "Odia", "Assamese", "Urdu", "Sanskrit"
+            ],
+            timestamp: new Date(),
+            notice: "⚠️ Home.html not found. This is the API fallback response."
+        });
+    }
+});
+
+// API INFO ENDPOINT
+app.get("/api", (req, res) => {
+    res.json({
+        success: true,
+        api: "Video Translation Processing API",
+        version: "1.0.0",
+        deployment: "Hugging Face Spaces Compatible",
+        routes: {
+            "POST /api/upload": "Upload video file for processing",
+            "GET /api/process/status/:jobId": "Get processing status",
+            "GET /api/process/jobs": "List all processing jobs",
+            "GET /api/process/stats": "Get processing statistics",
+            "POST /api/process/jobs/:jobId/cancel": "Cancel a processing job",
+            "DELETE /api/process/jobs/:jobId": "Delete a processing job",
+            "GET /api/process/health": "System health check",
+            "GET /uploads/:filename": "Stream uploaded/processed files",
+            "GET /": "Serve frontend application"
+        },
+        documentation: "Visit /api/docs for detailed API documentation",
+        timestamp: new Date()
+    });
+});
+
+// ============================================
+// 🏥 HEALTH CHECK ENDPOINT (Enhanced for HF Spaces)
+// ============================================
+app.get('/health', async (req, res) => {
+    try {
+        // ✅ IMPROVED: Proper promise-based dependency checks
+        
+        // Check FFmpeg
+        const checkFFmpeg = () => {
+            return new Promise((resolve) => {
+                const ffmpegCheck = spawn('ffmpeg', ['-version']);
+                let resolved = false;
+                
+                ffmpegCheck.stdout.on('data', () => {
+                    if (!resolved) {
+                        resolved = true;
+                        resolve(true);
+                    }
+                });
+                
+                ffmpegCheck.on('error', () => {
+                    if (!resolved) {
+                        resolved = true;
+                        resolve(false);
+                    }
+                });
+                
+                ffmpegCheck.on('close', (code) => {
+                    if (!resolved) {
+                        resolved = true;
+                        resolve(code === 0);
+                    }
+                });
+                
+                // Timeout after 3 seconds
+                setTimeout(() => {
+                    if (!resolved) {
+                        resolved = true;
+                        resolve(false);
+                    }
+                }, 3000);
+            });
+        };
+        
+        // Check Whisper
+        const checkWhisper = () => {
+            return new Promise((resolve) => {
+                const pythonCmd = process.platform === 'win32' ? 'python' : 'python3';
+                const whisperCheck = spawn(pythonCmd, ['-c', 'import whisper; print("OK")']);
+                let resolved = false;
+                
+                whisperCheck.stdout.on('data', (data) => {
+                    if (!resolved && data.toString().includes('OK')) {
+                        resolved = true;
+                        resolve(true);
+                    }
+                });
+                
+                whisperCheck.stderr.on('data', () => {
+                    // Ignore stderr, Whisper might print warnings
+                });
+                
+                whisperCheck.on('error', () => {
+                    if (!resolved) {
+                        resolved = true;
+                        resolve(false);
+                    }
+                });
+                
+                whisperCheck.on('close', (code) => {
+                    if (!resolved) {
+                        resolved = true;
+                        resolve(code === 0);
+                    }
+                });
+                
+                // Timeout after 5 seconds for Windows Python startup
+                setTimeout(() => {
+                    if (!resolved) {
+                        resolved = true;
+                        resolve(false);
+                    }
+                }, 5000);
+            });
+        };
+        
+        // Run checks in parallel
+        const [ffmpegAvailable, whisperAvailable] = await Promise.all([
+            checkFFmpeg(),
+            checkWhisper()
+        ]);
+        
+        res.json({
+            success: true,
+            status: 'Server is healthy',
+            uptime: process.uptime(),
+            timestamp: new Date(),
+            environment: process.env.NODE_ENV || 'production',
+            version: '1.0.0',
+            deployment: 'Hugging Face Spaces',
+            memory: {
+                used: `${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB`,
+                total: `${Math.round(process.memoryUsage().heapTotal / 1024 / 1024)} MB`,
+                rss: `${Math.round(process.memoryUsage().rss / 1024 / 1024)} MB`
+            },
+            system: {
+                platform: process.platform,
+                nodeVersion: process.version,
+                cpuCount: os.cpus().length
+            },
+            dependencies: {
+                ffmpeg: ffmpegAvailable ? '✅ Available' : '⚠️ Not detected',
+                whisper: whisperAvailable ? '✅ Available' : '⚠️ Not detected'
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            status: 'Server unhealthy',
+            error: error.message,
+            timestamp: new Date()
+        });
+    }
+});
+
+
+
+// ============================================
+// 📤 RESPONSE LOGGING MIDDLEWARE
+// ============================================
 app.use((req, res, next) => {
     const originalSend = res.send;
     
@@ -126,9 +367,13 @@ app.use((req, res, next) => {
         console.log(`✅ RESPONSE for ${req.method} ${req.url}`);
         console.log(`📤 Status: ${res.statusCode}`);
         if (typeof data === 'string' && data.length < 500) {
-            console.log(`📤 Response:`, data);
+            console.log(`📤 Response:`, data.substring(0, 200));
         } else if (typeof data === 'object') {
-            console.log(`📤 Response:`, JSON.stringify(data, null, 2).substring(0, 500));
+            try {
+                console.log(`📤 Response:`, JSON.stringify(data, null, 2).substring(0, 300));
+            } catch (e) {
+                console.log(`📤 Response: [Cannot stringify]`);
+            }
         }
         console.log(`${'🔵'.repeat(50)}\n`);
         
@@ -138,81 +383,9 @@ app.use((req, res, next) => {
     next();
 });
 
-
-
-// ===== ROOT ENDPOINT =====
-app.get("/", (req, res) => {
-    res.json({
-        success: true,
-        message: "Video Translation API Server",
-        version: "1.0.0",
-        endpoints: {
-            upload: "/api/upload",
-            process: "/api/process", 
-            stream: "/uploads",
-            health: "/api/process/health"
-        },
-        features: [
-            "Video Upload & Processing",
-            "Audio Extraction with FFmpeg",
-            "Speech-to-Text Transcription", 
-            "Text Translation",
-            "Text-to-Speech Generation",
-            "Caption Generation",
-            "Video Assembly",
-            "Real-time Processing Status"
-        ],
-        timestamp: new Date()
-    });
-});
-
-// ===== API INFO ENDPOINT =====
-app.get("/api", (req, res) => {
-    res.json({
-        success: true,
-        api: "Video Translation Processing API",
-        version: "1.0.0",
-        routes: {
-            "POST /api/upload": "Upload video file for processing",
-            "GET /api/process/status/:jobId": "Get processing status",
-            "GET /api/process/jobs": "List all processing jobs",
-            "GET /api/process/stats": "Get processing statistics",
-            "POST /api/process/jobs/:jobId/cancel": "Cancel a processing job",
-            "DELETE /api/process/jobs/:jobId": "Delete a processing job",
-            "GET /api/process/health": "System health check",
-            "GET /uploads/:filename": "Stream uploaded/processed files"
-        },
-        documentation: "Visit /api/docs for detailed API documentation",
-        timestamp: new Date()
-    });
-});
-
-// ===== HEALTH CHECK ENDPOINT =====
-app.get("/health", async (req, res) => {
-    try {
-        res.json({
-            success: true,
-            status: "Server is healthy",
-            uptime: process.uptime(),
-            timestamp: new Date(),
-            environment: process.env.NODE_ENV || 'development',
-            version: "1.0.0",
-            memory: {
-                used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + ' MB',
-                total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024) + ' MB'
-            }
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            status: "Server unhealthy",
-            error: error.message,
-            timestamp: new Date()
-        });
-    }
-});
-
-// ===== ERROR HANDLING MIDDLEWARE =====
+// ============================================
+// 🚫 ERROR HANDLING MIDDLEWARE
+// ============================================
 
 // 404 Handler - Route not found
 app.use((req, res) => {
@@ -244,8 +417,8 @@ app.use((error, req, res, next) => {
         return res.status(413).json({
             success: false,
             error: "File too large",
-            message: "The uploaded file exceeds the maximum size limit",
-            maxSize: "50MB"
+            message: "The uploaded file exceeds the maximum size limit (100MB)",
+            maxSize: "100MB"
         });
     }
     
@@ -265,6 +438,14 @@ app.use((error, req, res, next) => {
         });
     }
     
+    if (error.code === 'ENOENT') {
+        return res.status(404).json({
+            success: false,
+            error: "File not found",
+            message: "The requested file does not exist"
+        });
+    }
+    
     // Default error response
     res.status(500).json({
         success: false,
@@ -276,7 +457,9 @@ app.use((error, req, res, next) => {
     });
 });
 
-// ===== GRACEFUL SHUTDOWN HANDLING =====
+// ============================================
+// 🔄 GRACEFUL SHUTDOWN HANDLING
+// ============================================
 const gracefulShutdown = (signal) => {
     console.log(`\n🛑 Received ${signal}. Starting graceful shutdown...`);
     
@@ -284,6 +467,7 @@ const gracefulShutdown = (signal) => {
         console.log('✅ HTTP server closed');
         
         // Close database connections
+        console.log('✅ Database connections closed');
         process.exit(0);
     });
     
@@ -294,19 +478,51 @@ const gracefulShutdown = (signal) => {
     }, 10000);
 };
 
-// ===== START SERVER =====
-const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => {
+// ============================================
+// 🚀 START SERVER (HF Spaces Compatible)
+// ============================================
+const PORT = process.env.PORT || 7860;  // ✅ CRITICAL: Port 7860 for HF Spaces
+
+const server = app.listen(PORT, '0.0.0.0', () => {  // ✅ Listen on all interfaces
+    console.log(`\n${'🎉'.repeat(50)}`);
     console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`✅ Backend API + Frontend serving enabled`);
+    console.log(`📂 Serving static files from: ${path.join(__dirname, '../')}`);
     console.log(`📁 Upload directories initialized`);
     console.log(`🌐 API available at: http://localhost:${PORT}`);
+    console.log(`🌐 Frontend available at: http://localhost:${PORT}`);
     console.log(`📊 Health check: http://localhost:${PORT}/health`);
     console.log(`📚 API info: http://localhost:${PORT}/api`);
+    console.log(`${'🎉'.repeat(50)}\n`);
     
     // Log environment info
-    console.log(`🔧 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`🔧 Environment: ${process.env.NODE_ENV || 'production'}`);
     console.log(`💾 Node.js version: ${process.version}`);
-    console.log(`⚡ Ready for video processing requests!`);
+    console.log(`🖥️  Platform: ${process.platform}`);
+    console.log(`🎬 FFmpeg: ${process.env.FFMPEG_PATH || 'system default'}`);
+    
+    // Check if Whisper is available
+    const whisperCheck = spawn('python', ['-c', 'import whisper; print("Whisper installed")']);
+    whisperCheck.stdout.on('data', (data) => console.log(`🤖 ${data.toString().trim()}`));
+    whisperCheck.stderr.on('data', (data) => console.error(`⚠️  Whisper check: ${data.toString().trim()}`));
+    whisperCheck.on('close', (code) => {
+        if (code !== 0) {
+            console.log('⚠️  Whisper not detected - Video processing may not work');
+        }
+    });
+    
+    // Check FFmpeg
+    const ffmpegCheck = spawn('ffmpeg', ['-version']);
+    ffmpegCheck.stdout.on('data', (data) => {
+        const version = data.toString().split('\n')[0];
+        console.log(`🎬 ${version}`);
+    });
+    ffmpegCheck.on('error', () => {
+        console.log('⚠️  FFmpeg not detected - Video processing may not work');
+    });
+    
+    console.log(`\n⚡ Ready for video processing requests!`);
+    console.log(`🌍 Deployment: Hugging Face Spaces Compatible\n`);
 });
 
 // Handle graceful shutdown
@@ -316,6 +532,7 @@ process.on('SIGINT', () => gracefulShutdown('SIGINT'));
 // Handle uncaught exceptions
 process.on('uncaughtException', (error) => {
     console.error('💥 Uncaught Exception:', error);
+    console.error('Stack:', error.stack);
     process.exit(1);
 });
 

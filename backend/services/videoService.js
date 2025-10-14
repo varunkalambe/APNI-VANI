@@ -30,6 +30,12 @@ import lipSyncAnalyzer from './lipSyncAnalyzer.js';
 import { spawn } from 'child_process';
 import { generateAccurateCaptions } from './captionService.js';
 import { getConfig } from '../config/languageConfig.js';
+import { fileURLToPath } from 'url';  // ✅ ADD THIS
+import { dirname } from 'path'; 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 
 const escapeSubtitlePath = (windowsPath) => {
   return windowsPath
@@ -1212,35 +1218,82 @@ const subtitleStyle = [
       });
 
       ffmpegProcess.on('close', (code) => {
-        if (code === 0) {
-          const outputSize = fs.existsSync(outputPath) ? fs.statSync(outputPath).size : 0;
-          stats.outputSize = outputSize;
-          stats.processingTime = Date.now() - stats.startTime;
+  if (code === 0) {
+    const outputSize = fs.existsSync(outputPath) ? fs.statSync(outputPath).size : 0;
+    stats.outputSize = outputSize;
+    stats.processingTime = Date.now() - stats.startTime;
 
-          console.log(`[${jobId}] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
-          console.log(`[${jobId}] ✅ FFmpeg completed successfully!`);
-          console.log(`[${jobId}] 📦 Output size: ${(outputSize / 1024 / 1024).toFixed(2)}MB`);
-          console.log(`[${jobId}] ⏱️  Processing time: ${(stats.processingTime / 1000).toFixed(2)}s`);
-          console.log(`[${jobId}] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+    console.log(`[${jobId}] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+    console.log(`[${jobId}] ✅ FFmpeg completed successfully!`);
+    console.log(`[${jobId}] 📦 Output size: ${(outputSize / 1024 / 1024).toFixed(2)}MB`);
+    console.log(`[${jobId}] ⏱️  Processing time: ${(stats.processingTime / 1000).toFixed(2)}s`);
+    console.log(`[${jobId}] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
 
-          resolve({ outputPath, stats });
-        } else {
-          console.error(`[${jobId}] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
-          console.error(`[${jobId}] ❌ FFmpeg FAILED with exit code ${code}`);
-          console.error(`[${jobId}] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
-          console.error(`[${jobId}] 📋 FULL FFmpeg stderr output (last 4000 chars):`);
-          console.error(stderr.slice(-4000));
-          console.error(`[${jobId}] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
-
-          reject(new Error(`FFmpeg failed with exit code ${code}.`));
+    // ✅ NEW: Copy/move file to final location
+    try {
+      console.log(`[${jobId}] 🔍 Current output path: ${outputPath}`);
+      
+      // Define final destination
+      // Go up TWO levels: backend/services/ → backend/ → SIH-FINAL-DEMO/
+const finalOutputPath = path.join(__dirname, '..', '..', 'uploads', 'processed', `${jobId}_final.mp4`);
+      console.log(`[${jobId}] 🎯 Final destination: ${finalOutputPath}`);
+      
+      // Check if output file exists
+      if (fs.existsSync(outputPath)) {
+        console.log(`[${jobId}] ✅ Temporary file exists, copying to final location...`);
+        
+        // Ensure processed directory exists
+        const processedDir = path.join(__dirname, '..', 'uploads', 'processed');
+        if (!fs.existsSync(processedDir)) {
+          fs.mkdirSync(processedDir, { recursive: true });
+          console.log(`[${jobId}] 📁 Created processed directory`);
         }
-      });
+        
+        // Copy file to final location
+        fs.copyFileSync(outputPath, finalOutputPath);
+        console.log(`[${jobId}] 💾 File copied to final location`);
+        
+        // Verify final file exists
+        if (fs.existsSync(finalOutputPath)) {
+          const finalStats = fs.statSync(finalOutputPath);
+          console.log(`[${jobId}] ✅ File verified at final location: ${(finalStats.size / (1024 * 1024)).toFixed(2)}MB`);
+          console.log(`[${jobId}] 📁 Final path: ${finalOutputPath}`);
+          
+          // Update stats with final path
+          stats.finalOutputPath = finalOutputPath;
+          
+          resolve({ outputPath: finalOutputPath, stats });
+        } else {
+          console.error(`[${jobId}] ❌ ERROR: Final file not found after copy at ${finalOutputPath}`);
+          reject(new Error('Failed to verify final video file'));
+        }
+      } else {
+        console.error(`[${jobId}] ❌ ERROR: Temporary output file not found at ${outputPath}`);
+        reject(new Error('FFmpeg output file not found'));
+      }
+    } catch (copyError) {
+      console.error(`[${jobId}] ❌ ERROR copying file to final location:`, copyError.message);
+      console.error(`[${jobId}] Stack:`, copyError.stack);
+      reject(new Error(`Failed to save final video: ${copyError.message}`));
+    }
+  } else {
+    console.error(`[${jobId}] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+    console.error(`[${jobId}] ❌ FFmpeg FAILED with exit code ${code}`);
+    console.error(`[${jobId}] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+    console.error(`[${jobId}] 📋 FULL FFmpeg stderr output (last 4000 chars):`);
+    console.error(stderr.slice(-4000));
+    console.error(`[${jobId}] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
 
-      ffmpegProcess.on('error', (err) => {
-        console.error(`[${jobId}] ❌ Failed to start FFmpeg process:`, err.message);
-        console.error(`[${jobId}] Error details:`, err);
-        reject(new Error(`Failed to start FFmpeg subprocess: ${err.message}`));
-      });
+    reject(new Error(`FFmpeg failed with exit code ${code}.`));
+  }
+});
+
+ffmpegProcess.on('error', (err) => {
+  console.error(`[${jobId}] ❌ Failed to start FFmpeg process:`, err.message);
+  console.error(`[${jobId}] Error details:`, err);
+  reject(new Error(`Failed to start FFmpeg subprocess: ${err.message}`));
+});
+
     });
   } catch (error) {
     console.error(`[${jobId}] ❌ Setup error in video assembly:`, error.message);

@@ -44,10 +44,10 @@ window.addEventListener('load', () => {
 });
 
 
-// Development (local testing)
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? 'http://localhost:5000'
-    : 'https://your-backend-domain.com'; // ✅ UPDATE THIS for production
+    ? 'http://localhost:5000'  // ✅ Development - backend on port 5000
+    : '';  // ✅ Production - use relative URLs (empty string)
+
 
 let currentJobId = null;
 let selectedFile = null;
