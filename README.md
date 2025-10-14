@@ -10,7 +10,6 @@ pinned: false
 license: mit
 ---
 
-
 # 🎬 APNI VAANI - Video Language Translator
 
 **Breaking Language Barriers in Indian Digital Content**
@@ -20,6 +19,7 @@ An AI-powered video translation platform that enables seamless conversion of vid
 [![Smart India Hackathon 2024](https://img.shields.io/badge/SIH-2024-orange)](https://sih.gov.in/)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green)](https://nodejs.org/)
 [![Docker](https://img.shields.io/badge/Docker-Enabled-blue)](https://www.docker.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 🌟 Features
 
@@ -45,7 +45,7 @@ An AI-powered video translation platform that enables seamless conversion of vid
 - **TTS**: Microsoft Edge TTS
 - **Video Processing**: FFmpeg
 - **Translation**: MyMemory API
-- **Database**: MongoDB
+- **Database**: MongoDB Atlas
 - **Deployment**: Docker on Hugging Face Spaces
 
 ## 🌐 Supported Languages
