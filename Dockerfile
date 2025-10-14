@@ -107,19 +107,18 @@ COPY . .
 
 # Create upload directories with proper permissions
 RUN mkdir -p \
-    uploads/originals \
-    uploads/audio \
-    uploads/transcription \
-    uploads/translations \
-    uploads/translated_audio \
-    uploads/captions \
-    uploads/transcripts \
-    uploads/processed \
-    uploads/final \
-    uploads/temp
+    /app/uploads/originals \
+    /app/uploads/audio \
+    /app/uploads/transcription \
+    /app/uploads/translations \
+    /app/uploads/translated_audio \
+    /app/uploads/captions \
+    /app/uploads/transcripts \
+    /app/uploads/processed \
+    /app/uploads/final \
+    /app/uploads/temp && \
+    chmod -R 777 /app/uploads /app/backend/fonts
 
-# Set permissions
-RUN chmod -R 755 uploads backend/fonts
 
 # ===================================================================
 # ENVIRONMENT CONFIGURATION
