@@ -167,20 +167,29 @@ app.use("/uploads", streamRoutes);
 app.use("/api/process", processRoutes);
 
 // ============================================
-// 🌐 SERVE ALL HTML FILES EXPLICITLY
+// 🌐 CASE-INSENSITIVE HTML FILE SERVING
 // ============================================
 app.use((req, res, next) => {
-    // Only process GET requests ending with .html
-    if (req.method === 'GET' && req.path.endsWith('.html')) {
-        const filePath = path.join(__dirname, '..', req.path);
+    if (req.method === 'GET' && req.path.toLowerCase().endsWith('.html')) {
+        const dirPath = path.join(__dirname, '..');
         
-        if (fs.existsSync(filePath)) {
-            res.setHeader('Content-Type', 'text/html; charset=utf-8');
-            return res.sendFile(filePath);
+        try {
+            const files = fs.readdirSync(dirPath);
+            const requestedFile = path.basename(req.path);
+            const match = files.find(f => f.toLowerCase() === requestedFile.toLowerCase());
+            
+            if (match) {
+                const filePath = path.join(dirPath, match);
+                res.setHeader('Content-Type', 'text/html; charset=utf-8');
+                return res.sendFile(filePath);
+            }
+        } catch (err) {
+            console.error('Error finding HTML file:', err);
         }
     }
     next();
 });
+
 
 // ============================================
 // 🏠 ROOT ENDPOINTS (HF Spaces Compatible)
