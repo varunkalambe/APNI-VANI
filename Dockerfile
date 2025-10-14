@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
     ffmpeg \
     python3 \
     python3-pip \
+    python3-venv \
     fontconfig \
     fonts-noto-core \
     fonts-noto-mono \
@@ -39,6 +40,10 @@ RUN echo "=== Verifying Installations ===" && \
 # PYTHON DEPENDENCIES
 # ===================================================================
 
+# Create virtual environment and install packages
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
 # Use CPU-only PyTorch (smaller size)
 RUN pip3 install --no-cache-dir \
     openai-whisper \
@@ -47,7 +52,7 @@ RUN pip3 install --no-cache-dir \
     torch --index-url https://download.pytorch.org/whl/cpu \
     torchaudio --index-url https://download.pytorch.org/whl/cpu
 
-# Pre-download Whisper model (speeds up first run)
+# Pre-download Whisper model
 RUN echo "=== Downloading Whisper Model ===" && \
     python3 -c "import whisper; model = whisper.load_model('base'); print('✅ Whisper Model Downloaded Successfully')" || \
     (echo "❌ Failed to download Whisper model - retrying..." && sleep 5 && \
