@@ -1,6 +1,7 @@
 # ===================================================================
 # 🎬 APNI VAANI - Video Translation API Dockerfile
 # Hugging Face Spaces Compatible - Smart India Hackathon 2024
+# Optimized for CPU deployment with reduced image size
 # ===================================================================
 
 FROM node:18-slim
@@ -19,12 +20,8 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     python3-venv \
     fontconfig \
-    fonts-noto-core \
-    fonts-noto-mono \
-    fonts-noto-ui-core \
     fonts-noto-cjk \
     fonts-noto-color-emoji \
-    fonts-noto-extra \
     wget \
     curl \
     && rm -rf /var/lib/apt/lists/*
@@ -37,24 +34,26 @@ RUN echo "=== Verifying Installations ===" && \
     ffmpeg -version 2>&1 | head -n 1
 
 # ===================================================================
-# PYTHON DEPENDENCIES
+# PYTHON DEPENDENCIES - CPU OPTIMIZED
 # ===================================================================
 
-# Create virtual environment and install packages
+# Create virtual environment and activate it
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Use CPU-only PyTorch (smaller size)
+# Install CPU-only PyTorch FIRST (CRITICAL: Prevents CUDA installation)
+RUN pip3 install --no-cache-dir \
+    torch==2.2.0+cpu \
+    torchaudio==2.2.0+cpu \
+    --index-url https://download.pytorch.org/whl/cpu
+
+# Install other Python packages AFTER PyTorch
 RUN pip3 install --no-cache-dir \
     openai-whisper \
     edge-tts \
     numpy
 
-RUN pip3 install --no-cache-dir \
-    torch --index-url https://download.pytorch.org/whl/cpu \
-    torchaudio --index-url https://download.pytorch.org/whl/cpu
-
-# Pre-download Whisper model
+# Pre-download Whisper model to reduce runtime startup time
 RUN echo "=== Downloading Whisper Model ===" && \
     python3 -c "import whisper; model = whisper.load_model('base'); print('✅ Whisper Model Downloaded Successfully')" || \
     (echo "❌ Failed to download Whisper model - retrying..." && sleep 5 && \
@@ -94,12 +93,12 @@ RUN ls -lh /app/backend/fonts/ && \
 # Set working directory
 WORKDIR /app
 
-# Copy package files first (better caching)
+# Copy package files first (better Docker layer caching)
 COPY backend/package*.json ./backend/
 
-# Install Node.js dependencies
+# Install Node.js dependencies (production only)
 WORKDIR /app/backend
-RUN npm ci --only=production
+RUN npm ci --only=production --omit=dev
 
 # Copy entire project
 WORKDIR /app
