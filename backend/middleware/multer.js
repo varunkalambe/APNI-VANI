@@ -2,9 +2,13 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 
-// Correct folder name
-const uploadPath = "uploads/originals"; 
-if (!fs.existsSync(uploadPath)) fs.mkdirSync(uploadPath, { recursive: true });
+// Hardcoded absolute path matching Dockerfile structure
+const uploadPath = "/app/uploads/originals";
+
+// Docker creates this with chmod 777, but safety check
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath, { recursive: true });
+}
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadPath),
@@ -12,7 +16,7 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = ["video/mp4","video/avi","video/quicktime","video/x-ms-wmv"];
+  const allowedTypes = ["video/mp4", "video/avi", "video/quicktime", "video/x-ms-wmv"];
   cb(null, allowedTypes.includes(file.mimetype));
 };
 
