@@ -25,6 +25,7 @@ RUN apt-get update && apt-get install -y \
     fonts-noto-color-emoji \
     fonts-noto-extra \
     wget \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Verify installations
@@ -47,11 +48,37 @@ RUN pip3 install --no-cache-dir \
     torchaudio --index-url https://download.pytorch.org/whl/cpu
 
 # Pre-download Whisper model (speeds up first run)
-# Add retry logic for robustness
 RUN echo "=== Downloading Whisper Model ===" && \
     python3 -c "import whisper; model = whisper.load_model('base'); print('✅ Whisper Model Downloaded Successfully')" || \
     (echo "❌ Failed to download Whisper model - retrying..." && sleep 5 && \
      python3 -c "import whisper; model = whisper.load_model('base'); print('✅ Whisper Model Downloaded Successfully')")
+
+# ===================================================================
+# DOWNLOAD INDIAN LANGUAGE FONTS
+# ===================================================================
+
+# Create fonts directory
+RUN mkdir -p /app/backend/fonts
+
+# Download Noto Sans fonts for Indian languages from Google Fonts
+RUN echo "=== Downloading Indian Language Fonts ===" && \
+    cd /app/backend/fonts && \
+    wget -q https://github.com/notofonts/noto-fonts/raw/main/hinted/ttf/NotoSans/NotoSans-Regular.ttf && \
+    wget -q https://github.com/notofonts/noto-fonts/raw/main/hinted/ttf/NotoSansDevanagari/NotoSansDevanagari-Regular.ttf && \
+    wget -q https://github.com/notofonts/noto-fonts/raw/main/hinted/ttf/NotoSansBengali/NotoSansBengali-Regular.ttf && \
+    wget -q https://github.com/notofonts/noto-fonts/raw/main/hinted/ttf/NotoSansTamil/NotoSansTamil-Regular.ttf && \
+    wget -q https://github.com/notofonts/noto-fonts/raw/main/hinted/ttf/NotoSansTelugu/NotoSansTelugu-Regular.ttf && \
+    wget -q https://github.com/notofonts/noto-fonts/raw/main/hinted/ttf/NotoSansGujarati/NotoSansGujarati-Regular.ttf && \
+    wget -q https://github.com/notofonts/noto-fonts/raw/main/hinted/ttf/NotoSansKannada/NotoSansKannada-Regular.ttf && \
+    wget -q https://github.com/notofonts/noto-fonts/raw/main/hinted/ttf/NotoSansMalayalam/NotoSansMalayalam-Regular.ttf && \
+    wget -q https://github.com/notofonts/noto-fonts/raw/main/hinted/ttf/NotoSansGurmukhi/NotoSansGurmukhi-Regular.ttf && \
+    wget -q https://github.com/notofonts/noto-fonts/raw/main/hinted/ttf/NotoSansOriya/NotoSansOriya-Regular.ttf && \
+    wget -q https://github.com/googlefonts/noto-fonts/raw/main/hinted/ttf/NotoNastaliqUrdu/NotoNastaliqUrdu-Regular.ttf && \
+    echo "✅ All fonts downloaded successfully"
+
+# Verify fonts were downloaded
+RUN ls -lh /app/backend/fonts/ && \
+    echo "Font count: $(ls /app/backend/fonts/*.ttf 2>/dev/null | wc -l)"
 
 # ===================================================================
 # APPLICATION SETUP
@@ -82,11 +109,10 @@ RUN mkdir -p \
     uploads/transcripts \
     uploads/processed \
     uploads/final \
-    uploads/temp \
-    fonts
+    uploads/temp
 
-# Set permissions (755 is safer than 777)
-RUN chmod -R 755 uploads fonts
+# Set permissions
+RUN chmod -R 755 uploads backend/fonts
 
 # ===================================================================
 # ENVIRONMENT CONFIGURATION
