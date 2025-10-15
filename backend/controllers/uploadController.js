@@ -117,16 +117,42 @@ export const uploadVideo = async (req, res) => {
     console.log(`  File: ${file.originalname} (${Math.round(file.size / 1024)}KB)`);
     
     // ===== CONSTRUCT FILE PATH =====
-    const filePath = `uploads/originals/${file.filename}`;
+    const filePath = file.path;
+
+console.log(`[UPLOAD] 📂 File saved to: ${filePath}`);
+console.log(`[UPLOAD] 📂 File details:`, {
+  filename: file.filename,
+  originalname: file.originalname,
+  size: file.size,
+  path: file.path,
+  destination: file.destination
+});
     
-    // ✅ VERIFY FILE EXISTS
-    if (!fs.existsSync(filePath)) {
-      return res.status(500).json({
-        error: 'File upload failed',
-        message: 'Uploaded file could not be found on server'
-      });
-    }
-    
+// ✅ VERIFY FILE EXISTS
+if (!fs.existsSync(filePath)) {
+  console.error(`[UPLOAD] ❌ File not found at: ${filePath}`);
+  console.error(`[UPLOAD] ❌ Working directory: ${process.cwd()}`);
+  console.error(`[UPLOAD] ❌ Platform: ${process.platform}`);
+  
+  return res.status(500).json({
+    error: 'File upload failed',
+    message: 'Uploaded file could not be found on server',
+    debug: process.env.NODE_ENV !== 'production' ? {
+      expectedPath: filePath,
+      workingDir: process.cwd(),
+      platform: process.platform,
+      fileObject: {
+        filename: file.filename,
+        originalname: file.originalname,
+        path: file.path,
+        destination: file.destination
+      }
+    } : undefined
+  });
+}
+
+console.log(`[UPLOAD] ✅ File verified at: ${filePath}`);
+
     // ===== CREATE UPLOAD RECORD WITH COMPREHENSIVE LANGUAGE FIELDS =====
     console.log(`[UPLOAD] Creating database record with explicit language fields...`);
     
@@ -134,7 +160,7 @@ export const uploadVideo = async (req, res) => {
       filename: file.filename,
       originalName: file.originalname,
       size: file.size,
-      file_path: filePath,
+      file_path: file.path,
       
       // ✅ MULTIPLE LANGUAGE FIELD FORMATS FOR COMPATIBILITY
       source_language: fromLang,    // Original format
@@ -208,7 +234,7 @@ processVideo(savedUpload._id.toString(), {
   targetLanguageName: getLanguageName(toLang),
   originalFilename: file.originalname,
   uploadedFilename: file.filename,
-  filePath: filePath,
+  filePath: file.path,  // ✅ Use file.path
   jobId: savedUpload._id.toString(),
   fileSize: file.size,
   uploadTimestamp: new Date()
@@ -235,8 +261,9 @@ processVideo(savedUpload._id.toString(), {
 
 
     
-    // ===== RETURN SUCCESS RESPONSE =====
-    const downloadUrl = `${req.protocol}://${req.get('host')}/uploads/originals/${file.filename}`;
+    // ✅ UNIVERSAL: Construct relative URL for download
+const downloadUrl = `${req.protocol}://${req.get('host')}/uploads/originals/${file.filename}`;
+
     
     const response = {
       success: true,
